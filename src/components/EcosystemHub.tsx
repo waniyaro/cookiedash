@@ -54,7 +54,7 @@ const REGISTRY_PROTOCOLS: ProtocolEntry[] = [
   },
   {
     title: 'Cookie Chain Docs',
-    role: 'Core Specifications',
+    role: 'Core Specs',
     endpoint: 'docs.cookiescan.io',
     description: 'SVM architecture, validator node deployment, and genesis specs.',
     url: COOKIE_CHAIN_CONFIG.docsUrl,
@@ -100,12 +100,12 @@ export const EcosystemHub: React.FC = () => {
             className="p-4 sm:px-6 hover:bg-[#181d26]/80 transition-colors flex flex-col md:flex-row md:items-center justify-between gap-3 text-xs"
           >
             {/* Protocol Identity & Role */}
-            <div className="md:w-64 shrink-0 space-y-0.5">
+            <div className="md:w-72 shrink-0 space-y-0.5">
               <div className="flex items-center gap-2">
                 <span className="font-display font-bold text-sm text-[#f1f5f9]">
                   {entry.title}
                 </span>
-                <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-[#0b0c0f] text-[#38bdf8] border border-[#1f242e]">
+                <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-[#0b0c0f] text-[#38bdf8] border border-[#1f242e] whitespace-nowrap shrink-0">
                   {entry.role}
                 </span>
               </div>

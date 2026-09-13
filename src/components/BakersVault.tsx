@@ -302,17 +302,19 @@ export const BakersVault: React.FC = () => {
                 <div className="flex gap-2">
                   <div className="relative flex-1">
                     <input
-                      type="number"
-                      step="any"
-                      min="0"
+                      type="text"
+                      inputMode="decimal"
                       placeholder="Amount in $COOK"
                       value={amount}
                       onChange={(e) => {
-                        setAmount(e.target.value)
+                        const val = e.target.value.replace(/[^0-9.]/g, '')
+                        const parts = val.split('.')
+                        const sanitized = parts.length > 2 ? `${parts[0]}.${parts.slice(1).join('')}` : val
+                        setAmount(sanitized)
                         setActivePercentage(null)
                       }}
                       disabled={isSending}
-                      className="w-full px-4 py-2.5 rounded-xl bg-[#0c0806] border border-[#2d1e17] focus:border-[#d4a15c] text-[#f5ece1] text-xs font-mono placeholder-[#968579]/60 focus:outline-none transition pr-16 disabled:opacity-60"
+                      className="w-full px-4 py-2.5 rounded-xl bg-[#0c0806] border border-[#2d1e17] focus:border-[#d4a15c] text-[#f5ece1] text-xs font-mono placeholder-[#968579]/60 focus:outline-none transition pr-16 disabled:opacity-60 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                     />
                     <button
                       type="button"

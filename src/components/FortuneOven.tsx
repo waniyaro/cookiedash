@@ -3,7 +3,7 @@ import { useConnection, useWallet } from '@solana/wallet-adapter-react'
 import { useWalletModal } from '@solana/wallet-adapter-react-ui'
 import { Transaction, TransactionInstruction, PublicKey } from '@solana/web3.js'
 import { Buffer } from 'buffer'
-import { CheckCircle2, ExternalLink, Dices, AlertCircle, RefreshCw, Wallet, Sparkles } from 'lucide-react'
+import { CheckCircle2, ExternalLink, Dices, AlertCircle, RefreshCw, Wallet, Flame } from 'lucide-react'
 import confetti from 'canvas-confetti'
 import { COOKIE_CHAIN_CONFIG } from '../config/network'
 
@@ -293,7 +293,7 @@ export const FortuneOven: React.FC = () => {
               </>
             ) : (
               <>
-                <Sparkles className="w-5 h-5" />
+                <Flame className="w-5 h-5 fill-current" />
                 <span>Bake Fortune on Cookie Chain (~0.8s)</span>
               </>
             )}

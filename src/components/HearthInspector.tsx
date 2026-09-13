@@ -12,13 +12,6 @@ interface HearthInspectorProps {
   isLive: boolean
 }
 
-const CHANNEL_NAMES: Record<string, string> = {
-  status: 'Cluster Telemetry Stream',
-  wallet: 'SVM Wallet Readiness Audit',
-  memo: 'Solana Memo Protocol Spec',
-  bridge: 'Hyperlane Warp Route Gateway',
-}
-
 export const HearthInspector: React.FC<HearthInspectorProps> = ({
   metrics,
   loading,
@@ -317,17 +310,8 @@ Status: Online with guaranteed message finality.`
           </a>
         </div>
 
-        {/* Channel Indicator UX Hint */}
-        <div className="flex items-center justify-between text-[10px] font-mono text-[#94a3b8] px-0.5">
-          <span className="flex items-center gap-1">
-            <span>Display Channel:</span>
-            <span className="text-[#38bdf8] font-bold">{CHANNEL_NAMES[selectedAgentView]}</span>
-          </span>
-          <span className="text-[9px] text-[#64748b]">Select Mode ↓</span>
-        </div>
-
-        {/* Tactile Hardware Mode Switcher */}
-        <div className="grid grid-cols-4 gap-1.5 p-1 rounded-xl bg-[#0b0c0f] border border-[#1f242e] shadow-inner">
+        {/* Sleek Hardware Segmented Mode Switcher */}
+        <div className="grid grid-cols-4 gap-1 p-1 rounded-xl bg-[#0b0c0f] border border-[#1f242e]">
           {[
             { id: 'status', no: '01', label: 'TELEMETRY' },
             { id: 'wallet', no: '02', label: 'WALLET' },
@@ -342,11 +326,11 @@ Status: Online with guaranteed message finality.`
                 onClick={() => setSelectedAgentView(tab.id as any)}
                 className={`py-2 px-1 rounded-lg text-center transition-all flex flex-col items-center justify-center gap-0.5 select-none ${
                   isActive
-                    ? 'bg-gradient-to-b from-[#1e293b] to-[#0f172a] text-[#f8fafc] shadow-[0_2px_6px_rgba(0,0,0,0.8),inset_0_1px_1px_rgba(255,255,255,0.2)] border border-[#38bdf8]/60'
-                    : 'bg-[#12151c] text-[#64748b] hover:text-[#e2e8f0] hover:bg-[#181d26] border border-transparent active:translate-y-0.5'
+                    ? 'bg-[#1e2430] text-[#f8fafc] border border-[#2e3748] shadow-sm'
+                    : 'text-[#8492a6] hover:text-[#e2e8f0] hover:bg-[#131720] border border-transparent'
                 }`}
               >
-                <span className={`text-[9px] font-mono leading-none ${isActive ? 'text-[#38bdf8] font-black' : 'text-[#475569]'}`}>
+                <span className={`text-[9px] font-mono leading-none ${isActive ? 'text-[#38bdf8] font-black' : 'text-[#5a6578]'}`}>
                   {tab.no}
                 </span>
                 <span className="text-[10px] font-mono font-bold tracking-tight">
