@@ -115,35 +115,35 @@ export const FortuneOven: React.FC = () => {
   }
 
   return (
-    <div className="rounded-3xl bg-cookie-card border border-cookie-border p-6 sm:p-8 shadow-sm">
+    <div id="fortune-oven" className="rounded-3xl bg-cookie-card border border-cookie-border p-6 sm:p-7 shadow-sm">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-cookie-border">
-        <div>
+      <div className="flex items-center justify-between gap-4 pb-4 border-b border-cookie-border">
+        <div className="flex items-center gap-2.5">
+          <div className="p-2 rounded-xl bg-amber-500/10 text-amber-400 border border-amber-500/25 transition-transform hover:rotate-12 duration-200">
+            <Send className="w-4 h-4" />
+          </div>
           <div className="flex items-center gap-2">
-            <h2 className="text-lg font-bold text-white tracking-tight">
-              On-Chain Fortune Inscription
+            <h2 className="text-base font-bold text-white tracking-tight">
+              Fortune Oven
             </h2>
             <span className="px-2 py-0.5 rounded bg-sky-500/10 text-sky-400 border border-sky-500/20 text-[10px] font-mono font-bold uppercase">
-              Memo Program
+              Memo
             </span>
           </div>
-          <p className="text-xs text-slate-400 mt-1">
-            Write an immutable message permanently to Cookie Chain ledger
-          </p>
         </div>
 
-        <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-cookie-surface border border-cookie-border text-xs font-mono text-slate-300 self-start sm:self-auto">
-          <span className="text-slate-500">Inscribed:</span>
-          <strong className="text-cookie-blue">{totalBaked}</strong>
+        <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-cookie-surface border border-cookie-border text-xs font-mono text-slate-300">
+          <span className="text-slate-500">Baked:</span>
+          <strong className="text-cookie-blue font-bold">{totalBaked}</strong>
         </div>
       </div>
 
       {/* Input Form */}
-      <div className="mt-6 space-y-4">
+      <div className="mt-5 space-y-3.5">
         <div>
-          <div className="flex items-center justify-between mb-2">
-            <label className="text-xs font-semibold text-slate-300">
-              Memo Message Content
+          <div className="flex items-center justify-between mb-1.5">
+            <label className="text-xs font-medium text-slate-400 font-mono">
+              MESSAGE
             </label>
             <button
               type="button"

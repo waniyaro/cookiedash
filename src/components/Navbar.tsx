@@ -31,21 +31,64 @@ export const Navbar: React.FC<NavbarProps> = ({ isLive, currentSlot }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 py-3 flex items-center justify-between gap-4">
         {/* Brand */}
         <div className="flex items-center gap-4">
-          <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-sky-500 to-amber-400 p-[1px] shadow-sm">
-              <div className="w-full h-full rounded-[11px] bg-cookie-card flex items-center justify-center font-black text-cookie-blue text-sm">
-                CK
-              </div>
+          <div className="flex items-center gap-3 group cursor-pointer">
+            {/* Animated Golden Cookie Emblem */}
+            <div className="relative w-9 h-9 flex items-center justify-center">
+              <div className="absolute inset-0 rounded-full bg-amber-500/25 blur-md animate-glow-gold pointer-events-none" />
+              <svg
+                viewBox="0 0 36 36"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-9 h-9 relative z-10 transition-transform duration-300 group-hover:rotate-12 animate-cookie-float drop-shadow-md"
+              >
+                {/* Cookie Base with Baked Gradient */}
+                <circle
+                  cx="18"
+                  cy="18"
+                  r="15"
+                  fill="url(#cookieGradient)"
+                  stroke="#fbbf24"
+                  strokeWidth="1.5"
+                />
+                {/* Chocolate Chips */}
+                <circle cx="12" cy="13" r="2.2" fill="#582900" />
+                <circle cx="21" cy="12" r="1.8" fill="#582900" />
+                <circle cx="23" cy="20" r="2.2" fill="#582900" />
+                <circle cx="13" cy="22" r="2" fill="#582900" />
+                <circle cx="17.5" cy="18" r="1.6" fill="#451a03" />
+                <circle cx="17" cy="25" r="1.4" fill="#582900" />
+                {/* Baked Highlight */}
+                <path
+                  d="M9 13C10.5 8 16 6 21 7"
+                  stroke="#fef08a"
+                  strokeWidth="1.2"
+                  strokeLinecap="round"
+                  opacity="0.5"
+                />
+                <defs>
+                  <radialGradient
+                    id="cookieGradient"
+                    cx="0"
+                    cy="0"
+                    r="1"
+                    gradientUnits="userSpaceOnUse"
+                    gradientTransform="translate(14 13) rotate(52) scale(18.5)"
+                  >
+                    <stop stopColor="#fbbf24" />
+                    <stop offset="0.6" stopColor="#d97706" />
+                    <stop offset="1" stopColor="#92400e" />
+                  </radialGradient>
+                </defs>
+              </svg>
             </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <span className="font-black text-lg tracking-tight text-white">
-                  Cookie<span className="text-cookie-blue">Dash</span>
-                </span>
-                <span className="text-[10px] font-mono font-semibold px-2 py-0.5 rounded-md bg-sky-500/10 text-sky-400 border border-sky-500/20">
-                  SVM
-                </span>
-              </div>
+
+            <div className="flex items-center gap-2">
+              <span className="font-black text-lg tracking-tight text-white group-hover:text-amber-200 transition-colors">
+                Cookie<span className="text-cookie-blue">Dash</span>
+              </span>
+              <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-sky-500/10 text-sky-400 border border-sky-500/20">
+                SVM
+              </span>
             </div>
           </div>
 

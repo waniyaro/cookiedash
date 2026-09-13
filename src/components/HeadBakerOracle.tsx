@@ -66,49 +66,49 @@ export const HeadBakerOracle: React.FC<HeadBakerOracleProps> = ({ metrics, isLiv
       <div className="mt-4 grid grid-cols-2 gap-2">
         <button
           onClick={() => handleSelectPrompt('status')}
-          className={`px-3 py-2 rounded-xl text-xs font-mono font-medium transition text-left flex items-center gap-1.5 border ${
+          className={`group px-3 py-2 rounded-xl text-xs font-mono font-medium transition-all duration-200 text-left flex items-center gap-2 border ${
             selectedPrompt === 'status'
-              ? 'bg-sky-500/15 border-sky-500/30 text-sky-300'
-              : 'bg-cookie-surface border-cookie-border text-slate-400 hover:text-slate-200'
+              ? 'bg-sky-500/15 border-sky-500/30 text-sky-300 shadow-sm'
+              : 'bg-cookie-surface border-cookie-border text-slate-400 hover:text-slate-200 hover:border-slate-700'
           }`}
         >
-          <Activity className="w-3.5 h-3.5 text-sky-400 shrink-0" />
+          <Activity className="w-3.5 h-3.5 text-sky-400 shrink-0 transition-transform duration-200 group-hover:scale-110" />
           <span className="truncate">Node Status</span>
         </button>
 
         <button
           onClick={() => handleSelectPrompt('fortune')}
-          className={`px-3 py-2 rounded-xl text-xs font-mono font-medium transition text-left flex items-center gap-1.5 border ${
+          className={`group px-3 py-2 rounded-xl text-xs font-mono font-medium transition-all duration-200 text-left flex items-center gap-2 border ${
             selectedPrompt === 'fortune'
-              ? 'bg-sky-500/15 border-sky-500/30 text-sky-300'
-              : 'bg-cookie-surface border-cookie-border text-slate-400 hover:text-slate-200'
+              ? 'bg-sky-500/15 border-sky-500/30 text-sky-300 shadow-sm'
+              : 'bg-cookie-surface border-cookie-border text-slate-400 hover:text-slate-200 hover:border-slate-700'
           }`}
         >
-          <BookOpen className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+          <BookOpen className="w-3.5 h-3.5 text-amber-400 shrink-0 transition-transform duration-200 group-hover:scale-110" />
           <span className="truncate">Memo Docs</span>
         </button>
 
         <button
           onClick={() => handleSelectPrompt('bridge')}
-          className={`px-3 py-2 rounded-xl text-xs font-mono font-medium transition text-left flex items-center gap-1.5 border ${
+          className={`group px-3 py-2 rounded-xl text-xs font-mono font-medium transition-all duration-200 text-left flex items-center gap-2 border ${
             selectedPrompt === 'bridge'
-              ? 'bg-sky-500/15 border-sky-500/30 text-sky-300'
-              : 'bg-cookie-surface border-cookie-border text-slate-400 hover:text-slate-200'
+              ? 'bg-sky-500/15 border-sky-500/30 text-sky-300 shadow-sm'
+              : 'bg-cookie-surface border-cookie-border text-slate-400 hover:text-slate-200 hover:border-slate-700'
           }`}
         >
-          <Layers className="w-3.5 h-3.5 text-blue-400 shrink-0" />
+          <Layers className="w-3.5 h-3.5 text-blue-400 shrink-0 transition-transform duration-200 group-hover:scale-110" />
           <span className="truncate">Bridge Route</span>
         </button>
 
         <button
           onClick={() => handleSelectPrompt('mcp')}
-          className={`px-3 py-2 rounded-xl text-xs font-mono font-medium transition text-left flex items-center gap-1.5 border ${
+          className={`group px-3 py-2 rounded-xl text-xs font-mono font-medium transition-all duration-200 text-left flex items-center gap-2 border ${
             selectedPrompt === 'mcp'
-              ? 'bg-sky-500/15 border-sky-500/30 text-sky-300'
-              : 'bg-cookie-surface border-cookie-border text-slate-400 hover:text-slate-200'
+              ? 'bg-sky-500/15 border-sky-500/30 text-sky-300 shadow-sm'
+              : 'bg-cookie-surface border-cookie-border text-slate-400 hover:text-slate-200 hover:border-slate-700'
           }`}
         >
-          <Terminal className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+          <Terminal className="w-3.5 h-3.5 text-emerald-400 shrink-0 transition-transform duration-200 group-hover:scale-110" />
           <span className="truncate">cookie-mcp</span>
         </button>
       </div>

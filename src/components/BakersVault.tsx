@@ -137,12 +137,16 @@ export const BakersVault: React.FC = () => {
   }
 
   return (
-    <div className="rounded-3xl bg-cookie-card border border-cookie-border p-6 sm:p-8 shadow-sm">
+    <div className="rounded-3xl bg-cookie-card border border-cookie-border p-6 sm:p-7 shadow-sm">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-cookie-border">
-        <div>
-          <h3 className="font-bold text-white text-base tracking-tight">The Baker's Vault</h3>
-          <p className="text-xs text-slate-400 mt-0.5">Asset balance & instant $COOK transfers</p>
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-cookie-border">
+        <div className="flex items-center gap-2.5">
+          <div className="p-2 rounded-xl bg-sky-500/10 text-sky-400 border border-sky-500/25 transition-transform hover:scale-110 duration-200">
+            <Send className="w-4 h-4" />
+          </div>
+          <div>
+            <h3 className="font-bold text-white text-base tracking-tight">Vault & Transfer</h3>
+          </div>
         </div>
 
         {connected && publicKey && (
@@ -152,7 +156,7 @@ export const BakersVault: React.FC = () => {
             </span>
             <button
               onClick={handleCopy}
-              className="p-0.5 text-slate-400 hover:text-white transition"
+              className="p-1 text-slate-400 hover:text-white transition rounded hover:bg-cookie-card"
               title="Copy address"
             >
               {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
@@ -161,7 +165,7 @@ export const BakersVault: React.FC = () => {
               href={`${COOKIE_CHAIN_CONFIG.explorerUrl}/address/${publicKey.toBase58()}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-0.5 text-slate-400 hover:text-cookie-blue transition"
+              className="p-1 text-slate-400 hover:text-cookie-blue transition rounded hover:bg-cookie-card"
               title="View in CookieScan"
             >
               <ExternalLink className="w-3.5 h-3.5" />
@@ -171,13 +175,13 @@ export const BakersVault: React.FC = () => {
       </div>
 
       {!connected ? (
-        <div className="mt-5 p-5 rounded-2xl bg-cookie-surface/50 border border-cookie-border text-center space-y-2.5">
-          <p className="text-xs text-slate-300">
-            Connect your wallet to inspect your on-chain $COOK balance and transfer funds.
+        <div className="mt-5 p-6 rounded-2xl bg-cookie-surface/40 border border-cookie-border text-center space-y-3">
+          <p className="text-xs text-slate-400">
+            Connect your wallet to view $COOK balance and send instant transactions.
           </p>
           <button
             onClick={() => setVisible(true)}
-            className="px-4 py-2 rounded-xl bg-cookie-card hover:bg-cookie-surface border border-cookie-border text-xs font-bold text-cookie-blue transition"
+            className="px-4 py-2 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 text-xs font-bold transition shadow-sm"
           >
             Connect Wallet
           </button>

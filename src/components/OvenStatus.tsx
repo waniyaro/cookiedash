@@ -40,13 +40,19 @@ export const OvenStatus: React.FC<OvenStatusProps> = ({
       {/* Header */}
       <div className="flex items-center justify-between pb-4 border-b border-cookie-border">
         <div className="flex items-center gap-2.5">
-          <div className="p-2 rounded-xl bg-sky-500/10 text-sky-400 border border-sky-500/20">
-            <Activity className="w-4 h-4" />
+          <div className="relative p-2 rounded-xl bg-sky-500/10 text-sky-400 border border-sky-500/20 group">
+            <Activity className="w-4 h-4 transition-transform group-hover:scale-110" />
+            <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
           </div>
           <div>
-            <h3 className="font-bold text-white text-base tracking-tight">
-              Network Telemetry
-            </h3>
+            <div className="flex items-center gap-2">
+              <h3 className="font-bold text-white text-base tracking-tight">
+                Node Telemetry
+              </h3>
+              <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-semibold">
+                LIVE
+              </span>
+            </div>
             <p className="text-[11px] text-slate-400 font-mono">
               rpc.cookiescan.io
             </p>
@@ -60,7 +66,7 @@ export const OvenStatus: React.FC<OvenStatusProps> = ({
           <button
             onClick={handleManualRefresh}
             disabled={isRefreshing || loading}
-            className="p-1.5 rounded-lg bg-cookie-surface hover:bg-cookie-border text-slate-400 hover:text-white transition disabled:opacity-50"
+            className="p-1.5 rounded-lg bg-cookie-surface hover:bg-cookie-border text-slate-400 hover:text-white transition disabled:opacity-50 hover:rotate-45"
             title="Refresh RPC Stats"
           >
             <RefreshCw className={`w-3.5 h-3.5 ${isRefreshing || loading ? 'animate-spin text-cookie-blue' : ''}`} />
