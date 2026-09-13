@@ -12,6 +12,13 @@ interface HearthInspectorProps {
   isLive: boolean
 }
 
+const CHANNEL_NAMES: Record<string, string> = {
+  status: 'Cluster Telemetry Stream',
+  wallet: 'SVM Wallet Readiness Audit',
+  memo: 'Solana Memo Protocol Spec',
+  bridge: 'Hyperlane Warp Route Gateway',
+}
+
 export const HearthInspector: React.FC<HearthInspectorProps> = ({
   metrics,
   loading,
@@ -120,7 +127,7 @@ State: Healthy, sub-second finality active.`
       case 'wallet':
         if (!connected || !publicKey) {
           return `[02 // WALLET_AUDIT: STANDBY]
-No active wallet detected. Operating in passive ledger mode.
+No active wallet detected. Operating in passive observer mode.
 Connect Phantom or Nightly to authorize transactions.`
         }
         return `[02 // WALLET_AUDIT: VERIFIED]
@@ -142,33 +149,34 @@ Status: Online with guaranteed message finality.`
   return (
     <aside
       id="telemetry-section"
-      className="rounded-2xl bg-[#1c130e] border border-[#3e271c] shadow-[0_16px_40px_-12px_rgba(0,0,0,0.9)] overflow-hidden transition-all"
+      className="rounded-2xl rack-card overflow-hidden transition-all"
     >
-      {/* SECTION 1: HEARTH GAUGES */}
+      {/* SECTION 1: HEARTH GAUGES (COOL CARBON TELEMETRY RACK) */}
       <div className="p-5 space-y-4">
         {/* Engineering Header: Monospace Technical ID */}
-        <div className="flex items-center justify-between pb-3 border-b border-[#2d1c14]">
+        <div className="flex items-center justify-between pb-3 border-b border-[#1f242e]">
           <div>
-            <div className="text-[10px] font-mono text-[#d4a15c] font-black uppercase tracking-widest">
+            <div className="text-[10px] font-mono text-[#38bdf8] font-black uppercase tracking-widest flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#38bdf8]" />
               // TELEMETRY_RACK.SVM
             </div>
-            <h3 className="font-mono font-bold text-sm text-[#f5ece1] tracking-tight">
+            <h3 className="font-mono font-bold text-sm text-[#f1f5f9] tracking-tight">
               rpc.cookiescan.io
             </h3>
           </div>
 
           <div className="flex items-center gap-2">
-            <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-[#090605] border border-[#332016] text-[10px] font-mono font-bold text-[#f5ece1]">
+            <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-[#0b0c0f] border border-[#262b35] text-[10px] font-mono font-bold text-[#e2e8f0]">
               <span className={`w-1.5 h-1.5 rounded-full ${isLive ? 'bg-emerald-400' : 'bg-amber-400'} animate-pulse`} />
               LIVE
             </span>
             <button
               onClick={handleRefresh}
               disabled={isRefreshing || loading}
-              className="p-1.5 rounded bg-[#271a13] hover:bg-[#332319] text-[#968579] hover:text-[#f5ece1] transition border border-[#3e271c]"
+              className="p-1.5 rounded bg-[#1e232d] hover:bg-[#282f3d] text-[#94a3b8] hover:text-[#f1f5f9] transition border border-[#2d3442]"
               title="Refresh Telemetry"
             >
-              <RefreshCw className={`w-3 h-3 ${isRefreshing || loading ? 'animate-spin text-[#d4a15c]' : ''}`} />
+              <RefreshCw className={`w-3 h-3 ${isRefreshing || loading ? 'animate-spin text-[#38bdf8]' : ''}`} />
             </button>
           </div>
         </div>
@@ -180,17 +188,17 @@ Status: Online with guaranteed message finality.`
         )}
 
         {/* Throughput Sparkline & Current Rate */}
-        <div className="p-3.5 rounded-xl bg-[#090605] border border-[#2d1c14]">
-          <div className="flex items-center justify-between text-[10px] font-mono text-[#968579] mb-2">
-            <span className="tracking-wider uppercase font-bold">THROUGHPUT GAUGE</span>
+        <div className="p-3.5 rounded-xl bg-[#0b0c0f] border border-[#1f242e]">
+          <div className="flex items-center justify-between text-[10px] font-mono text-[#94a3b8] mb-2">
+            <span className="tracking-wider uppercase font-bold text-[#38bdf8]/90">THROUGHPUT GAUGE</span>
             <span>{secondsAgo}s ago</span>
           </div>
 
           <div className="flex items-end justify-between gap-4">
             <div>
               <div className="flex items-baseline gap-1.5">
-                <span className="text-2xl font-black font-mono text-[#f5ece1]">{tps}</span>
-                <span className="text-xs font-mono text-[#968579]">tx / sec</span>
+                <span className="text-2xl font-black font-mono text-[#f8fafc]">{tps}</span>
+                <span className="text-xs font-mono text-[#94a3b8]">tx / sec</span>
               </div>
               <span className="text-[10px] font-mono text-emerald-400 font-semibold">Sub-second finality</span>
             </div>
@@ -200,8 +208,8 @@ Status: Online with guaranteed message finality.`
               <svg viewBox="0 0 140 36" className="w-full h-full overflow-visible">
                 <defs>
                   <linearGradient id="tpsGradient" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor="#ffb347" stopOpacity="0.35" />
-                    <stop offset="100%" stopColor="#ff7a1a" stopOpacity="0.0" />
+                    <stop offset="0%" stopColor="#38bdf8" stopOpacity="0.35" />
+                    <stop offset="100%" stopColor="#0284c7" stopOpacity="0.0" />
                   </linearGradient>
                 </defs>
                 <polygon
@@ -210,7 +218,7 @@ Status: Online with guaranteed message finality.`
                 />
                 <polyline
                   fill="none"
-                  stroke="#d4a15c"
+                  stroke="#38bdf8"
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -221,7 +229,7 @@ Status: Online with guaranteed message finality.`
                     cx="140"
                     cy={32 - ((tpsHistory[tpsHistory.length - 1] - minTps) / (maxTps - minTps || 1)) * 26}
                     r="3"
-                    fill="#ffb347"
+                    fill="#38bdf8"
                   />
                 )}
               </svg>
@@ -230,13 +238,13 @@ Status: Online with guaranteed message finality.`
         </div>
 
         {/* Epoch Radial & Slot Gauge */}
-        <div className="p-3.5 rounded-xl bg-[#090605] border border-[#2d1c14] flex items-center justify-between gap-4">
+        <div className="p-3.5 rounded-xl bg-[#0b0c0f] border border-[#1f242e] flex items-center justify-between gap-4">
           <div className="space-y-0.5">
-            <span className="text-[10px] font-mono text-[#968579] uppercase font-bold tracking-wider">SLOT INDEX</span>
-            <div className="text-base font-black font-mono text-[#f5ece1]">
+            <span className="text-[10px] font-mono text-[#94a3b8] uppercase font-bold tracking-wider">SLOT INDEX</span>
+            <div className="text-base font-black font-mono text-[#f8fafc]">
               #{slot.toLocaleString()}
             </div>
-            <span className="text-[10px] font-mono text-[#d4a15c] font-semibold">Epoch {epoch}</span>
+            <span className="text-[10px] font-mono text-[#38bdf8] font-semibold">Epoch {epoch}</span>
           </div>
 
           {/* Radial Epoch Indicator */}
@@ -246,7 +254,7 @@ Status: Online with guaranteed message finality.`
                 cx="22"
                 cy="22"
                 r="18"
-                stroke="#1f140f"
+                stroke="#181c24"
                 strokeWidth="4"
                 fill="none"
               />
@@ -254,7 +262,7 @@ Status: Online with guaranteed message finality.`
                 cx="22"
                 cy="22"
                 r="18"
-                stroke="#d4a15c"
+                stroke="#38bdf8"
                 strokeWidth="4"
                 fill="none"
                 strokeDasharray={113.1}
@@ -262,7 +270,7 @@ Status: Online with guaranteed message finality.`
                 strokeLinecap="round"
               />
             </svg>
-            <div className="absolute inset-0 flex items-center justify-center text-[10px] font-mono font-black text-[#f5ece1]">
+            <div className="absolute inset-0 flex items-center justify-center text-[10px] font-mono font-black text-[#f8fafc]">
               {epochProg}%
             </div>
           </div>
@@ -270,29 +278,30 @@ Status: Online with guaranteed message finality.`
 
         {/* Specs Grid */}
         <div className="grid grid-cols-2 gap-2 text-xs font-mono">
-          <div className="p-2.5 rounded-lg bg-[#090605] border border-[#2d1c14]">
-            <div className="text-[9px] text-[#968579] uppercase font-bold mb-0.5">VALIDATORS</div>
-            <div className="font-bold text-[#f5ece1]">{activeValidators} Active</div>
+          <div className="p-2.5 rounded-lg bg-[#0b0c0f] border border-[#1f242e]">
+            <div className="text-[9px] text-[#94a3b8] uppercase font-bold mb-0.5">VALIDATORS</div>
+            <div className="font-bold text-[#f8fafc]">{activeValidators} Active</div>
           </div>
-          <div className="p-2.5 rounded-lg bg-[#090605] border border-[#2d1c14]">
-            <div className="text-[9px] text-[#968579] uppercase font-bold mb-0.5">CORE</div>
-            <div className="font-bold text-[#f5ece1]">SVM v{version}</div>
+          <div className="p-2.5 rounded-lg bg-[#0b0c0f] border border-[#1f242e]">
+            <div className="text-[9px] text-[#94a3b8] uppercase font-bold mb-0.5">CORE</div>
+            <div className="font-bold text-[#f8fafc]">SVM v{version}</div>
           </div>
         </div>
       </div>
 
       {/* MECHANICAL INNER DIVIDER */}
-      <div className="border-t border-[#2d1c14]" />
+      <div className="border-t border-[#1f242e]" />
 
       {/* SECTION 2: HEAD BAKER AI & MCP ORACLE */}
-      <div className="p-5 space-y-3.5 bg-[#140d09]/70">
-        {/* Oracle Header */}
+      <div className="p-5 space-y-3.5 bg-[#0e1014]/70">
+        {/* Oracle Header with Clear Channel UX Hint */}
         <div className="flex items-center justify-between">
           <div>
-            <div className="text-[10px] font-mono text-[#d4a15c] font-black uppercase tracking-widest">
+            <div className="text-[10px] font-mono text-[#38bdf8] font-black uppercase tracking-widest flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#38bdf8]" />
               // AGENT_ORACLE
             </div>
-            <h4 className="font-mono font-bold text-xs sm:text-sm text-[#f5ece1]">
+            <h4 className="font-mono font-bold text-xs sm:text-sm text-[#f1f5f9]">
               Head Baker AI (cookie-mcp)
             </h4>
           </div>
@@ -301,15 +310,24 @@ Status: Online with guaranteed message finality.`
             href="https://github.com/cookiechain/cookie-mcp"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[10px] font-mono text-[#d4a15c] hover:underline inline-flex items-center gap-1"
+            className="text-[10px] font-mono text-[#38bdf8] hover:underline inline-flex items-center gap-1"
           >
             <span>v1.0 Repo</span>
             <ExternalLink className="w-2.5 h-2.5" />
           </a>
         </div>
 
+        {/* Channel Indicator UX Hint */}
+        <div className="flex items-center justify-between text-[10px] font-mono text-[#94a3b8] px-0.5">
+          <span className="flex items-center gap-1">
+            <span>Display Channel:</span>
+            <span className="text-[#38bdf8] font-bold">{CHANNEL_NAMES[selectedAgentView]}</span>
+          </span>
+          <span className="text-[9px] text-[#64748b]">Select Mode ↓</span>
+        </div>
+
         {/* Tactile Hardware Mode Switcher */}
-        <div className="grid grid-cols-4 gap-1.5 p-1 rounded-xl bg-[#090605] border border-[#2d1c14] shadow-inner">
+        <div className="grid grid-cols-4 gap-1.5 p-1 rounded-xl bg-[#0b0c0f] border border-[#1f242e] shadow-inner">
           {[
             { id: 'status', no: '01', label: 'TELEMETRY' },
             { id: 'wallet', no: '02', label: 'WALLET' },
@@ -324,11 +342,11 @@ Status: Online with guaranteed message finality.`
                 onClick={() => setSelectedAgentView(tab.id as any)}
                 className={`py-2 px-1 rounded-lg text-center transition-all flex flex-col items-center justify-center gap-0.5 select-none ${
                   isActive
-                    ? 'bg-gradient-to-b from-[#33231a] to-[#201510] text-[#f5ece1] shadow-[0_2px_6px_rgba(0,0,0,0.8),inset_0_1px_1px_rgba(255,255,255,0.15)] border border-[#d4a15c]/60'
-                    : 'bg-[#120d09] text-[#7d6d62] hover:text-[#f5ece1] hover:bg-[#1a130e] border border-transparent active:translate-y-0.5'
+                    ? 'bg-gradient-to-b from-[#1e293b] to-[#0f172a] text-[#f8fafc] shadow-[0_2px_6px_rgba(0,0,0,0.8),inset_0_1px_1px_rgba(255,255,255,0.2)] border border-[#38bdf8]/60'
+                    : 'bg-[#12151c] text-[#64748b] hover:text-[#e2e8f0] hover:bg-[#181d26] border border-transparent active:translate-y-0.5'
                 }`}
               >
-                <span className={`text-[9px] font-mono leading-none ${isActive ? 'text-[#d4a15c] font-black' : 'text-[#54463e]'}`}>
+                <span className={`text-[9px] font-mono leading-none ${isActive ? 'text-[#38bdf8] font-black' : 'text-[#475569]'}`}>
                   {tab.no}
                 </span>
                 <span className="text-[10px] font-mono font-bold tracking-tight">
@@ -340,35 +358,35 @@ Status: Online with guaranteed message finality.`
         </div>
 
         {/* Compact Agent Output */}
-        <div className="p-3 rounded-xl bg-[#090605] border border-[#2d1c14] text-xs font-mono leading-relaxed text-[#f5ece1]">
-          <pre className="whitespace-pre-wrap font-mono text-[11px] text-[#f5ece1]/90">
+        <div className="p-3 rounded-xl bg-[#0b0c0f] border border-[#1f242e] text-xs font-mono leading-relaxed text-[#f1f5f9]">
+          <pre className="whitespace-pre-wrap font-mono text-[11px] text-[#e2e8f0]/95">
             {getAgentContent()}
           </pre>
         </div>
 
         {/* Proof of Integration: Live MCP Manifest Drawer */}
-        <div className="rounded-xl border border-[#3e271c] bg-[#090605] overflow-hidden">
+        <div className="rounded-xl border border-[#282d38] bg-[#0b0c0f] overflow-hidden">
           <button
             onClick={() => setManifestOpen(!manifestOpen)}
-            className="w-full px-3 py-2 flex items-center justify-between text-xs font-mono text-[#d4a15c] hover:bg-[#1c130e] transition"
+            className="w-full px-3 py-2 flex items-center justify-between text-xs font-mono text-[#38bdf8] hover:bg-[#161a22] transition"
           >
             <span className="font-semibold">// View live cookie-mcp manifest</span>
             {manifestOpen ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
           </button>
 
           {manifestOpen && (
-            <div className="p-3 border-t border-[#2d1c14] bg-[#090605] space-y-2">
-              <div className="flex items-center justify-between text-[10px] font-mono text-[#968579]">
+            <div className="p-3 border-t border-[#1f242e] bg-[#0b0c0f] space-y-2">
+              <div className="flex items-center justify-between text-[10px] font-mono text-[#94a3b8]">
                 <span>cookie-mcp protocol dump</span>
                 <button
                   onClick={copyManifestJson}
-                  className="inline-flex items-center gap-1 text-[#d4a15c] hover:text-[#f5ece1] transition"
+                  className="inline-flex items-center gap-1 text-[#38bdf8] hover:text-[#f8fafc] transition"
                 >
                   {copiedManifest ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
                   <span>{copiedManifest ? 'Copied' : 'Copy JSON'}</span>
                 </button>
               </div>
-              <pre className="text-[10px] font-mono text-[#968579] leading-snug overflow-x-auto max-h-48 p-2 rounded-lg bg-[#140d09]">
+              <pre className="text-[10px] font-mono text-[#94a3b8] leading-snug overflow-x-auto max-h-48 p-2 rounded-lg bg-[#141820]">
                 {JSON.stringify(mcpManifest, null, 2)}
               </pre>
             </div>

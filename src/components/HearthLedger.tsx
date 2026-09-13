@@ -56,23 +56,24 @@ export const HearthLedger: React.FC = () => {
   }
 
   return (
-    <section className="rounded-2xl bg-[#1c130e] border border-[#3e271c] shadow-[0_16px_40px_-12px_rgba(0,0,0,0.9)] p-5 transition-all space-y-3.5">
+    <section className="rounded-2xl rack-card p-5 transition-all space-y-3.5">
       {/* Header: Transparent data provenance */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-[#2d1c14]">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-[#1f242e]">
         <div>
-          <div className="text-[10px] font-mono text-[#d4a15c] font-black uppercase tracking-widest">
+          <div className="text-[10px] font-mono text-[#38bdf8] font-black uppercase tracking-widest flex items-center gap-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#38bdf8]" />
             // SOLANA_MEMO.AUDIT_STREAM
           </div>
-          <h3 className="font-mono font-bold text-xs sm:text-sm text-[#f5ece1] tracking-tight">
+          <h3 className="font-mono font-bold text-xs sm:text-sm text-[#f1f5f9] tracking-tight">
             Recent On-Chain Inscriptions
           </h3>
-          <p className="text-[10px] font-mono text-[#968579]">
-            Program: <span className="text-[#d4a15c]">MemoSq4g...fcHr</span>
+          <p className="text-[10px] font-mono text-[#94a3b8]">
+            Program: <span className="text-[#38bdf8]">MemoSq4g...fcHr</span>
           </p>
         </div>
 
         <div className="flex items-center gap-2 self-start sm:self-auto">
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#0c0806] border border-[#2d1e17] text-[10px] font-mono text-[#968579]">
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#0b0c0f] border border-[#1f242e] text-[10px] font-mono text-[#94a3b8]">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
             <span>On-Chain Verified</span>
           </span>
@@ -80,16 +81,16 @@ export const HearthLedger: React.FC = () => {
             href={COOKIE_CHAIN_CONFIG.explorerUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="p-1 rounded-lg bg-[#0c0806] hover:bg-[#1a1310] border border-[#2d1e17] text-[#968579] hover:text-[#f5ece1] transition"
+            className="p-1 rounded-lg bg-[#0b0c0f] hover:bg-[#181d26] border border-[#1f242e] text-[#94a3b8] hover:text-[#f8fafc] transition"
             title="Open in CookieScan"
           >
-            <Compass className="w-3.5 h-3.5 text-[#d4a15c]" />
+            <Compass className="w-3.5 h-3.5 text-[#38bdf8]" />
           </a>
         </div>
       </div>
 
       {/* Continuous Tape Ledger Stream (No nested rounded cards!) */}
-      <div className="rounded-2xl bg-[#0c0806] border border-[#2d1e17] divide-y divide-[#241813] overflow-hidden">
+      <div className="rounded-xl bg-[#0b0c0f] border border-[#1f242e] divide-y divide-[#181c24] overflow-hidden">
         {VERIFIED_ONCHAIN_LEDGER.map((item) => (
           <div
             key={item.id}
