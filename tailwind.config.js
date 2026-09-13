@@ -7,25 +7,20 @@ export default {
   theme: {
     extend: {
       colors: {
-        cookie: {
-          bg: '#080402',
-          dark: '#0d0704',
-          card: '#140a05',
-          surface: '#1c0e07',
-          border: '#2c150a',
-          borderLight: '#4a2512',
-          blue: '#f59e0b', // warm golden honey replacement
-          cyan: '#fbbf24',
-          gold: '#f59e0b',
-          amber: '#fbbf24',
-          caramel: '#d97706',
-          ember: '#ea580c',
-          flame: '#f97316',
-          oven: '#ea580c',
-          crust: '#78350f',
-          dough: '#fef3c7',
-          cream: '#fffbeb',
-          soot: '#180d07',
+        bakery: {
+          bg: '#140d0a',          // Deep roasted cacao & espresso
+          surface: '#1e1410',     // Dark umbra card base
+          elevated: '#281a15',    // Slightly elevated surface
+          border: '#3a251e',      // Subtle warm boundary
+          borderMuted: '#2a1a15',
+          flame: '#ff7a1a',       // Hero primary fire
+          amber: '#ffb347',       // Hero bright caramel
+          gold: '#d4a15c',        // Secondary Vault gold
+          goldMuted: '#9e7a46',
+          ivory: '#f5ece1',       // High-contrast primary text
+          dough: '#e8dcce',       // Soft dough text
+          taupe: '#998376',       // Muted secondary label text
+          soot: '#0e0806',        // Deepest plate/tray background
         },
       },
       fontFamily: {

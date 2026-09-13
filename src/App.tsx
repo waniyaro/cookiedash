@@ -1,9 +1,8 @@
 import { Navbar } from './components/Navbar'
-import { HeroBanner } from './components/HeroBanner'
+import { NodeTickerBar } from './components/NodeTickerBar'
 import { FortuneOven } from './components/FortuneOven'
 import { BakersVault } from './components/BakersVault'
-import { OvenStatus } from './components/OvenStatus'
-import { HeadBakerOracle } from './components/HeadBakerOracle'
+import { HearthInspector } from './components/HearthInspector'
 import { EcosystemHub } from './components/EcosystemHub'
 import { useNetworkMetrics } from './hooks/useNetworkMetrics'
 
@@ -11,34 +10,35 @@ function App() {
   const { metrics, loading, error, refresh, isLive } = useNetworkMetrics()
 
   return (
-    <div className="min-h-screen text-[#fffbeb] flex flex-col font-sans selection:bg-amber-400 selection:text-[#080402]">
-      <Navbar isLive={isLive} currentSlot={metrics?.currentSlot} />
+    <div className="min-h-screen bg-[#140d0a] text-[#f5ece1] flex flex-col font-sans selection:bg-[#ffb347] selection:text-[#140d0a]">
+      {/* Top Navigation */}
+      <Navbar />
 
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
-        {/* Hero Section with Onboarding Flow */}
-        <HeroBanner />
+      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+        {/* Real-time Node Ticker Strip */}
+        <NodeTickerBar metrics={metrics} isLive={isLive} />
 
-        {/* 2-Column Responsive Dashboard Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          {/* Left Column (Primary Actions): Fortune Inscription & Vault */}
-          <div className="lg:col-span-7 space-y-8">
+        {/* Asymmetrical Modular Bento Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          {/* Main Column (8 cols): Hero Fortune Oven & Pastry Vault */}
+          <div className="lg:col-span-8 space-y-6">
             <FortuneOven />
             <BakersVault />
           </div>
 
-          {/* Right Column (Live Intelligence): Telemetry & AI Oracle */}
-          <div className="lg:col-span-5 space-y-8 lg:sticky lg:top-24">
-            <OvenStatus
+          {/* Right Sidebar (4 cols): Hearth Gauges & Head Baker AI Oracle */}
+          <div className="lg:col-span-4 lg:sticky lg:top-24">
+            <HearthInspector
               metrics={metrics}
               loading={loading}
               error={error}
               refresh={refresh}
+              isLive={isLive}
             />
-            <HeadBakerOracle metrics={metrics} isLive={isLive} />
           </div>
         </div>
 
-        {/* Official Ecosystem & Bridge Section */}
+        {/* Ecosystem Directory */}
         <EcosystemHub />
       </main>
     </div>
