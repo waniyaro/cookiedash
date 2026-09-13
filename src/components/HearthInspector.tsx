@@ -113,26 +113,26 @@ export const HearthInspector: React.FC<HearthInspectorProps> = ({
   const getAgentContent = () => {
     switch (selectedAgentView) {
       case 'status':
-        return `● Hearth Telemetry Verified
+        return `[01 // TELEMETRY_VERIFIED]
 Node: rpc.cookiescan.io (SVM Genesis: 9wDaBR...BB2)
-Slot: #${slot.toLocaleString()} | Throughput: ${tps} TPS
+Slot: #${slot.toLocaleString()} | Rate: ${tps} TPS
 State: Healthy, sub-second finality active.`
       case 'wallet':
         if (!connected || !publicKey) {
-          return `● Wallet Audit: Standby
-No wallet connected. Operating in passive ledger observer mode.
-Connect Phantom or Nightly to audit balances and sign transactions.`
+          return `[02 // WALLET_AUDIT: STANDBY]
+No active wallet detected. Operating in passive ledger mode.
+Connect Phantom or Nightly to authorize transactions.`
         }
-        return `● Wallet Audit: Verified
-Address: ${publicKey.toBase58().slice(0, 8)}...${publicKey.toBase58().slice(-8)}
+        return `[02 // WALLET_AUDIT: VERIFIED]
+Pubkey: ${publicKey.toBase58().slice(0, 8)}...${publicKey.toBase58().slice(-8)}
 Capabilities: Inscription Ready, $COOK Transfer Ready.`
       case 'memo':
-        return `● Solana Memo Program (v1.0)
+        return `[03 // SOLANA_MEMO_SPEC: v1.0]
 Program ID: ${COOKIE_CHAIN_CONFIG.memoProgramId}
-UTF-8 Payload: Permanent block storage
-Average Gas: <0.00001 $COOK`
+Payload: Immutable UTF-8 block storage
+Fee: ~0.000005 $COOK`
       case 'bridge':
-        return `● Hyperlane Warp Route
+        return `[04 // HYPERLANE_WARP_ROUTE]
 Route: Solana Mainnet <—> Cookie Chain
 Portal: ${COOKIE_CHAIN_CONFIG.bridgeUrl}
 Status: Online with guaranteed message finality.`
@@ -142,28 +142,30 @@ Status: Online with guaranteed message finality.`
   return (
     <aside
       id="telemetry-section"
-      className="rounded-3xl bakery-card overflow-hidden transition-all"
+      className="rounded-2xl bg-[#1c130e] border border-[#3e271c] shadow-[0_16px_40px_-12px_rgba(0,0,0,0.9)] overflow-hidden transition-all"
     >
       {/* SECTION 1: HEARTH GAUGES */}
-      <div className="p-5 sm:p-6 space-y-4">
-        {/* Header: Clean, single status badge */}
-        <div className="flex items-center justify-between pb-3 border-b border-[#2d1e17]">
+      <div className="p-5 space-y-4">
+        {/* Engineering Header: Monospace Technical ID */}
+        <div className="flex items-center justify-between pb-3 border-b border-[#2d1c14]">
           <div>
-            <h3 className="font-display font-bold text-sm sm:text-base text-[#f5ece1] tracking-tight">
-              Hearth Telemetry
+            <div className="text-[10px] font-mono text-[#d4a15c] font-black uppercase tracking-widest">
+              // TELEMETRY_RACK.SVM
+            </div>
+            <h3 className="font-mono font-bold text-sm text-[#f5ece1] tracking-tight">
+              rpc.cookiescan.io
             </h3>
-            <p className="text-[11px] font-mono text-[#8f8075]">rpc.cookiescan.io</p>
           </div>
 
           <div className="flex items-center gap-2">
-            <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-[#080504] border border-[#38261e] text-[10px] font-mono font-bold text-[#f5ece1]">
+            <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-[#090605] border border-[#332016] text-[10px] font-mono font-bold text-[#f5ece1]">
               <span className={`w-1.5 h-1.5 rounded-full ${isLive ? 'bg-emerald-400' : 'bg-amber-400'} animate-pulse`} />
               LIVE
             </span>
             <button
               onClick={handleRefresh}
               disabled={isRefreshing || loading}
-              className="p-1.5 rounded-lg bg-[#251b16] hover:bg-[#33251e] text-[#8f8075] hover:text-[#f5ece1] transition border border-[#38261e]"
+              className="p-1.5 rounded bg-[#271a13] hover:bg-[#332319] text-[#968579] hover:text-[#f5ece1] transition border border-[#3e271c]"
               title="Refresh Telemetry"
             >
               <RefreshCw className={`w-3 h-3 ${isRefreshing || loading ? 'animate-spin text-[#d4a15c]' : ''}`} />
@@ -172,15 +174,15 @@ Status: Online with guaranteed message finality.`
         </div>
 
         {error && !metrics && (
-          <div className="p-2.5 rounded-xl bg-rose-950/30 border border-rose-500/30 text-rose-300 text-xs">
+          <div className="p-2 rounded bg-rose-950/40 border border-rose-500/40 text-rose-300 text-xs font-mono">
             Connecting to Cookie Chain node...
           </div>
         )}
 
         {/* Throughput Sparkline & Current Rate */}
-        <div className="p-3.5 rounded-2xl bg-[#080504] border border-[#241813]">
-          <div className="flex items-center justify-between text-[11px] font-mono text-[#8f8075] mb-2">
-            <span>NETWORK THROUGHPUT</span>
+        <div className="p-3.5 rounded-xl bg-[#090605] border border-[#2d1c14]">
+          <div className="flex items-center justify-between text-[10px] font-mono text-[#968579] mb-2">
+            <span className="tracking-wider uppercase font-bold">THROUGHPUT GAUGE</span>
             <span>{secondsAgo}s ago</span>
           </div>
 
@@ -188,9 +190,9 @@ Status: Online with guaranteed message finality.`
             <div>
               <div className="flex items-baseline gap-1.5">
                 <span className="text-2xl font-black font-mono text-[#f5ece1]">{tps}</span>
-                <span className="text-xs font-mono text-[#8f8075]">tx / sec</span>
+                <span className="text-xs font-mono text-[#968579]">tx / sec</span>
               </div>
-              <span className="text-[10px] font-mono text-emerald-400">Stable sub-second</span>
+              <span className="text-[10px] font-mono text-emerald-400 font-semibold">Sub-second finality</span>
             </div>
 
             {/* Live SVG Sparkline */}
@@ -198,7 +200,7 @@ Status: Online with guaranteed message finality.`
               <svg viewBox="0 0 140 36" className="w-full h-full overflow-visible">
                 <defs>
                   <linearGradient id="tpsGradient" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor="#ffb347" stopOpacity="0.3" />
+                    <stop offset="0%" stopColor="#ffb347" stopOpacity="0.35" />
                     <stop offset="100%" stopColor="#ff7a1a" stopOpacity="0.0" />
                   </linearGradient>
                 </defs>
@@ -228,23 +230,23 @@ Status: Online with guaranteed message finality.`
         </div>
 
         {/* Epoch Radial & Slot Gauge */}
-        <div className="p-3.5 rounded-2xl bg-[#080504] border border-[#241813] flex items-center justify-between gap-4">
-          <div className="space-y-1">
-            <span className="text-[10px] font-mono text-[#8f8075] uppercase">SLOT INDEX</span>
+        <div className="p-3.5 rounded-xl bg-[#090605] border border-[#2d1c14] flex items-center justify-between gap-4">
+          <div className="space-y-0.5">
+            <span className="text-[10px] font-mono text-[#968579] uppercase font-bold tracking-wider">SLOT INDEX</span>
             <div className="text-base font-black font-mono text-[#f5ece1]">
               #{slot.toLocaleString()}
             </div>
-            <span className="text-[11px] font-mono text-[#d4a15c]">Epoch {epoch}</span>
+            <span className="text-[10px] font-mono text-[#d4a15c] font-semibold">Epoch {epoch}</span>
           </div>
 
           {/* Radial Epoch Indicator */}
-          <div className="relative w-14 h-14 shrink-0 flex items-center justify-center">
-            <svg className="w-14 h-14 transform -rotate-90" viewBox="0 0 44 44">
+          <div className="relative w-13 h-13 shrink-0 flex items-center justify-center">
+            <svg className="w-13 h-13 transform -rotate-90" viewBox="0 0 44 44">
               <circle
                 cx="22"
                 cy="22"
                 r="18"
-                stroke="#1a1310"
+                stroke="#1f140f"
                 strokeWidth="4"
                 fill="none"
               />
@@ -268,29 +270,31 @@ Status: Online with guaranteed message finality.`
 
         {/* Specs Grid */}
         <div className="grid grid-cols-2 gap-2 text-xs font-mono">
-          <div className="p-2.5 rounded-xl bg-[#080504] border border-[#241813]">
-            <div className="text-[10px] text-[#8f8075] mb-0.5">VALIDATORS</div>
-            <div className="font-bold text-[#f5ece1]">{activeValidators} active</div>
+          <div className="p-2.5 rounded-lg bg-[#090605] border border-[#2d1c14]">
+            <div className="text-[9px] text-[#968579] uppercase font-bold mb-0.5">VALIDATORS</div>
+            <div className="font-bold text-[#f5ece1]">{activeValidators} Active</div>
           </div>
-          <div className="p-2.5 rounded-xl bg-[#080504] border border-[#241813]">
-            <div className="text-[10px] text-[#8f8075] mb-0.5">CORE</div>
+          <div className="p-2.5 rounded-lg bg-[#090605] border border-[#2d1c14]">
+            <div className="text-[9px] text-[#968579] uppercase font-bold mb-0.5">CORE</div>
             <div className="font-bold text-[#f5ece1]">SVM v{version}</div>
           </div>
         </div>
       </div>
 
-      {/* SUBTLE INNER DIVIDER */}
-      <div className="border-t border-[#241813]" />
+      {/* MECHANICAL INNER DIVIDER */}
+      <div className="border-t border-[#2d1c14]" />
 
       {/* SECTION 2: HEAD BAKER AI & MCP ORACLE */}
-      <div className="p-5 sm:p-6 space-y-4 bg-[#140d0a]/50">
+      <div className="p-5 space-y-3.5 bg-[#140d09]/70">
         {/* Oracle Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h4 className="font-display font-bold text-sm text-[#f5ece1]">
-              Head Baker AI Agent
+            <div className="text-[10px] font-mono text-[#d4a15c] font-black uppercase tracking-widest">
+              // AGENT_ORACLE
+            </div>
+            <h4 className="font-mono font-bold text-xs sm:text-sm text-[#f5ece1]">
+              Head Baker AI (cookie-mcp)
             </h4>
-            <span className="text-[10px] font-mono text-[#8f8075]">cookie-mcp/v1.0</span>
           </div>
 
           <a
@@ -299,59 +303,62 @@ Status: Online with guaranteed message finality.`
             rel="noopener noreferrer"
             className="text-[10px] font-mono text-[#d4a15c] hover:underline inline-flex items-center gap-1"
           >
-            <span>GitHub</span>
+            <span>v1.0 Repo</span>
             <ExternalLink className="w-2.5 h-2.5" />
           </a>
         </div>
 
-        {/* Tactile Protocol Dispatch Switcher (Replaces default outline buttons) */}
-        <div className="p-1 rounded-xl bg-[#0c0806] border border-[#2d1e17] grid grid-cols-4 gap-1 text-[11px] font-mono">
-          {(
-            [
-              { id: 'status', label: 'Node' },
-              { id: 'wallet', label: 'Audit' },
-              { id: 'memo', label: 'Memo' },
-              { id: 'bridge', label: 'Bridge' },
-            ] as const
-          ).map((tab) => {
+        {/* Tactile Hardware Mode Switcher */}
+        <div className="grid grid-cols-4 gap-1.5 p-1 rounded-xl bg-[#090605] border border-[#2d1c14] shadow-inner">
+          {[
+            { id: 'status', no: '01', label: 'TELEMETRY' },
+            { id: 'wallet', no: '02', label: 'WALLET' },
+            { id: 'memo',   no: '03', label: 'MEMO SPEC' },
+            { id: 'bridge', no: '04', label: 'WARP' },
+          ].map((tab) => {
             const isActive = selectedAgentView === tab.id
             return (
               <button
                 key={tab.id}
-                onClick={() => setSelectedAgentView(tab.id)}
-                className={`py-1.5 px-2 rounded-lg text-center transition-all flex items-center justify-center gap-1.5 font-bold ${
+                type="button"
+                onClick={() => setSelectedAgentView(tab.id as any)}
+                className={`py-2 px-1 rounded-lg text-center transition-all flex flex-col items-center justify-center gap-0.5 select-none ${
                   isActive
-                    ? 'bg-[#241a15] text-[#f5ece1] shadow-inner shadow-black/60 border border-[#d4a15c]/50'
-                    : 'text-[#968579] hover:text-[#f5ece1] hover:bg-[#1a1310]/50'
+                    ? 'bg-gradient-to-b from-[#33231a] to-[#201510] text-[#f5ece1] shadow-[0_2px_6px_rgba(0,0,0,0.8),inset_0_1px_1px_rgba(255,255,255,0.15)] border border-[#d4a15c]/60'
+                    : 'bg-[#120d09] text-[#7d6d62] hover:text-[#f5ece1] hover:bg-[#1a130e] border border-transparent active:translate-y-0.5'
                 }`}
               >
-                {isActive && <span className="w-1.5 h-1.5 rounded-full bg-[#d4a15c] animate-pulse shrink-0" />}
-                <span>{tab.label}</span>
+                <span className={`text-[9px] font-mono leading-none ${isActive ? 'text-[#d4a15c] font-black' : 'text-[#54463e]'}`}>
+                  {tab.no}
+                </span>
+                <span className="text-[10px] font-mono font-bold tracking-tight">
+                  {tab.label}
+                </span>
               </button>
             )
           })}
         </div>
 
         {/* Compact Agent Output */}
-        <div className="p-3 rounded-2xl bg-[#080504] border border-[#241813] text-xs font-mono leading-relaxed text-[#f5ece1]">
-          <pre className="whitespace-pre-wrap font-sans text-xs text-[#f5ece1]/90">
+        <div className="p-3 rounded-xl bg-[#090605] border border-[#2d1c14] text-xs font-mono leading-relaxed text-[#f5ece1]">
+          <pre className="whitespace-pre-wrap font-mono text-[11px] text-[#f5ece1]/90">
             {getAgentContent()}
           </pre>
         </div>
 
         {/* Proof of Integration: Live MCP Manifest Drawer */}
-        <div className="rounded-2xl border border-[#38261e] bg-[#080504] overflow-hidden">
+        <div className="rounded-xl border border-[#3e271c] bg-[#090605] overflow-hidden">
           <button
             onClick={() => setManifestOpen(!manifestOpen)}
-            className="w-full px-3 py-2 flex items-center justify-between text-xs font-mono text-[#d4a15c] hover:bg-[#1a1310] transition"
+            className="w-full px-3 py-2 flex items-center justify-between text-xs font-mono text-[#d4a15c] hover:bg-[#1c130e] transition"
           >
-            <span className="font-semibold">View live cookie-mcp manifest</span>
+            <span className="font-semibold">// View live cookie-mcp manifest</span>
             {manifestOpen ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
           </button>
 
           {manifestOpen && (
-            <div className="p-3 border-t border-[#241813] bg-[#080504] space-y-2">
-              <div className="flex items-center justify-between text-[10px] font-mono text-[#8f8075]">
+            <div className="p-3 border-t border-[#2d1c14] bg-[#090605] space-y-2">
+              <div className="flex items-center justify-between text-[10px] font-mono text-[#968579]">
                 <span>cookie-mcp protocol dump</span>
                 <button
                   onClick={copyManifestJson}
@@ -361,7 +368,7 @@ Status: Online with guaranteed message finality.`
                   <span>{copiedManifest ? 'Copied' : 'Copy JSON'}</span>
                 </button>
               </div>
-              <pre className="text-[10px] font-mono text-[#8f8075] leading-snug overflow-x-auto max-h-48 p-2 rounded-lg bg-[#1a1310]">
+              <pre className="text-[10px] font-mono text-[#968579] leading-snug overflow-x-auto max-h-48 p-2 rounded-lg bg-[#140d09]">
                 {JSON.stringify(mcpManifest, null, 2)}
               </pre>
             </div>

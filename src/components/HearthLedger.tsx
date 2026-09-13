@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { ExternalLink, Check, Copy, ScrollText, Compass } from 'lucide-react'
+import { ExternalLink, Check, Copy, Compass } from 'lucide-react'
 import { COOKIE_CHAIN_CONFIG } from '../config/network'
 
 interface InscriptionEntry {
@@ -56,19 +56,19 @@ export const HearthLedger: React.FC = () => {
   }
 
   return (
-    <section className="bakery-card rounded-3xl p-6 transition-all space-y-4">
+    <section className="rounded-2xl bg-[#1c130e] border border-[#3e271c] shadow-[0_16px_40px_-12px_rgba(0,0,0,0.9)] p-5 transition-all space-y-3.5">
       {/* Header: Transparent data provenance */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3.5 border-b border-[#2d1e17]">
-        <div className="flex items-center gap-2">
-          <ScrollText className="w-4 h-4 text-[#d4a15c]" />
-          <div>
-            <h3 className="font-display font-bold text-sm sm:text-base text-[#f5ece1] tracking-tight">
-              Hearth Inscriptions &amp; Audit Trail
-            </h3>
-            <p className="text-[11px] font-mono text-[#968579]">
-              Solana Memo Program: <span className="text-[#d4a15c]">MemoSq4g...fcHr</span>
-            </p>
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-[#2d1c14]">
+        <div>
+          <div className="text-[10px] font-mono text-[#d4a15c] font-black uppercase tracking-widest">
+            // SOLANA_MEMO.AUDIT_STREAM
           </div>
+          <h3 className="font-mono font-bold text-xs sm:text-sm text-[#f5ece1] tracking-tight">
+            Recent On-Chain Inscriptions
+          </h3>
+          <p className="text-[10px] font-mono text-[#968579]">
+            Program: <span className="text-[#d4a15c]">MemoSq4g...fcHr</span>
+          </p>
         </div>
 
         <div className="flex items-center gap-2 self-start sm:self-auto">

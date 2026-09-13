@@ -335,27 +335,39 @@ export const BakersVault: React.FC = () => {
                   </button>
                 </div>
 
-                {/* Percentage Shortcuts with REAL Dynamic UI State */}
-                <div className="flex items-center gap-1.5 text-[10px] font-mono text-[#968579]">
-                  <span>Portion:</span>
-                  {[25, 50, 75, 100].map((pct) => {
-                    const isSelected = activePercentage === pct
-                    return (
-                      <button
-                        key={pct}
-                        type="button"
-                        onClick={() => (pct === 100 ? handleSetMax() : handleSetPercentage(pct))}
-                        disabled={balance === null || balance <= 0}
-                        className={`px-2.5 py-0.5 rounded-lg text-[10px] font-mono font-bold transition active:scale-95 disabled:opacity-40 ${
-                          isSelected
-                            ? 'bg-[#d4a15c] text-[#090605] shadow-sm shadow-[#d4a15c]/25'
-                            : 'bg-[#0c0806] border border-[#2d1e17] text-[#968579] hover:text-[#f5ece1] hover:border-[#442f24]'
-                        }`}
-                      >
-                        {pct}%
-                      </button>
-                    )
-                  })}
+                <div className="flex items-center justify-between text-[11px] font-mono text-[#968579] px-1">
+                  <div className="flex items-center gap-1.5 text-[10px]">
+                    <span>Portion:</span>
+                    {[25, 50, 75, 100].map((pct) => {
+                      const isSelected = activePercentage === pct
+                      return (
+                        <button
+                          key={pct}
+                          type="button"
+                          onClick={() => (pct === 100 ? handleSetMax() : handleSetPercentage(pct))}
+                          disabled={balance === null || balance <= 0}
+                          className={`px-2 py-0.5 rounded text-[10px] font-mono font-bold transition active:scale-95 disabled:opacity-40 ${
+                            isSelected
+                              ? 'bg-[#d4a15c] text-[#090605] shadow-sm shadow-[#d4a15c]/25'
+                              : 'bg-[#0c0806] border border-[#2d1e17] text-[#968579] hover:text-[#f5ece1] hover:border-[#442f24]'
+                          }`}
+                        >
+                          {pct}%
+                        </button>
+                      )
+                    })}
+                  </div>
+
+                  {/* Real-time Available Balance & Fee helper */}
+                  <div className="text-[10px] text-right">
+                    {balance !== null && parseFloat(amount || '0') > balance ? (
+                      <span className="text-amber-400 font-bold">Exceeds available balance</span>
+                    ) : (
+                      <span className="text-[#968579]">
+                        Fee: <span className="text-[#d4a15c]">&lt;0.0001 $COOK</span>
+                      </span>
+                    )}
+                  </div>
                 </div>
               </div>
 
