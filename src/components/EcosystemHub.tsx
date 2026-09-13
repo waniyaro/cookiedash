@@ -97,25 +97,25 @@ export const EcosystemHub: React.FC = () => {
         {REGISTRY_PROTOCOLS.map((entry) => (
           <div
             key={entry.title}
-            className="p-4 sm:px-6 hover:bg-[#251b16]/60 transition-colors flex flex-col md:flex-row md:items-center justify-between gap-3 text-xs"
+            className="p-4 sm:px-6 hover:bg-[#181d26]/80 transition-colors flex flex-col md:flex-row md:items-center justify-between gap-3 text-xs"
           >
             {/* Protocol Identity & Role */}
             <div className="md:w-64 shrink-0 space-y-0.5">
               <div className="flex items-center gap-2">
-                <span className="font-display font-bold text-sm text-[#f5ece1]">
+                <span className="font-display font-bold text-sm text-[#f1f5f9]">
                   {entry.title}
                 </span>
-                <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-[#080504] text-[#d4a15c] border border-[#38261e]">
+                <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-[#0b0c0f] text-[#38bdf8] border border-[#1f242e]">
                   {entry.role}
                 </span>
               </div>
-              <span className="text-[11px] font-mono text-[#8f8075]">
+              <span className="text-[11px] font-mono text-[#94a3b8]">
                 {entry.endpoint}
               </span>
             </div>
 
             {/* Description */}
-            <p className="flex-1 text-[#8f8075] font-sans text-xs leading-relaxed md:px-4">
+            <p className="flex-1 text-[#94a3b8] font-sans text-xs leading-relaxed md:px-4">
               {entry.description}
             </p>
 
@@ -125,10 +125,10 @@ export const EcosystemHub: React.FC = () => {
                 href={entry.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-[#080504] hover:bg-[#1a1310] text-[#f5ece1] hover:text-[#ffb347] border border-[#38261e] text-xs font-mono font-bold transition group"
+                className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-[#0b0c0f] hover:bg-[#1e293b] text-[#f1f5f9] hover:text-[#38bdf8] border border-[#1f242e] text-xs font-mono font-bold transition group"
               >
                 <span>{entry.actionText}</span>
-                <ArrowUpRight className="w-3 h-3 text-[#8f8075] group-hover:text-[#ffb347] transition-colors" />
+                <ArrowUpRight className="w-3 h-3 text-[#64748b] group-hover:text-[#38bdf8] transition-colors" />
               </a>
             </div>
           </div>
