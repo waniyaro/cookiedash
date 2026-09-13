@@ -53,17 +53,12 @@ export const Navbar: React.FC<NavbarProps> = ({ isLive, currentSlot }) => {
             </div>
 
             {/* Brand Title */}
-            <div className="flex flex-col">
-              <div className="flex items-center gap-2">
-                <span className="font-black text-lg tracking-tight text-white leading-none group-hover:text-amber-200 transition-colors">
-                  Cookie<span className="text-cookie-blue">Dash</span>
-                </span>
-                <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-sky-500/10 text-sky-400 border border-sky-500/20">
-                  SVM
-                </span>
-              </div>
-              <span className="text-[10px] font-mono text-slate-500 font-semibold tracking-wider uppercase mt-1">
-                Cookie Chain
+            <div className="flex items-center gap-2">
+              <span className="font-black text-lg tracking-tight text-white leading-none group-hover:text-amber-200 transition-colors">
+                Cookie<span className="text-cookie-blue">Dash</span>
+              </span>
+              <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-sky-500/10 text-sky-400 border border-sky-500/20">
+                SVM
               </span>
             </div>
           </div>
