@@ -124,7 +124,7 @@ export const FortuneOven: React.FC = () => {
   return (
     <article
       id="fortune-oven"
-      className="relative rounded-3xl bg-[#1a1310] border border-[#38261e] p-6 sm:p-8 lg:p-10 hero-oven-glow overflow-hidden transition-all"
+      className="relative rounded-3xl bakery-card hero-oven-glow p-6 sm:p-8 lg:p-10 overflow-hidden transition-all"
     >
       {/* Artisanal Ambient Warmth */}
       <div className="absolute -right-16 -top-16 w-96 h-96 bg-gradient-to-br from-[#ff7a1a]/15 to-transparent rounded-full blur-3xl pointer-events-none" />
@@ -149,33 +149,28 @@ export const FortuneOven: React.FC = () => {
             </p>
           </div>
 
-          {/* Clean Brand Stat Tile */}
-          <div className="pt-2 flex items-center gap-4">
-            <div className="relative w-16 h-16 shrink-0 rounded-2xl bg-[#080504] border border-[#38261e] flex items-center justify-center shadow-inner group">
-              <div className="absolute inset-0 rounded-2xl bg-[#ff7a1a]/15 blur-sm pointer-events-none" />
-              <img
-                src="/cookie-sticker.png"
-                alt="Cookie Chain"
-                className="relative z-10 w-11 h-11 object-contain drop-shadow-[0_2px_8px_rgba(255,122,26,0.5)] transition-transform group-hover:scale-110 group-hover:rotate-6"
-              />
-            </div>
-
-            {/* Prominent Counter Display */}
-            <div className="space-y-0.5">
-              <span className="text-[10px] font-mono text-[#8f8075] uppercase tracking-wider block">
-                TOTAL ON-CHAIN BATCHES
+          {/* Pure Architectural Metric Display (No generic circle-icon) */}
+          <div className="pt-2 pl-4 border-l-2 border-[#d4a15c] space-y-1">
+            <span className="text-[10px] font-mono text-[#968579] uppercase tracking-wider block">
+              TOTAL ON-CHAIN BATCHES
+            </span>
+            <div className="flex items-baseline gap-3">
+              <span className="font-display font-black text-4xl sm:text-5xl text-[#f5ece1] tracking-tight">
+                {totalBaked}
               </span>
-              <div className="flex items-baseline gap-2">
-                <span className="font-display font-black text-3xl sm:text-4xl text-[#f5ece1]">
-                  {totalBaked}
-                </span>
-                <span className="text-xs font-mono font-bold text-[#d4a15c]">Batches Baked</span>
-              </div>
-              <div className="flex items-center gap-2 text-[11px] font-mono text-[#8f8075]">
-                <span>Gas: &lt; 0.0001 $COOK</span>
-                <span>•</span>
-                <span className="text-emerald-400">~0.8s Finality</span>
-              </div>
+              <span className="text-xs sm:text-sm font-mono font-bold text-[#d4a15c] uppercase tracking-wider">
+                Batches Inscribed
+              </span>
+            </div>
+            <div className="flex items-center gap-2.5 text-xs font-mono text-[#968579]">
+              <span className="inline-flex items-center gap-1.5 text-emerald-400 font-semibold">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                Solana Memo Program
+              </span>
+              <span>•</span>
+              <span>Gas &lt; 0.0001 $COOK</span>
+              <span>•</span>
+              <span>~0.8s Finality</span>
             </div>
           </div>
         </div>

@@ -4,9 +4,10 @@
 
 @layer base {
   body {
-    background-color: #0d0907;
+    background-color: #090605;
     background-image: 
-      radial-gradient(ellipse 80% 35% at 50% 0%, rgba(255, 122, 26, 0.09), transparent 75%),
+      radial-gradient(ellipse 90% 40% at 50% -5%, rgba(255, 122, 26, 0.12), transparent 70%),
+      radial-gradient(circle at 10% 90%, rgba(212, 161, 92, 0.04), transparent 40%),
       url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E");
     background-attachment: fixed;
     color: #f5ece1;
@@ -17,7 +18,7 @@
   }
 
   input, textarea {
-    background-color: #080504;
+    background-color: #0c0806;
     color: #f5ece1;
   }
 }
@@ -45,20 +46,20 @@
 /* Exclusive Hero Flame CTA */
 .hero-flame-btn {
   background: linear-gradient(135deg, #ff7a1a 0%, #ff9a2b 50%, #ffb347 100%);
-  color: #0d0907;
+  color: #090605;
   font-weight: 800;
   box-shadow: 
-    0 12px 32px -4px rgba(255, 122, 26, 0.45),
+    0 12px 36px -4px rgba(255, 122, 26, 0.5),
     0 2px 4px 0 rgba(0, 0, 0, 0.4),
-    inset 0 1px 1px 0 rgba(255, 255, 255, 0.5);
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.6);
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .hero-flame-btn:hover:not(:disabled) {
   background: linear-gradient(135deg, #ff8a2e 0%, #ffa73e 50%, #ffc060 100%);
   box-shadow: 
-    0 16px 40px -4px rgba(255, 122, 26, 0.6),
+    0 16px 44px -4px rgba(255, 122, 26, 0.65),
     0 4px 8px 0 rgba(0, 0, 0, 0.5),
-    inset 0 1px 1px 0 rgba(255, 255, 255, 0.6);
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.7);
   transform: translateY(-1px);
 }
 .hero-flame-btn:active:not(:disabled) {
@@ -66,11 +67,22 @@
   box-shadow: 0 4px 14px 0 rgba(255, 122, 26, 0.35);
 }
 
+/* Physical Elevation Shadow for Cards */
+.bakery-card {
+  background-color: #221813;
+  border: 1px solid #442f24;
+  box-shadow: 
+    0 20px 50px -15px rgba(0, 0, 0, 0.75),
+    0 2px 6px 0 rgba(0, 0, 0, 0.5),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.05);
+}
+
 /* Hero Oven Glow */
 .hero-oven-glow {
   box-shadow: 
-    0 0 90px -20px rgba(255, 122, 26, 0.15),
-    inset 0 1px 1px 0 rgba(255, 179, 71, 0.15);
+    0 24px 60px -20px rgba(0, 0, 0, 0.9),
+    0 0 80px -10px rgba(255, 122, 26, 0.15),
+    inset 0 1px 2px 0 rgba(255, 179, 71, 0.2);
 }
 
 /* Custom Night Bakery Scrollbar */
@@ -79,12 +91,12 @@
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #0d0907;
+  background: #090605;
 }
 ::-webkit-scrollbar-thumb {
-  background: #251b16;
+  background: #2d1f19;
   border-radius: 9999px;
-  border: 1px solid #38261e;
+  border: 1px solid #442f24;
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #d4a15c;
@@ -93,15 +105,16 @@
 /* Wallet adapter button */
 .wallet-adapter-button {
   font-family: 'Outfit', sans-serif !important;
-  background: #1a1310 !important;
+  background: #221813 !important;
   color: #f5ece1 !important;
   font-weight: 700 !important;
   border-radius: 0.75rem !important;
-  border: 1px solid #38261e !important;
+  border: 1px solid #442f24 !important;
+  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.4) !important;
   transition: all 0.2s ease-in-out !important;
 }
 .wallet-adapter-button:hover {
-  background: #251b16 !important;
+  background: #2d1f19 !important;
   border-color: #d4a15c !important;
   color: #ffffff !important;
 }

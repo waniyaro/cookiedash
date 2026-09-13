@@ -142,12 +142,12 @@ Status: Online with guaranteed message finality.`
   return (
     <aside
       id="telemetry-section"
-      className="rounded-3xl bg-[#1a1310] border border-[#38261e] overflow-hidden shadow-xl"
+      className="rounded-3xl bakery-card overflow-hidden transition-all"
     >
       {/* SECTION 1: HEARTH GAUGES */}
       <div className="p-5 sm:p-6 space-y-4">
         {/* Header: Clean, single status badge */}
-        <div className="flex items-center justify-between pb-3 border-b border-[#241813]">
+        <div className="flex items-center justify-between pb-3 border-b border-[#2d1e17]">
           <div>
             <h3 className="font-display font-bold text-sm sm:text-base text-[#f5ece1] tracking-tight">
               Hearth Telemetry
