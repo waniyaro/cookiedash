@@ -51,9 +51,9 @@ export const HearthInspector: React.FC<HearthInspectorProps> = ({
     setTimeout(() => setIsRefreshing(false), 500)
   }
 
-  const slot = metrics?.currentSlot || 24871012
+  const slot = metrics?.currentSlot || 24877660
   const tps = metrics?.tps || 9
-  const epoch = metrics?.epoch ?? 12
+  const epoch = metrics?.epoch ?? 57
   const epochProg = metrics?.epochProgressPercent ?? 57
   const version = metrics?.solanaCoreVersion || '4.1.2'
   const activeValidators = metrics?.activeValidators || 8
