@@ -30,11 +30,18 @@ export const Navbar: React.FC = () => {
           className="flex items-center gap-3 group cursor-pointer select-none"
         >
           <div className="relative w-9 h-9 shrink-0">
-            <div className="absolute inset-0 rounded-full bg-[#ff7a1a]/20 blur-md pointer-events-none" />
+            <div className="absolute inset-0 rounded-full bg-[#ff7a1a]/20 blur-md pointer-events-none transition-all duration-500 group-hover:bg-[#ff7a1a]/40 group-hover:scale-110" />
+            {/* Whole Cookie (Default) */}
             <img
-              src="/cookie-sticker.png"
-              alt="Cookie Chain Logo"
-              className="relative z-10 w-9 h-9 object-contain drop-shadow-[0_4px_10px_rgba(255,122,26,0.35)] transition-transform duration-300 group-hover:scale-105"
+              src="/cookie-whole.png"
+              alt="CookieDash Logo"
+              className="absolute inset-0 z-10 w-9 h-9 object-contain drop-shadow-[0_4px_10px_rgba(255,122,26,0.35)] transition-all duration-400 ease-out group-hover:opacity-0 group-hover:scale-95"
+            />
+            {/* Cracked Fortune Cookie with Scroll (On Hover) */}
+            <img
+              src="/cookie-broken.png"
+              alt="CookieDash Fortune Logo"
+              className="relative z-20 w-9 h-9 object-contain drop-shadow-[0_6px_14px_rgba(255,179,71,0.5)] transition-all duration-400 ease-out opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100"
             />
           </div>
 
