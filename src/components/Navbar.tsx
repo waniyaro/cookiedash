@@ -38,11 +38,11 @@ export const Navbar: React.FC = () => {
             />
           </div>
 
-          <div className="flex items-baseline gap-2">
+          <div className="flex items-center gap-2.5">
             <span className="font-display font-black text-xl sm:text-2xl tracking-tight text-[#f5ece1] leading-none">
               Cookie<span className="text-[#ffb347]">Dash</span>
             </span>
-            <span className="text-[9px] font-mono font-bold px-2 py-0.5 rounded-full bg-[#1a1310] text-[#d4a15c] border border-[#38261e] uppercase tracking-widest">
+            <span className="text-[9px] font-mono font-bold px-2 py-0.5 rounded-full bg-[#1a1310] text-[#d4a15c] border border-[#38261e] uppercase tracking-widest inline-flex items-center">
               SVM cApp
             </span>
           </div>
