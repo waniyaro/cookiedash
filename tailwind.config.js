@@ -23,7 +23,7 @@ export default {
         },
       },
       fontFamily: {
-        display: ['Syne', 'Outfit', 'sans-serif'],
+        display: ['Outfit', 'system-ui', '-apple-system', 'sans-serif'],
         sans: ['Outfit', 'system-ui', '-apple-system', 'sans-serif'],
         mono: ['Space Mono', 'JetBrains Mono', 'ui-monospace', 'monospace'],
       },

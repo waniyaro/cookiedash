@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./assets/cookiedash-header.png" alt="CookieDash Header" width="100%" />
+  <img src="./assets/banner.png" alt="CookieDash Header" width="100%" />
 </p>
 
 <p align="center">
