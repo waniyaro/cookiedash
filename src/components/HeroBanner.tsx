@@ -16,144 +16,106 @@ export const HeroBanner: React.FC = () => {
   }
 
   return (
-    <section className="relative rounded-3xl bg-cookie-card border border-cookie-border p-6 sm:p-7 shadow-sm overflow-hidden">
-      {/* Soft Ambient Glow */}
-      <div className="absolute -top-24 -right-24 w-80 h-80 bg-sky-500/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute -bottom-24 -left-24 w-80 h-80 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+    <section className="relative rounded-2xl bg-gradient-to-r from-cookie-card via-cookie-card to-cookie-surface border border-cookie-border/80 p-4 sm:p-5 shadow-lg overflow-hidden">
+      {/* Background Ambient Glow */}
+      <div className="absolute top-0 right-1/4 w-72 h-32 bg-sky-500/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 right-10 w-48 h-24 bg-amber-500/10 rounded-full blur-2xl pointer-events-none" />
 
-      <div className="relative z-10 max-w-5xl mx-auto space-y-6">
-        {/* Top Badges */}
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-500/10 border border-sky-500/25 text-sky-400 text-xs font-mono">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-            <span>SVM Core 4.1.2</span>
-          </div>
-
-          <div className="flex items-center gap-3 text-xs font-mono text-slate-400">
-            <span className="text-slate-300">⚡ ~0.8s Finality</span>
-            <span className="text-slate-600">•</span>
-            <span className="text-amber-300">Gas &lt; 0.0001 $COOK</span>
-          </div>
-        </div>
-
-        {/* Crisp Punchy Title without walls of text */}
+      <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+        {/* Left: Punchy Branding & Network Status */}
         <div className="space-y-1.5">
-          <h1 className="text-2xl sm:text-4xl font-black text-white tracking-tight leading-tight">
-            Cookie Chain <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-sky-200 to-amber-300">Live Terminal</span>
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-400 text-[11px] font-mono">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
+              SVM Cluster
+            </span>
+            <span className="text-[11px] font-mono text-slate-400 px-2 py-0.5 rounded-md bg-cookie-surface border border-cookie-border">
+              ⚡ ~0.8s Finality
+            </span>
+            <span className="text-[11px] font-mono text-amber-300 px-2 py-0.5 rounded-md bg-cookie-surface border border-cookie-border">
+              &lt; 0.0001 $COOK Fee
+            </span>
+          </div>
+
+          <h1 className="text-lg sm:text-xl font-black text-white tracking-tight">
+            Cookie Chain Terminal &amp; On-Chain Hub
           </h1>
-          <p className="text-xs sm:text-sm text-slate-400 max-w-2xl">
-            Real-time SVM telemetry, on-chain fortune baking via Solana Memo, and instant $COOK vault.
-          </p>
         </div>
 
-        {/* Dynamic Interactive Pipeline Flow */}
-        <div className="pt-1">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            {/* Step 1: Wallet Status */}
-            <div
-              onClick={() => !connected && setVisible(true)}
-              className={`group relative p-4 rounded-2xl border transition-all duration-300 ${
+        {/* Right: 3 Quick Action Pills */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 shrink-0">
+          {/* Action 1: Wallet */}
+          <button
+            onClick={() => !connected && setVisible(true)}
+            className={`group p-3 rounded-xl border transition-all duration-200 flex items-center justify-between gap-3 text-left ${
+              connected
+                ? 'bg-emerald-500/10 border-emerald-500/30'
+                : 'bg-cookie-surface/90 hover:bg-cookie-surface border-cookie-border hover:border-sky-500/50'
+            }`}
+          >
+            <div className="flex items-center gap-2.5 min-w-0">
+              <div className={`p-1.5 rounded-lg border shrink-0 ${
                 connected
-                  ? 'bg-emerald-500/10 border-emerald-500/30'
-                  : 'bg-cookie-surface/80 hover:bg-cookie-surface border-cookie-border hover:border-sky-500/50 cursor-pointer'
-              }`}
-            >
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-[10px] font-mono uppercase font-bold tracking-wider text-slate-400">
-                  Step 01
-                </span>
-                {connected ? (
-                  <span className="flex items-center gap-1 text-[11px] font-mono text-emerald-400 font-semibold">
-                    <CheckCircle2 className="w-3.5 h-3.5" />
-                    Connected
-                  </span>
-                ) : (
-                  <span className="text-[11px] font-mono text-sky-400 group-hover:underline flex items-center gap-1">
-                    Connect <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
-                  </span>
-                )}
+                  ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30'
+                  : 'bg-sky-500/10 text-sky-400 border-sky-500/20 group-hover:scale-105 transition-transform'
+              }`}>
+                <Wallet className="w-3.5 h-3.5" />
               </div>
-
-              <div className="flex items-center gap-2.5">
-                <div className={`p-2 rounded-xl border transition-transform duration-300 group-hover:scale-110 ${
-                  connected
-                    ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30'
-                    : 'bg-sky-500/10 text-sky-400 border-sky-500/20'
-                }`}>
-                  <Wallet className="w-4 h-4" />
+              <div className="min-w-0">
+                <div className="text-xs font-bold text-white truncate">
+                  {connected ? 'Wallet Active' : 'Connect'}
                 </div>
-                <div>
-                  <h4 className="text-xs font-bold text-white">
-                    {connected ? 'Wallet Ready' : 'Connect Wallet'}
-                  </h4>
-                  <p className="text-[11px] font-mono text-slate-400">
-                    {connected && publicKey
-                      ? `${publicKey.toBase58().slice(0, 4)}...${publicKey.toBase58().slice(-4)}`
-                      : 'Nightly or Phantom'}
-                  </p>
+                <div className="text-[10px] font-mono text-slate-400 truncate">
+                  {connected && publicKey
+                    ? `${publicKey.toBase58().slice(0, 4)}...${publicKey.toBase58().slice(-4)}`
+                    : 'Click to open'}
                 </div>
               </div>
             </div>
+            {connected ? (
+              <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+            ) : (
+              <ArrowRight className="w-3.5 h-3.5 text-sky-400 shrink-0 group-hover:translate-x-0.5 transition-transform" />
+            )}
+          </button>
 
-            {/* Step 2: Inscribe */}
-            <div
-              onClick={() => scrollToSection('fortune-oven')}
-              className="group p-4 rounded-2xl bg-cookie-surface/80 hover:bg-cookie-surface border border-cookie-border hover:border-amber-500/50 transition-all duration-300 cursor-pointer"
-            >
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-[10px] font-mono uppercase font-bold tracking-wider text-slate-400">
-                  Step 02
-                </span>
-                <span className="text-[11px] font-mono text-amber-400 group-hover:underline flex items-center gap-1">
-                  Bake <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
-                </span>
+          {/* Action 2: Inscribe */}
+          <button
+            onClick={() => scrollToSection('fortune-oven')}
+            className="group p-3 rounded-xl bg-cookie-surface/90 hover:bg-cookie-surface border border-cookie-border hover:border-amber-500/50 transition-all duration-200 flex items-center justify-between gap-3 text-left"
+          >
+            <div className="flex items-center gap-2.5 min-w-0">
+              <div className="p-1.5 rounded-lg bg-amber-500/10 text-amber-400 border border-amber-500/20 shrink-0 group-hover:scale-105 group-hover:rotate-6 transition-transform">
+                <Sparkles className="w-3.5 h-3.5" />
               </div>
-
-              <div className="flex items-center gap-2.5">
-                <div className="p-2 rounded-xl bg-amber-500/10 text-amber-400 border border-amber-500/20 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6">
-                  <Sparkles className="w-4 h-4" />
-                </div>
-                <div>
-                  <h4 className="text-xs font-bold text-white">Inscribe Memo</h4>
-                  <p className="text-[11px] font-mono text-slate-400">
-                    Permanent on-chain text
-                  </p>
-                </div>
+              <div className="min-w-0">
+                <div className="text-xs font-bold text-white truncate">Bake Memo</div>
+                <div className="text-[10px] font-mono text-slate-400 truncate">On-Chain text</div>
               </div>
             </div>
+            <ArrowRight className="w-3.5 h-3.5 text-amber-400 shrink-0 group-hover:translate-x-0.5 transition-transform" />
+          </button>
 
-            {/* Step 3: Explorer */}
-            <a
-              href={COOKIE_CHAIN_CONFIG.explorerUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group p-4 rounded-2xl bg-cookie-surface/80 hover:bg-cookie-surface border border-cookie-border hover:border-sky-500/50 transition-all duration-300 block"
-            >
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-[10px] font-mono uppercase font-bold tracking-wider text-slate-400">
-                  Step 03
-                </span>
-                <span className="text-[11px] font-mono text-sky-400 group-hover:underline flex items-center gap-1">
-                  CookieScan <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
-                </span>
+          {/* Action 3: Explorer */}
+          <a
+            href={COOKIE_CHAIN_CONFIG.explorerUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group p-3 rounded-xl bg-cookie-surface/90 hover:bg-cookie-surface border border-cookie-border hover:border-sky-500/50 transition-all duration-200 flex items-center justify-between gap-3 text-left"
+          >
+            <div className="flex items-center gap-2.5 min-w-0">
+              <div className="p-1.5 rounded-lg bg-sky-500/10 text-sky-400 border border-sky-500/20 shrink-0 group-hover:scale-105 transition-transform">
+                <Compass className="w-3.5 h-3.5" />
               </div>
-
-              <div className="flex items-center gap-2.5">
-                <div className="p-2 rounded-xl bg-sky-500/10 text-sky-400 border border-sky-500/20 transition-transform duration-300 group-hover:scale-110">
-                  <Compass className="w-4 h-4" />
-                </div>
-                <div>
-                  <h4 className="text-xs font-bold text-white">Verify On-Chain</h4>
-                  <p className="text-[11px] font-mono text-slate-400">
-                    Inspect block receipts
-                  </p>
-                </div>
+              <div className="min-w-0">
+                <div className="text-xs font-bold text-white truncate">CookieScan</div>
+                <div className="text-[10px] font-mono text-slate-400 truncate">Explorer</div>
               </div>
-            </a>
-          </div>
+            </div>
+            <ArrowRight className="w-3.5 h-3.5 text-sky-400 shrink-0 group-hover:translate-x-0.5 transition-transform" />
+          </a>
         </div>
       </div>
     </section>
   )
 }
-
