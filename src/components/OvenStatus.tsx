@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Flame, RefreshCw, Cpu, Layers, ShieldCheck, Zap, ExternalLink } from 'lucide-react'
+import { Flame, RefreshCw, Cpu, Layers, ShieldCheck, ExternalLink, Activity } from 'lucide-react'
 import type { NetworkMetrics } from '../services/network'
 import { COOKIE_CHAIN_CONFIG } from '../config/network'
 
@@ -36,171 +36,139 @@ export const OvenStatus: React.FC<OvenStatusProps> = ({
   }
 
   return (
-    <section className="relative rounded-3xl bg-cookie-card border border-cookie-border/80 p-6 sm:p-8 shadow-2xl overflow-hidden backdrop-blur-xl">
-      {/* Background ambient lighting */}
-      <div className="absolute -top-24 -right-24 w-96 h-96 bg-cookie-oven/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-cookie-accent/10 rounded-full blur-3xl pointer-events-none" />
+    <div className="rounded-3xl bg-cookie-card/90 border border-cookie-border/70 p-6 shadow-2xl backdrop-blur-xl relative overflow-hidden">
+      {/* Background ambient warmth */}
+      <div className="absolute top-0 right-0 w-64 h-64 bg-cookie-oven/10 rounded-full blur-3xl pointer-events-none" />
 
-      {/* Header bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-cookie-border/60">
-        <div>
-          <div className="flex items-center gap-2.5">
-            <div className="p-2 rounded-xl bg-cookie-oven/20 border border-cookie-oven/30 text-cookie-oven">
-              <Flame className="w-5 h-5 animate-pulse" />
-            </div>
-            <div>
-              <h2 className="text-xl font-bold text-white tracking-tight flex items-center gap-2">
-                Oven Status & Cookie Pulse
-              </h2>
-              <p className="text-xs text-slate-400">
-                Live SVM telemetry polled directly from <span className="font-mono text-cookie-gold">rpc.cookiescan.io</span>
-              </p>
-            </div>
+      {/* Header */}
+      <div className="flex items-center justify-between pb-5 border-b border-cookie-border/50">
+        <div className="flex items-center gap-2.5">
+          <div className="p-2 rounded-xl bg-gradient-to-br from-cookie-accent to-cookie-oven text-cookie-dark font-bold shadow-cookie-glow">
+            <Activity className="w-4 h-4" />
+          </div>
+          <div>
+            <h3 className="font-extrabold text-white text-base tracking-tight">
+              Oven Status & Pulse
+            </h3>
+            <p className="text-[11px] text-slate-400 font-mono">
+              rpc.cookiescan.io
+            </p>
           </div>
         </div>
 
-        <div className="flex items-center gap-3 self-end sm:self-auto">
-          <span className="text-xs font-mono text-slate-400">
-            {metrics ? `Synced ${secondsAgo}s ago` : 'Syncing...'}
+        <div className="flex items-center gap-2">
+          <span className="text-[11px] font-mono text-slate-400">
+            {metrics ? `${secondsAgo}s ago` : 'Syncing'}
           </span>
           <button
             onClick={handleManualRefresh}
             disabled={isRefreshing || loading}
-            className="p-2 rounded-xl bg-cookie-dark/80 hover:bg-cookie-border/80 border border-cookie-border text-slate-300 hover:text-white transition disabled:opacity-50"
-            title="Refresh Network Stats"
+            className="p-1.5 rounded-lg bg-cookie-dark/80 hover:bg-cookie-border text-slate-300 hover:text-white transition disabled:opacity-50"
+            title="Refresh RPC Stats"
           >
-            <RefreshCw className={`w-4 h-4 ${isRefreshing || loading ? 'animate-spin text-cookie-gold' : ''}`} />
+            <RefreshCw className={`w-3.5 h-3.5 ${isRefreshing || loading ? 'animate-spin text-cookie-gold' : ''}`} />
           </button>
         </div>
       </div>
 
-      {/* Error state */}
       {error && !metrics && (
-        <div className="mt-6 p-4 rounded-2xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-sm">
-          ⚠️ Unable to reach Cookie Chain RPC endpoint. Retrying in background... ({error})
+        <div className="mt-4 p-3 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-300 text-xs">
+          ⚠️ Reconnecting to Cookie Chain RPC...
         </div>
       )}
 
-      {/* Telemetry Metrics Grid */}
-      <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {/* Metric 1: Oven Heat / TPS */}
-        <div className="relative group rounded-2xl bg-cookie-dark/70 border border-cookie-border/60 p-5 hover:border-cookie-oven/50 transition duration-300">
-          <div className="flex items-center justify-between text-xs text-slate-400 mb-2">
-            <span className="font-medium">Oven Heat (Live TPS)</span>
-            <Flame className="w-4 h-4 text-cookie-oven" />
+      {/* Metric Cards Grid */}
+      <div className="mt-5 space-y-3">
+        {/* Metric 1: Oven Heat (TPS) */}
+        <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.05] hover:border-cookie-oven/40 transition">
+          <div className="flex items-center justify-between mb-1.5">
+            <span className="text-xs font-semibold text-slate-400 flex items-center gap-1.5">
+              <Flame className="w-3.5 h-3.5 text-cookie-oven" />
+              Oven Heat (Live TPS)
+            </span>
+            <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-cookie-oven/20 text-cookie-oven">
+              Active
+            </span>
           </div>
           <div className="flex items-baseline gap-2">
-            <span className="text-3xl font-extrabold text-white font-mono tracking-tight">
+            <span className="text-3xl font-black text-white font-mono">
               {metrics ? metrics.tps : '--'}
             </span>
-            <span className="text-xs text-cookie-gold font-semibold uppercase tracking-wider">
+            <span className="text-xs font-bold text-cookie-gold uppercase tracking-wider">
               Tx / sec
             </span>
           </div>
-          <div className="mt-3">
-            <div className="h-1.5 w-full bg-slate-800 rounded-full overflow-hidden">
-              <div
-                className="h-full bg-gradient-to-r from-cookie-accent to-cookie-oven rounded-full transition-all duration-500"
-                style={{ width: `${Math.min(100, Math.max(15, (metrics?.tps || 1) * 3))}%` }}
-              />
-            </div>
-            <div className="mt-2 flex items-center justify-between text-[11px] text-slate-400">
-              <span className="text-emerald-400 flex items-center gap-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                Optimal Bake Speed
-              </span>
-              <span>~0.8s Blocks</span>
-            </div>
+          <div className="mt-2.5 h-1.5 w-full bg-slate-800 rounded-full overflow-hidden">
+            <div
+              className="h-full bg-gradient-to-r from-cookie-accent to-cookie-oven rounded-full transition-all duration-500"
+              style={{ width: `${Math.min(100, Math.max(20, (metrics?.tps || 1) * 3))}%` }}
+            />
           </div>
         </div>
 
-        {/* Metric 2: Current Block & Epoch */}
-        <div className="relative group rounded-2xl bg-cookie-dark/70 border border-cookie-border/60 p-5 hover:border-cookie-accent/50 transition duration-300">
-          <div className="flex items-center justify-between text-xs text-slate-400 mb-2">
-            <span className="font-medium">Block Height & Epoch</span>
-            <Layers className="w-4 h-4 text-cookie-accent" />
-          </div>
-          <div className="flex items-baseline gap-2">
-            <span className="text-2xl font-extrabold text-white font-mono tracking-tight">
-              {metrics ? `#${metrics.currentSlot.toLocaleString()}` : 'Syncing...'}
+        {/* Metric 2: Current Block & Epoch Progress */}
+        <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.05] hover:border-cookie-accent/40 transition">
+          <div className="flex items-center justify-between mb-1.5">
+            <span className="text-xs font-semibold text-slate-400 flex items-center gap-1.5">
+              <Layers className="w-3.5 h-3.5 text-cookie-accent" />
+              Block Height & Epoch
+            </span>
+            <span className="text-xs font-mono text-cookie-gold">
+              Epoch {metrics ? metrics.epoch : '--'}
             </span>
           </div>
-          <div className="mt-3">
-            <div className="h-1.5 w-full bg-slate-800 rounded-full overflow-hidden">
-              <div
-                className="h-full bg-cookie-accent rounded-full transition-all duration-500"
-                style={{ width: `${metrics?.epochProgressPercent || 0}%` }}
-              />
-            </div>
-            <div className="mt-2 flex items-center justify-between text-[11px] text-slate-400">
-              <span>Epoch {metrics ? metrics.epoch : '--'}</span>
-              <span className="text-cookie-gold font-mono">{metrics ? `${metrics.epochProgressPercent}%` : '--'}</span>
-            </div>
+          <div className="text-xl font-bold font-mono text-white">
+            {metrics ? `#${metrics.currentSlot.toLocaleString()}` : 'Syncing...'}
+          </div>
+          <div className="mt-2.5 flex items-center justify-between text-[11px] text-slate-400 font-mono">
+            <span>Epoch Progress</span>
+            <span className="text-slate-200">{metrics ? `${metrics.epochProgressPercent}%` : '--'}</span>
+          </div>
+          <div className="mt-1 h-1 w-full bg-slate-800 rounded-full overflow-hidden">
+            <div
+              className="h-full bg-cookie-accent rounded-full transition-all duration-500"
+              style={{ width: `${metrics?.epochProgressPercent || 0}%` }}
+            />
           </div>
         </div>
 
-        {/* Metric 3: Active Master Bakers */}
-        <div className="relative group rounded-2xl bg-cookie-dark/70 border border-cookie-border/60 p-5 hover:border-blue-500/50 transition duration-300">
-          <div className="flex items-center justify-between text-xs text-slate-400 mb-2">
-            <span className="font-medium">Master Bakers</span>
-            <ShieldCheck className="w-4 h-4 text-blue-400" />
-          </div>
-          <div className="flex items-baseline gap-2">
-            <span className="text-3xl font-extrabold text-white font-mono tracking-tight">
+        {/* Metric 3: Master Bakers & SVM */}
+        <div className="grid grid-cols-2 gap-2.5">
+          <div className="p-3.5 rounded-2xl bg-white/[0.02] border border-white/[0.05]">
+            <span className="text-[11px] text-slate-400 block mb-1 flex items-center gap-1">
+              <ShieldCheck className="w-3 h-3 text-emerald-400" />
+              Validators
+            </span>
+            <span className="text-lg font-bold text-white font-mono">
               {metrics ? metrics.activeValidators : '--'}
             </span>
-            <span className="text-xs text-slate-400">Validators</span>
           </div>
-          <div className="mt-4 flex items-center gap-1.5 text-[11px] text-slate-300">
-            <span className="w-2 h-2 rounded-full bg-emerald-400" />
-            <span>Community Consensus Active</span>
-          </div>
-        </div>
 
-        {/* Metric 4: SVM Architecture & Genesis */}
-        <div className="relative group rounded-2xl bg-cookie-dark/70 border border-cookie-border/60 p-5 hover:border-cookie-gold/50 transition duration-300">
-          <div className="flex items-center justify-between text-xs text-slate-400 mb-2">
-            <span className="font-medium">SVM Infrastructure</span>
-            <Cpu className="w-4 h-4 text-cookie-gold" />
-          </div>
-          <div className="flex items-baseline gap-2">
-            <span className="text-lg font-bold text-white font-mono tracking-tight">
+          <div className="p-3.5 rounded-2xl bg-white/[0.02] border border-white/[0.05]">
+            <span className="text-[11px] text-slate-400 block mb-1 flex items-center gap-1">
+              <Cpu className="w-3 h-3 text-cookie-gold" />
+              SVM Core
+            </span>
+            <span className="text-xs font-bold font-mono text-white block truncate">
               v{metrics ? metrics.solanaCoreVersion : '4.1.2'}
             </span>
-            <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-cookie-accent/20 text-cookie-gold">
-              SVM Native
-            </span>
-          </div>
-          <div className="mt-4 flex items-center justify-between text-[11px]">
-            <span className="text-slate-400">Explorer</span>
-            <a
-              href={COOKIE_CHAIN_CONFIG.explorerUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-cookie-gold hover:underline flex items-center gap-1"
-            >
-              cookiescan.io
-              <ExternalLink className="w-3 h-3" />
-            </a>
           </div>
         </div>
       </div>
 
-      {/* Bottom Network Highlights Banner */}
-      <div className="mt-6 pt-5 border-t border-cookie-border/40 grid grid-cols-1 md:grid-cols-3 gap-4 text-xs text-slate-300">
-        <div className="flex items-center gap-2.5">
-          <Zap className="w-4 h-4 text-cookie-gold shrink-0" />
-          <span><strong>Sub-Second Finality:</strong> ~1s block time with SVM execution speed.</span>
-        </div>
-        <div className="flex items-center gap-2.5">
-          <Flame className="w-4 h-4 text-cookie-oven shrink-0" />
-          <span><strong>Micro Gas Fees:</strong> Transactions cost less than 0.0001 $COOK.</span>
-        </div>
-        <div className="flex items-center gap-2.5">
-          <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
-          <span><strong>Solana Tooling Compatible:</strong> Native SPL tokens, Memo & Nightly.</span>
-        </div>
+      {/* Explorer link footer */}
+      <div className="mt-4 pt-3.5 border-t border-cookie-border/40 flex items-center justify-between text-[11px]">
+        <span className="text-slate-400">Official Explorer:</span>
+        <a
+          href={COOKIE_CHAIN_CONFIG.explorerUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-cookie-gold hover:underline flex items-center gap-1 font-semibold"
+        >
+          cookiescan.io
+          <ExternalLink className="w-3 h-3" />
+        </a>
       </div>
-    </section>
+    </div>
   )
 }
