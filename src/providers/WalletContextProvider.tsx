@@ -1,9 +1,10 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useState } from 'react'
 import { ConnectionProvider, WalletProvider } from '@solana/wallet-adapter-react'
-import { WalletModalProvider } from '@solana/wallet-adapter-react-ui'
+import { WalletModalContext } from '@solana/wallet-adapter-react-ui'
 import { COOKIE_CHAIN_CONFIG } from '../config/network'
+import { CookieWalletModal } from '../components/CookieWalletModal'
 
-// Default wallet adapter styles
+// Default styles for WalletMultiButton dropdown menu
 import '@solana/wallet-adapter-react-ui/styles.css'
 
 interface Props {
@@ -17,6 +18,8 @@ export const WalletContextProvider: React.FC<Props> = ({ children }) => {
   // Modern wallets (Nightly, Phantom, Solflare) are auto-discovered via Wallet Standard
   const wallets = useMemo(() => [], [])
 
+  const [visible, setVisible] = useState(false)
+
   return (
     <ConnectionProvider
       endpoint={endpoint}
@@ -26,8 +29,12 @@ export const WalletContextProvider: React.FC<Props> = ({ children }) => {
       }}
     >
       <WalletProvider wallets={wallets} autoConnect>
-        <WalletModalProvider>{children}</WalletModalProvider>
+        <WalletModalContext.Provider value={{ visible, setVisible }}>
+          {children}
+          <CookieWalletModal isOpen={visible} onClose={() => setVisible(false)} />
+        </WalletModalContext.Provider>
       </WalletProvider>
     </ConnectionProvider>
   )
 }
+
