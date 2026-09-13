@@ -1,69 +1,89 @@
 import React from 'react'
-import { ExternalLink, ArrowUpRight, Compass, Shield, Code2, Coins, Layers, BookOpen } from 'lucide-react'
+import { ArrowUpRight, Compass, Shield, Code2, Coins, Layers, BookOpen } from 'lucide-react'
 import { COOKIE_CHAIN_CONFIG } from '../config/network'
 
 const ECOSYSTEM_SERVICES = [
   {
     title: 'Cookiebox Swap',
-    description: 'Premier DEX liquidity aggregator for all Cookie Chain pools.',
+    description: 'Premier DEX liquidity aggregator routing across all pools.',
     url: 'https://cookiebox.app',
     icon: Coins,
-    badge: 'DEX Aggregator',
+    badge: 'DEX',
+    accent: 'from-amber-500/15 text-amber-400 border-amber-500/25',
+    iconBg: 'bg-amber-500/10 text-amber-400 border-amber-500/20',
   },
   {
     title: 'Cookieswap',
-    description: 'Instant token swaps and liquidity pools on SVM.',
+    description: 'Instant token swapping and liquidity pool deployment.',
     url: COOKIE_CHAIN_CONFIG.swapUrl,
     icon: Layers,
-    badge: 'Trading Hub',
+    badge: 'Trading',
+    accent: 'from-sky-500/15 text-sky-400 border-sky-500/25',
+    iconBg: 'bg-sky-500/10 text-sky-400 border-sky-500/20',
   },
   {
     title: 'Hyperlane Warp Bridge',
-    description: 'Cross-chain $COOK bridge between Solana and Cookie Chain.',
+    description: 'Cross-chain bridge for $COOK between Solana and Cookie Chain.',
     url: COOKIE_CHAIN_CONFIG.bridgeUrl,
     icon: ArrowUpRight,
     badge: 'Bridge',
+    accent: 'from-purple-500/15 text-purple-400 border-purple-500/25',
+    iconBg: 'bg-purple-500/10 text-purple-400 border-purple-500/20',
   },
   {
     title: 'Cookie DAS API',
-    description: 'High-performance Digital Asset Standard RPC endpoints.',
+    description: 'Digital Asset Standard RPC endpoints for developers.',
     url: COOKIE_CHAIN_CONFIG.cookieDasApi,
     icon: Code2,
-    badge: 'Developer API',
+    badge: 'API',
+    accent: 'from-emerald-500/15 text-emerald-400 border-emerald-500/25',
+    iconBg: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20',
   },
   {
     title: 'cookie-mcp',
-    description: 'Model Context Protocol server for AI agent execution.',
+    description: 'Model Context Protocol server empowering autonomous AI agents.',
     url: 'https://github.com/cookiechain/cookie-mcp',
     icon: Shield,
     badge: 'AI Agents',
+    accent: 'from-cyan-500/15 text-cyan-400 border-cyan-500/25',
+    iconBg: 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20',
   },
   {
     title: 'Cookie Chain Docs',
-    description: 'Official SVM guides, genesis specs, and node setup.',
+    description: 'Official SVM guides, genesis specs, and node validator setups.',
     url: COOKIE_CHAIN_CONFIG.docsUrl,
     icon: BookOpen,
-    badge: 'Documentation',
+    badge: 'Docs',
+    accent: 'from-blue-500/15 text-blue-400 border-blue-500/25',
+    iconBg: 'bg-blue-500/10 text-blue-400 border-blue-500/20',
   },
 ]
 
 export const EcosystemHub: React.FC = () => {
   return (
-    <footer className="mt-12 pt-8 pb-14 border-t border-cookie-border">
+    <footer className="mt-12 pt-8 pb-14 border-t border-cookie-border/60">
+      {/* Header */}
       <div className="flex items-center justify-between gap-4 mb-5">
-        <div className="flex items-center gap-2">
-          <Compass className="w-4 h-4 text-cookie-blue" />
-          <h3 className="text-base font-bold text-white tracking-tight">Verified Ecosystem</h3>
+        <div className="flex items-center gap-2.5">
+          <div className="p-1.5 rounded-lg bg-cookie-card border border-cookie-border text-slate-400">
+            <Compass className="w-4 h-4 text-sky-400" />
+          </div>
+          <div className="flex items-center gap-2">
+            <h3 className="text-base font-bold text-white tracking-tight">Ecosystem Directory</h3>
+            <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-sky-500/10 text-sky-400 border border-sky-500/20 font-semibold">
+              Verified
+            </span>
+          </div>
         </div>
 
         <a
           href={COOKIE_CHAIN_CONFIG.explorerUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-cookie-card hover:bg-cookie-surface border border-cookie-border text-xs font-semibold text-slate-300 hover:text-white transition group"
+          className="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-cookie-card hover:bg-cookie-surface border border-cookie-border text-xs font-medium text-slate-300 hover:text-white transition-all duration-200"
         >
           <span>CookieScan</span>
-          <ExternalLink className="w-3 h-3 text-slate-500 group-hover:text-cookie-blue transition-colors" />
+          <ArrowUpRight className="w-3.5 h-3.5 text-slate-500 group-hover:text-sky-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
         </a>
       </div>
 
@@ -77,21 +97,25 @@ export const EcosystemHub: React.FC = () => {
               href={item.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="group p-4 rounded-2xl bg-cookie-card hover:bg-cookie-surface border border-cookie-border hover:border-sky-500/40 transition-all duration-300 flex flex-col justify-between"
+              className="group relative p-4 rounded-xl bg-cookie-card/90 hover:bg-cookie-surface border border-cookie-border/80 hover:border-slate-700 transition-all duration-300 flex flex-col justify-between overflow-hidden hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/40"
             >
               <div>
-                <div className="flex items-center justify-between mb-2">
-                  <span className="p-1.5 rounded-lg bg-cookie-surface text-cookie-blue border border-cookie-border group-hover:scale-110 transition-transform duration-200">
-                    <Icon className="w-3.5 h-3.5" />
+                <div className="flex items-center justify-between mb-2.5">
+                  <span className={`p-2 rounded-xl border ${item.iconBg} transition-transform duration-200 group-hover:scale-110`}>
+                    <Icon className="w-4 h-4" />
                   </span>
-                  <span className="text-[10px] font-mono font-medium px-2 py-0.5 rounded bg-cookie-surface text-slate-400 border border-cookie-border">
+                  <span className="text-[10px] font-mono font-semibold px-2 py-0.5 rounded-md bg-slate-900 text-slate-400 border border-slate-800">
                     {item.badge}
                   </span>
                 </div>
-                <h4 className="font-bold text-xs text-white group-hover:text-cookie-blue transition-colors flex items-center gap-1.5">
-                  {item.title}
-                  <ExternalLink className="w-3 h-3 text-slate-500 opacity-0 group-hover:opacity-100 transition-opacity" />
-                </h4>
+
+                <div className="flex items-center justify-between gap-1">
+                  <h4 className="font-bold text-xs text-white group-hover:text-sky-300 transition-colors">
+                    {item.title}
+                  </h4>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-slate-500 opacity-0 group-hover:opacity-100 group-hover:text-sky-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                </div>
+
                 <p className="text-[11px] text-slate-400 mt-1 leading-relaxed">
                   {item.description}
                 </p>
@@ -101,11 +125,27 @@ export const EcosystemHub: React.FC = () => {
         })}
       </div>
 
-      {/* Footer Meta */}
-      <div className="mt-8 pt-4 border-t border-cookie-border/60 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs font-mono text-slate-500">
-        <p>CookieDash • Built for the Cookie Chain Community Hackathon</p>
-        <p>RPC: rpc.cookiescan.io • Genesis: 9wDaBR...BB2</p>
+      {/* Footer Branding Bar */}
+      <div className="mt-8 pt-6 border-t border-cookie-border/40 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono text-slate-500">
+        <div className="flex items-center gap-2.5">
+          <img
+            src="/cookie-sticker.png"
+            alt="CookieDash Logo"
+            className="w-5 h-5 object-contain"
+          />
+          <span className="text-slate-400 font-bold">CookieDash</span>
+          <span className="text-slate-600">•</span>
+          <span>Community Hackathon</span>
+        </div>
+
+        <div className="flex items-center gap-2">
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
+          <span className="text-slate-400">rpc.cookiescan.io</span>
+          <span className="text-slate-600">•</span>
+          <span className="text-slate-500">Genesis: 9wDaBR...BB2</span>
+        </div>
       </div>
     </footer>
   )
 }
+
