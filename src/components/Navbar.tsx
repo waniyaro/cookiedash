@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui'
 import { useWallet } from '@solana/wallet-adapter-react'
-import { ExternalLink, CheckCircle2, Shield, Radio } from 'lucide-react'
+import { ArrowUpRight, CheckCircle2, Shield, Compass } from 'lucide-react'
 import { COOKIE_CHAIN_CONFIG, switchNightlyToCookieChain } from '../config/network'
 
 interface NavbarProps {
@@ -24,102 +24,103 @@ export const Navbar: React.FC<NavbarProps> = ({ isLive, currentSlot }) => {
     }
   }
 
+  const scrollTo = (id: string) => {
+    const el = document.getElementById(id)
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    }
+  }
+
   const isNightly = wallet?.adapter.name.toLowerCase().includes('nightly')
 
   return (
-    <header className="sticky top-0 z-50 backdrop-blur-md bg-cookie-bg/90 border-b border-cookie-border/80">
+    <header className="sticky top-0 z-50 backdrop-blur-xl bg-cookie-bg/85 border-b border-cookie-border/70 transition-all">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 py-3 flex items-center justify-between gap-4">
-        {/* Brand */}
-        <div className="flex items-center gap-4">
-          <div className="flex items-center gap-3 group cursor-pointer">
-            {/* Animated Golden Cookie Emblem */}
-            <div className="relative w-9 h-9 flex items-center justify-center">
-              <div className="absolute inset-0 rounded-full bg-amber-500/25 blur-md animate-glow-gold pointer-events-none" />
-              <svg
-                viewBox="0 0 36 36"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-9 h-9 relative z-10 transition-transform duration-300 group-hover:rotate-12 animate-cookie-float drop-shadow-md"
-              >
-                {/* Cookie Base with Baked Gradient */}
-                <circle
-                  cx="18"
-                  cy="18"
-                  r="15"
-                  fill="url(#cookieGradient)"
-                  stroke="#fbbf24"
-                  strokeWidth="1.5"
-                />
-                {/* Chocolate Chips */}
-                <circle cx="12" cy="13" r="2.2" fill="#582900" />
-                <circle cx="21" cy="12" r="1.8" fill="#582900" />
-                <circle cx="23" cy="20" r="2.2" fill="#582900" />
-                <circle cx="13" cy="22" r="2" fill="#582900" />
-                <circle cx="17.5" cy="18" r="1.6" fill="#451a03" />
-                <circle cx="17" cy="25" r="1.4" fill="#582900" />
-                {/* Baked Highlight */}
-                <path
-                  d="M9 13C10.5 8 16 6 21 7"
-                  stroke="#fef08a"
-                  strokeWidth="1.2"
-                  strokeLinecap="round"
-                  opacity="0.5"
-                />
-                <defs>
-                  <radialGradient
-                    id="cookieGradient"
-                    cx="0"
-                    cy="0"
-                    r="1"
-                    gradientUnits="userSpaceOnUse"
-                    gradientTransform="translate(14 13) rotate(52) scale(18.5)"
-                  >
-                    <stop stopColor="#fbbf24" />
-                    <stop offset="0.6" stopColor="#d97706" />
-                    <stop offset="1" stopColor="#92400e" />
-                  </radialGradient>
-                </defs>
-              </svg>
+        {/* Brand with Extracted Official Cookie Sticker */}
+        <div className="flex items-center gap-3">
+          <div
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="flex items-center gap-3 group cursor-pointer"
+          >
+            {/* The Extracted Cookie Sticker */}
+            <div className="relative w-10 h-10 shrink-0">
+              <div className="absolute inset-0 rounded-full bg-amber-400/20 blur-md animate-glow-gold pointer-events-none" />
+              <img
+                src="/cookie-sticker.png"
+                alt="Cookie Chain Logo"
+                className="relative z-10 w-10 h-10 object-contain drop-shadow-md transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6 animate-cookie-float"
+              />
             </div>
 
-            <div className="flex items-center gap-2">
-              <span className="font-black text-lg tracking-tight text-white group-hover:text-amber-200 transition-colors">
-                Cookie<span className="text-cookie-blue">Dash</span>
-              </span>
-              <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-sky-500/10 text-sky-400 border border-sky-500/20">
-                SVM
-              </span>
-            </div>
-          </div>
-
-          {/* RPC Connection Status */}
-          <div className="hidden md:flex items-center gap-2 pl-4 border-l border-slate-800">
-            <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-slate-900 border border-slate-800 text-[11px] font-mono">
-              <Radio className={`w-3 h-3 ${isLive ? 'text-emerald-400 animate-pulse' : 'text-amber-400'}`} />
-              <span className="text-slate-300">{isLive ? 'rpc.cookiescan.io' : 'Connecting...'}</span>
-              {currentSlot ? (
-                <span className="text-sky-400 border-l border-slate-800 pl-1.5">
-                  #{currentSlot.toLocaleString()}
+            {/* Brand Title */}
+            <div className="flex flex-col">
+              <div className="flex items-center gap-2">
+                <span className="font-black text-lg tracking-tight text-white leading-none group-hover:text-amber-200 transition-colors">
+                  Cookie<span className="text-cookie-blue">Dash</span>
                 </span>
-              ) : null}
+                <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-sky-500/10 text-sky-400 border border-sky-500/20">
+                  SVM
+                </span>
+              </div>
+              <span className="text-[10px] font-mono text-slate-500 font-semibold tracking-wider uppercase mt-1">
+                Cookie Chain
+              </span>
             </div>
           </div>
         </div>
 
-        {/* Actions & Wallet */}
-        <div className="flex items-center gap-2.5">
-          {/* Bridge Link */}
-          <a
-            href={COOKIE_CHAIN_CONFIG.bridgeUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hidden sm:inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-cookie-card hover:bg-cookie-surface border border-cookie-border text-xs font-medium text-slate-300 hover:text-white transition"
-          >
-            <span>Bridge</span>
-            <ExternalLink className="w-3 h-3 text-slate-500" />
-          </a>
+        {/* Center: Live RPC Telemetry Pill & Quick Nav */}
+        <div className="hidden md:flex items-center gap-3">
+          {/* RPC Status Indicator */}
+          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-cookie-card/80 border border-cookie-border text-xs font-mono">
+            <span className="relative flex h-2 w-2">
+              <span className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${
+                isLive ? 'bg-emerald-400' : 'bg-amber-400'
+              }`} />
+              <span className={`relative inline-flex rounded-full h-2 w-2 ${
+                isLive ? 'bg-emerald-500' : 'bg-amber-500'
+              }`} />
+            </span>
+            <span className="text-slate-300 font-medium">rpc.cookiescan.io</span>
+            {currentSlot ? (
+              <span className="text-sky-400 border-l border-cookie-border pl-2 font-semibold">
+                #{currentSlot.toLocaleString()}
+              </span>
+            ) : null}
+          </div>
 
-          {/* Nightly Auto Switch */}
+          {/* Quick Anchor Links */}
+          <nav className="flex items-center gap-1 text-xs font-medium text-slate-400">
+            <button
+              onClick={() => scrollTo('fortune-oven')}
+              className="px-3 py-1.5 rounded-xl hover:text-white hover:bg-cookie-card/60 transition"
+            >
+              Inscribe
+            </button>
+            <a
+              href={COOKIE_CHAIN_CONFIG.bridgeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1 px-3 py-1.5 rounded-xl hover:text-white hover:bg-cookie-card/60 transition"
+            >
+              <span>Bridge</span>
+              <ArrowUpRight className="w-3 h-3 text-slate-500" />
+            </a>
+            <a
+              href={COOKIE_CHAIN_CONFIG.explorerUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1 px-3 py-1.5 rounded-xl hover:text-white hover:bg-cookie-card/60 transition"
+            >
+              <span>CookieScan</span>
+              <Compass className="w-3 h-3 text-slate-500" />
+            </a>
+          </nav>
+        </div>
+
+        {/* Right: Actions & Wallet MultiButton */}
+        <div className="flex items-center gap-2.5">
+          {/* Nightly Quick Config */}
           {isNightly && (
             <button
               onClick={handleSwitchNetwork}
@@ -130,12 +131,12 @@ export const Navbar: React.FC<NavbarProps> = ({ isLive, currentSlot }) => {
               {switchSuccess ? (
                 <>
                   <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-                  <span className="text-emerald-400">Configured</span>
+                  <span className="text-emerald-400">Connected</span>
                 </>
               ) : (
                 <>
                   <Shield className="w-3.5 h-3.5 text-sky-400" />
-                  <span>{switchingNetwork ? 'Configuring...' : 'Set Nightly RPC'}</span>
+                  <span>{switchingNetwork ? 'Setting RPC...' : 'Set Nightly RPC'}</span>
                 </>
               )}
             </button>
@@ -143,10 +144,11 @@ export const Navbar: React.FC<NavbarProps> = ({ isLive, currentSlot }) => {
 
           {/* Wallet Button */}
           <div className="wallet-button-wrapper">
-            <WalletMultiButton className="!bg-sky-500 hover:!bg-sky-400 !text-slate-950 !h-9 !px-4 !rounded-xl !text-xs !font-bold !transition-all !duration-150 !font-sans shadow-sm" />
+            <WalletMultiButton className="!bg-sky-500 hover:!bg-sky-400 !text-slate-950 !h-10 !px-4 !rounded-xl !text-xs !font-bold !transition-all !duration-150 !font-sans shadow-sm" />
           </div>
         </div>
       </div>
     </header>
   )
 }
+
