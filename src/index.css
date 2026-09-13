@@ -69,20 +69,20 @@
 
 /* Physical Elevation Shadow for Cards */
 .bakery-card {
-  background-color: #221813;
-  border: 1px solid #442f24;
+  background-color: #241a15;
+  border: 1px solid #4a3227;
   box-shadow: 
-    0 20px 50px -15px rgba(0, 0, 0, 0.75),
-    0 2px 6px 0 rgba(0, 0, 0, 0.5),
-    inset 0 1px 1px 0 rgba(255, 255, 255, 0.05);
+    0 20px 50px -12px rgba(0, 0, 0, 0.85),
+    0 2px 4px 0 rgba(0, 0, 0, 0.6),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.07);
 }
 
 /* Hero Oven Glow */
 .hero-oven-glow {
   box-shadow: 
-    0 24px 60px -20px rgba(0, 0, 0, 0.9),
-    0 0 80px -10px rgba(255, 122, 26, 0.15),
-    inset 0 1px 2px 0 rgba(255, 179, 71, 0.2);
+    0 24px 60px -18px rgba(0, 0, 0, 0.95),
+    0 0 90px -10px rgba(255, 122, 26, 0.18),
+    inset 0 1px 2px 0 rgba(255, 179, 71, 0.25);
 }
 
 /* Custom Night Bakery Scrollbar */

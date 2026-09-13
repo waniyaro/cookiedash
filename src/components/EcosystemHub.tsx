@@ -93,7 +93,7 @@ export const EcosystemHub: React.FC = () => {
       </div>
 
       {/* Protocol Registry Table / List (Replaces generic 6 cards) */}
-      <div className="rounded-2xl bg-[#1a1310] border border-[#38261e] divide-y divide-[#241813] overflow-hidden shadow-xl">
+      <div className="rounded-2xl bakery-card divide-y divide-[#2d1e17] overflow-hidden">
         {REGISTRY_PROTOCOLS.map((entry) => (
           <div
             key={entry.title}

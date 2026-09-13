@@ -304,8 +304,8 @@ Status: Online with guaranteed message finality.`
           </a>
         </div>
 
-        {/* View Selection Chips */}
-        <div className="grid grid-cols-4 gap-1 text-[10px] font-mono">
+        {/* Tactile Protocol Dispatch Switcher (Replaces default outline buttons) */}
+        <div className="p-1 rounded-xl bg-[#0c0806] border border-[#2d1e17] grid grid-cols-4 gap-1 text-[11px] font-mono">
           {(
             [
               { id: 'status', label: 'Node' },
@@ -313,19 +313,23 @@ Status: Online with guaranteed message finality.`
               { id: 'memo', label: 'Memo' },
               { id: 'bridge', label: 'Bridge' },
             ] as const
-          ).map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setSelectedAgentView(tab.id)}
-              className={`py-1 rounded-lg border text-center transition ${
-                selectedAgentView === tab.id
-                  ? 'bg-[#251b16] border-[#d4a15c] text-[#f5ece1] font-bold'
-                  : 'bg-[#080504] border-[#241813] text-[#8f8075] hover:text-[#f5ece1]'
-              }`}
-            >
-              {tab.label}
-            </button>
-          ))}
+          ).map((tab) => {
+            const isActive = selectedAgentView === tab.id
+            return (
+              <button
+                key={tab.id}
+                onClick={() => setSelectedAgentView(tab.id)}
+                className={`py-1.5 px-2 rounded-lg text-center transition-all flex items-center justify-center gap-1.5 font-bold ${
+                  isActive
+                    ? 'bg-[#241a15] text-[#f5ece1] shadow-inner shadow-black/60 border border-[#d4a15c]/50'
+                    : 'text-[#968579] hover:text-[#f5ece1] hover:bg-[#1a1310]/50'
+                }`}
+              >
+                {isActive && <span className="w-1.5 h-1.5 rounded-full bg-[#d4a15c] animate-pulse shrink-0" />}
+                <span>{tab.label}</span>
+              </button>
+            )
+          })}
         </div>
 
         {/* Compact Agent Output */}
