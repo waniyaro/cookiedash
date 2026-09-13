@@ -23,8 +23,8 @@ export const HeroBanner: React.FC = () => {
               Cookie Chain
             </span>
           </div>
-          <p className="text-xs text-slate-400">
-            Interactive playground for Solana Memo inscriptions, token transfers, and live telemetry.
+          <p className="text-xs text-slate-300 font-sans max-w-2xl leading-relaxed">
+            Decentralized SVM playground: permanently bake fortunes on-chain via Solana Memo, transfer $COOK, and inspect live network telemetry.
           </p>
         </div>
 

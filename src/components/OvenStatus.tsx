@@ -85,7 +85,7 @@ export const OvenStatus: React.FC<OvenStatusProps> = ({
         {/* Metric 1: TPS */}
         <div className="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800/80">
           <div className="flex items-center justify-between mb-1">
-            <span className="text-[10px] font-mono uppercase text-slate-500 font-semibold">THROUGHPUT</span>
+            <span className="text-[10px] font-mono uppercase text-slate-400 font-bold tracking-wider">THROUGHPUT</span>
             <span className="text-[10px] font-mono font-bold text-emerald-400 px-1.5 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20">
               OPTIMAL
             </span>
@@ -94,11 +94,11 @@ export const OvenStatus: React.FC<OvenStatusProps> = ({
             <span className="text-2xl font-extrabold text-white font-mono">
               {metrics ? metrics.tps : '--'}
             </span>
-            <span className="text-xs font-mono text-slate-400">
+            <span className="text-xs font-mono text-slate-300">
               tx / sec
             </span>
           </div>
-          <div className="mt-2 h-1 w-full bg-slate-900 rounded-full overflow-hidden">
+          <div className="mt-2 h-1.5 w-full bg-slate-900 rounded-full overflow-hidden">
             <div
               className="h-full bg-sky-500 rounded-full transition-all duration-500"
               style={{ width: `${Math.min(100, Math.max(20, (metrics?.tps || 1) * 3))}%` }}
@@ -109,22 +109,22 @@ export const OvenStatus: React.FC<OvenStatusProps> = ({
         {/* Metric 2: Slot & Epoch */}
         <div className="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800/80">
           <div className="flex items-center justify-between mb-1">
-            <span className="text-[10px] font-mono uppercase text-slate-500 font-semibold flex items-center gap-1.5">
+            <span className="text-[10px] font-mono uppercase text-slate-400 font-bold tracking-wider flex items-center gap-1.5">
               <Layers className="w-3 h-3 text-sky-400" />
               SLOT INDEX
             </span>
-            <span className="text-[11px] font-mono text-sky-400 font-semibold">
+            <span className="text-xs font-mono text-sky-400 font-bold">
               Epoch {metrics ? metrics.epoch : '--'}
             </span>
           </div>
           <div className="text-lg font-bold font-mono text-white">
             {metrics ? `#${metrics.currentSlot.toLocaleString()}` : 'Syncing...'}
           </div>
-          <div className="mt-2 flex items-center justify-between text-[10px] text-slate-400 font-mono">
+          <div className="mt-2 flex items-center justify-between text-xs text-slate-300 font-mono">
             <span>Epoch Progress</span>
-            <span className="text-slate-300 font-semibold">{metrics ? `${metrics.epochProgressPercent}%` : '--'}</span>
+            <span className="text-slate-200 font-bold">{metrics ? `${metrics.epochProgressPercent}%` : '--'}</span>
           </div>
-          <div className="mt-1 h-1 w-full bg-slate-900 rounded-full overflow-hidden">
+          <div className="mt-1.5 h-1.5 w-full bg-slate-900 rounded-full overflow-hidden">
             <div
               className="h-full bg-amber-400 rounded-full transition-all duration-500"
               style={{ width: `${metrics?.epochProgressPercent || 0}%` }}
@@ -135,7 +135,7 @@ export const OvenStatus: React.FC<OvenStatusProps> = ({
         {/* Metric 3: Validators & SVM Core */}
         <div className="grid grid-cols-2 gap-2">
           <div className="p-3 rounded-xl bg-slate-950/60 border border-slate-800/80">
-            <span className="text-[10px] font-mono uppercase text-slate-500 font-semibold flex items-center gap-1 mb-1">
+            <span className="text-[10px] font-mono uppercase text-slate-400 font-bold tracking-wider flex items-center gap-1 mb-1">
               <ShieldCheck className="w-3 h-3 text-emerald-400" />
               Validators
             </span>
@@ -145,7 +145,7 @@ export const OvenStatus: React.FC<OvenStatusProps> = ({
           </div>
 
           <div className="p-3 rounded-xl bg-slate-950/60 border border-slate-800/80">
-            <span className="text-[10px] font-mono uppercase text-slate-500 font-semibold flex items-center gap-1 mb-1">
+            <span className="text-[10px] font-mono uppercase text-slate-400 font-bold tracking-wider flex items-center gap-1 mb-1">
               <Cpu className="w-3 h-3 text-sky-400" />
               SVM Core
             </span>

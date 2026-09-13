@@ -116,7 +116,7 @@ export const EcosystemHub: React.FC = () => {
                   <ArrowUpRight className="w-3.5 h-3.5 text-slate-500 opacity-0 group-hover:opacity-100 group-hover:text-sky-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
                 </div>
 
-                <p className="text-[11px] text-slate-400 mt-1 leading-relaxed">
+                <p className="text-xs text-slate-300 mt-1.5 leading-relaxed font-sans">
                   {item.description}
                 </p>
               </div>
@@ -126,23 +126,23 @@ export const EcosystemHub: React.FC = () => {
       </div>
 
       {/* Footer Branding Bar */}
-      <div className="mt-8 pt-6 border-t border-cookie-border/40 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono text-slate-500">
+      <div className="mt-8 pt-6 border-t border-cookie-border/40 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono text-slate-400">
         <div className="flex items-center gap-2.5">
           <img
             src="/cookie-sticker.png"
             alt="CookieDash Logo"
             className="w-5 h-5 object-contain"
           />
-          <span className="text-slate-400 font-bold">CookieDash</span>
+          <span className="text-white font-bold">CookieDash</span>
           <span className="text-slate-600">•</span>
-          <span>Community Hackathon</span>
+          <span className="text-slate-300">Community Hackathon</span>
         </div>
 
         <div className="flex items-center gap-2">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
-          <span className="text-slate-400">rpc.cookiescan.io</span>
+          <span className="text-slate-300 font-semibold">rpc.cookiescan.io</span>
           <span className="text-slate-600">•</span>
-          <span className="text-slate-500">Genesis: 9wDaBR...BB2</span>
+          <span className="text-slate-400">Genesis: 9wDaBR...BB2</span>
         </div>
       </div>
     </footer>

@@ -8,14 +8,14 @@ import confetti from 'canvas-confetti'
 import { COOKIE_CHAIN_CONFIG } from '../config/network'
 
 const DEGEN_FORTUNES = [
-  'The oven never cools down. 10,000x $COOK incoming on SVM.',
-  'Bake fast, swap faster. Cookie Chain is your decentralized kitchen.',
-  'A mysterious master baker will airdrop fresh batches to your wallet.',
-  'Your portfolio will rise like freshly fermented sourdough in the SVM oven.',
-  'Micro-gas fees, maximum sugar. You are officially the Head Baker now.',
-  'Sub-second finality confirmed your destiny in this exact block.',
+  'Fresh batch straight from the SVM oven: 10,000x $COOK incoming.',
+  'Crispy crust, zero slippage. Cookie Chain is your decentralized kitchen.',
+  'A mysterious master baker will airdrop fresh batches to this wallet.',
+  'Your portfolio will rise like golden brioche in the sub-second oven.',
+  'Baking temperature: 420°C. Gas fees: < 0.0001 $COOK. Life is sweet.',
+  'Sub-second finality confirmed your recipe in this exact slot.',
   'Never fade the baker who deploys contracts for $0.05 on Cookie Chain.',
-  'Hyperlane warp speed activated. Golden cookies will cross the bridge.',
+  'Hyperlane warp speed activated: hot golden cookies crossing the bridge.',
 ]
 
 export const FortuneOven: React.FC = () => {
@@ -102,10 +102,10 @@ export const FortuneOven: React.FC = () => {
       localStorage.setItem('cookie_total_baked', newCount.toString())
 
       confetti({
-        particleCount: 60,
-        spread: 60,
+        particleCount: 75,
+        spread: 70,
         origin: { y: 0.6 },
-        colors: ['#38bdf8', '#f59e0b', '#0284c7'],
+        colors: ['#38bdf8', '#f59e0b', '#fbbf24', '#0284c7'],
       })
     } catch (err: unknown) {
       setBakingState('error')
@@ -114,49 +114,75 @@ export const FortuneOven: React.FC = () => {
     }
   }
 
+  const handleResetForNewBake = () => {
+    setBakingState('idle')
+    setTxSignature(null)
+    setBakedSlot(null)
+    handleRandomFortune()
+  }
+
   return (
-    <div id="fortune-oven" className="rounded-2xl bg-cookie-card border border-cookie-border/80 p-5 sm:p-6 shadow-sm">
+    <div
+      id="fortune-oven"
+      className="relative rounded-2xl bg-cookie-card border-2 border-amber-500/35 hover:border-amber-400/50 p-5 sm:p-7 oven-hearth-glow transition-all duration-300 overflow-hidden"
+    >
+      {/* Warm Ambient Hearth Radial Glow in Background */}
+      <div className="absolute -right-12 -top-12 w-48 h-48 bg-amber-500/15 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute -left-12 -bottom-12 w-48 h-48 bg-amber-600/10 rounded-full blur-3xl pointer-events-none" />
+
       {/* Header */}
-      <div className="flex items-center justify-between pb-4 border-b border-cookie-border/60">
-        <div className="flex items-center gap-2.5">
-          <div className="p-2 rounded-xl bg-amber-500/10 text-amber-400 border border-amber-500/20">
-            <Flame className="w-4 h-4 animate-pulse" />
+      <div className="relative flex items-center justify-between pb-4 border-b border-cookie-border/70">
+        <div className="flex items-center gap-3">
+          {/* Animated Oven Icon with Steam & Hearth Pulse */}
+          <div className="relative p-2.5 rounded-xl bg-gradient-to-b from-amber-500/20 to-amber-600/10 text-amber-400 border border-amber-500/30 animate-hearth shadow-inner">
+            <Flame className="w-5 h-5" />
+            {/* Steam particles indicator */}
+            <span className="absolute -top-2 left-2 text-[10px] select-none text-amber-300 font-bold animate-steam pointer-events-none">
+              ~
+            </span>
+            <span className="absolute -top-2.5 right-2 text-[8px] select-none text-amber-200 font-bold animate-steam pointer-events-none" style={{ animationDelay: '0.8s' }}>
+              ~
+            </span>
           </div>
+
           <div>
             <div className="flex items-center gap-2">
-              <h2 className="text-base font-bold text-white tracking-tight">
+              <h2 className="text-lg font-black text-white tracking-tight">
                 Fortune Oven
               </h2>
-              <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-300 border border-amber-500/20 font-semibold">
-                MEMO
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/40 font-bold tracking-wide">
+                420°C SVM
               </span>
             </div>
-            <p className="text-[11px] text-slate-400 mt-0.5">
-              Permanent on-chain inscription
+            <p className="text-xs text-slate-300 mt-0.5">
+              Inscribe permanent decentralized fortunes via Solana Memo
             </p>
           </div>
         </div>
 
-        <div className="flex items-center gap-1.5 px-3 py-1 rounded-xl bg-cookie-surface border border-cookie-border text-xs font-mono">
+        <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-950/80 border border-amber-500/25 text-xs font-mono shadow-sm">
           <span className="text-slate-400 text-[11px]">Baked:</span>
-          <span className="text-amber-400 font-bold">{totalBaked}</span>
+          <span className="text-amber-400 font-extrabold">{totalBaked}</span>
         </div>
       </div>
 
-      {/* Input Form */}
-      <div className="mt-4 space-y-3">
+      {/* Input Form & Success View */}
+      <div className="relative mt-5 space-y-3.5">
         {/* Dark Styled Textarea Box */}
-        <div className="relative rounded-xl bg-slate-950/80 border border-slate-800/80 focus-within:border-amber-500/50 transition-all p-3.5 space-y-2">
-          <div className="flex items-center justify-between text-[11px] font-mono text-slate-400">
-            <span className="font-medium text-slate-400">INSCRIPTION TEXT</span>
+        <div className="relative rounded-xl bg-slate-950/90 border border-slate-800/90 focus-within:border-amber-400/60 transition-all p-3.5 space-y-2">
+          <div className="flex items-center justify-between text-[11px] font-mono text-slate-300">
+            <span className="font-semibold text-slate-300 flex items-center gap-1.5">
+              <span>FORTUNE INSCRIPTION</span>
+              <span className="text-[9px] px-1.5 py-0.2 rounded bg-slate-800 text-amber-400/90">UTF-8</span>
+            </span>
             <button
               type="button"
               onClick={handleRandomFortune}
               disabled={bakingState === 'signing' || bakingState === 'baking'}
-              className="inline-flex items-center gap-1 text-amber-400 hover:text-amber-300 transition disabled:opacity-50 font-semibold"
+              className="inline-flex items-center gap-1 text-amber-400 hover:text-amber-300 transition disabled:opacity-50 font-bold hover:scale-105 active:scale-95"
             >
               <Dices className="w-3.5 h-3.5" />
-              <span>Random</span>
+              <span>Surprise Me</span>
             </button>
           </div>
 
@@ -165,62 +191,80 @@ export const FortuneOven: React.FC = () => {
             value={fortune}
             onChange={(e) => setFortune(e.target.value)}
             disabled={bakingState === 'signing' || bakingState === 'baking'}
-            placeholder="Type your message to inscribe permanently..."
-            className="w-full bg-transparent text-slate-100 placeholder-slate-500 text-sm focus:outline-none transition leading-relaxed resize-none font-sans"
+            placeholder="Type your message to inscribe permanently on Cookie Chain..."
+            className="w-full bg-transparent text-slate-100 placeholder-slate-400 text-sm focus:outline-none transition leading-relaxed resize-none font-sans"
           />
 
-          <div className="flex items-center justify-between text-[10px] font-mono text-slate-500 pt-1 border-t border-slate-800/60">
-            <span>Solana Memo Program</span>
-            <span>{fortune.length} chars</span>
+          <div className="flex items-center justify-between text-[10px] font-mono text-slate-400 pt-1.5 border-t border-slate-800/80">
+            <span className="flex items-center gap-1">
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-400/80" />
+              Solana Memo Program (MemoSq...)
+            </span>
+            <span className="font-semibold text-slate-300">{fortune.length} chars</span>
           </div>
         </div>
 
         {/* Error Notification */}
         {bakingState === 'error' && errorMsg && (
-          <div className="p-3 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-300 text-xs flex items-center gap-2">
+          <div className="p-3 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-200 text-xs flex items-center gap-2">
             <AlertCircle className="w-4 h-4 text-rose-400 shrink-0" />
             <span className="truncate">{errorMsg}</span>
           </div>
         )}
 
-        {/* Confirmed Receipt */}
+        {/* Confirmed Baked Receipt with Highlighted CookieScan Link */}
         {bakingState === 'baked' && txSignature && (
-          <div className="p-3.5 rounded-xl bg-cookie-surface border border-emerald-500/30 space-y-2.5">
-            <div className="flex items-center justify-between gap-2">
+          <div className="p-4 rounded-xl bg-gradient-to-r from-emerald-950/40 via-cookie-card to-amber-950/30 border-2 border-emerald-500/40 space-y-3 shadow-lg">
+            <div className="flex items-center justify-between gap-2 flex-wrap">
               <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                <span className="font-bold text-white text-xs">
-                  Inscribed on Cookie Chain
-                </span>
-                {bakedSlot && (
-                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-900 text-slate-300 border border-slate-800">
-                    Slot #{bakedSlot.toLocaleString()}
-                  </span>
-                )}
+                <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
+                <div>
+                  <h4 className="font-bold text-white text-xs sm:text-sm">
+                    Freshly Baked &amp; Inscribed on Cookie Chain!
+                  </h4>
+                  {bakedSlot && (
+                    <span className="text-[10px] font-mono text-emerald-300">
+                      Confirmed in Slot #{bakedSlot.toLocaleString()} (~0.8s)
+                    </span>
+                  )}
+                </div>
               </div>
 
               <a
                 href={`${COOKIE_CHAIN_CONFIG.explorerUrl}/tx/${txSignature}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 text-xs font-semibold text-cookie-blue hover:underline"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-sky-500/20 hover:bg-sky-500/30 border border-sky-400/50 text-xs font-bold text-sky-300 hover:text-white transition shadow-sm"
               >
-                <span>CookieScan</span>
-                <ExternalLink className="w-3 h-3" />
+                <span>View on CookieScan</span>
+                <ExternalLink className="w-3.5 h-3.5" />
               </a>
             </div>
 
-            <p className="text-xs text-slate-300 font-mono bg-slate-950 p-2.5 rounded-lg border border-slate-800">
+            <p className="text-xs text-slate-200 font-mono bg-slate-950/90 p-3 rounded-lg border border-slate-800 italic">
               "{fortune}"
             </p>
+
+            <div className="flex items-center justify-between pt-1">
+              <span className="text-[10px] font-mono text-slate-400">
+                Tx: {txSignature.slice(0, 8)}...{txSignature.slice(-8)}
+              </span>
+              <button
+                onClick={handleResetForNewBake}
+                className="text-xs font-semibold text-amber-400 hover:text-amber-300 transition hover:underline flex items-center gap-1"
+              >
+                <span>Bake Another Fortune</span>
+                <span>→</span>
+              </button>
+            </div>
           </div>
         )}
 
-        {/* Action Button */}
+        {/* Primary Action Button */}
         <button
           onClick={handleBakeFortune}
           disabled={bakingState === 'signing' || bakingState === 'baking' || !fortune.trim()}
-          className="w-full py-3 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-bold text-xs uppercase tracking-wider transition shadow-md shadow-amber-500/10 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 active:scale-[0.99]"
+          className="w-full py-3.5 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 hover:from-amber-300 hover:via-amber-400 hover:to-amber-300 text-slate-950 font-black text-xs uppercase tracking-wider transition shadow-lg shadow-amber-500/20 hover:shadow-amber-500/30 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 active:scale-[0.99]"
         >
           {bakingState === 'signing' ? (
             <>
@@ -230,17 +274,17 @@ export const FortuneOven: React.FC = () => {
           ) : bakingState === 'baking' ? (
             <>
               <RefreshCw className="w-4 h-4 animate-spin" />
-              <span>Confirming on-chain...</span>
+              <span>Baking Into Cookie Chain Block...</span>
             </>
           ) : !connected ? (
             <>
               <Wallet className="w-4 h-4" />
-              <span>Connect Wallet to Inscribe</span>
+              <span>Connect Wallet to Bake Fortune</span>
             </>
           ) : (
             <>
               <Sparkles className="w-4 h-4" />
-              <span>Inscribe Fortune on Cookie Chain</span>
+              <span>Bake Fortune Into Cookie Chain</span>
             </>
           )}
         </button>
