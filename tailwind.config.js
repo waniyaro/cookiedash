@@ -8,19 +8,18 @@ export default {
     extend: {
       colors: {
         bakery: {
-          bg: '#140d0a',          // Deep roasted cacao & espresso
-          surface: '#1e1410',     // Dark umbra card base
-          elevated: '#281a15',    // Slightly elevated surface
-          border: '#3a251e',      // Subtle warm boundary
-          borderMuted: '#2a1a15',
-          flame: '#ff7a1a',       // Hero primary fire
-          amber: '#ffb347',       // Hero bright caramel
-          gold: '#d4a15c',        // Secondary Vault gold
+          page: '#0d0907',        // Deep roasted charcoal/obsidian
+          surface: '#1a1310',     // Elevated dark umbra card base
+          elevated: '#251b16',    // Higher elevation / hover surface
+          tray: '#080504',        // Deepest soot inset trays
+          border: '#38261e',      // Defined boundary
+          borderMuted: '#241813', // Subtle dividers
+          flame: '#ff7a1a',       // Hero fire gradient start
+          amber: '#ffb347',       // Hero fire gradient end
+          gold: '#d4a15c',        // Secondary Vault antique gold
           goldMuted: '#9e7a46',
-          ivory: '#f5ece1',       // High-contrast primary text
-          dough: '#e8dcce',       // Soft dough text
-          taupe: '#998376',       // Muted secondary label text
-          soot: '#0e0806',        // Deepest plate/tray background
+          ivory: '#f5ece1',       // Crisp high-contrast text
+          taupe: '#8f8075',       // Cool ash taupe labels
         },
       },
       fontFamily: {

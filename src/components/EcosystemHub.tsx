@@ -1,122 +1,142 @@
 import React from 'react'
-import { ArrowUpRight, Compass, Shield, Code2, Coins, Layers, BookOpen } from 'lucide-react'
+import { ArrowUpRight } from 'lucide-react'
 import { COOKIE_CHAIN_CONFIG } from '../config/network'
 
-const ECOSYSTEM_SERVICES = [
+interface ProtocolEntry {
+  title: string
+  role: string
+  endpoint: string
+  description: string
+  url: string
+  actionText: string
+}
+
+const REGISTRY_PROTOCOLS: ProtocolEntry[] = [
   {
-    title: 'Cookiebox Swap',
-    description: 'Premier DEX liquidity aggregator routing orders across all on-chain pools.',
+    title: 'Cookiebox',
+    role: 'DEX Aggregator',
+    endpoint: 'cookiebox.app',
+    description: 'Premier SVM liquidity aggregator routing swaps across all on-chain pools.',
     url: 'https://cookiebox.app',
-    icon: Coins,
-    badge: 'DEX',
+    actionText: 'Swap',
   },
   {
     title: 'Cookieswap',
-    description: 'Instant token swapping and liquidity pool deployment on Cookie Chain.',
+    role: 'AMM & Pools',
+    endpoint: 'cookieswap.app',
+    description: 'Direct liquidity pool deployment and instant token exchange on Cookie Chain.',
     url: COOKIE_CHAIN_CONFIG.swapUrl,
-    icon: Layers,
-    badge: 'AMM',
+    actionText: 'Pools',
   },
   {
     title: 'Hyperlane Warp Bridge',
-    description: 'Direct bridge transporting $COOK between Solana and Cookie Chain.',
+    role: 'Interoperability',
+    endpoint: 'hyperlane.cookiescan.io',
+    description: 'Cross-chain bridge transporting $COOK between Solana Mainnet and Cookie Chain.',
     url: COOKIE_CHAIN_CONFIG.bridgeUrl,
-    icon: ArrowUpRight,
-    badge: 'Bridge',
-  },
-  {
-    title: 'Cookie DAS API',
-    description: 'Digital Asset Standard RPC endpoints for developers to query tokens.',
-    url: COOKIE_CHAIN_CONFIG.cookieDasApi,
-    icon: Code2,
-    badge: 'RPC & DAS',
+    actionText: 'Bridge',
   },
   {
     title: 'cookie-mcp',
-    description: 'Official Model Context Protocol server empowering autonomous AI bakery agents.',
+    role: 'AI Execution Layer',
+    endpoint: 'github.com/cookiechain/cookie-mcp',
+    description: 'Official Model Context Protocol server enabling autonomous agents to execute on-chain.',
     url: 'https://github.com/cookiechain/cookie-mcp',
-    icon: Shield,
-    badge: 'AI Agents',
+    actionText: 'GitHub',
+  },
+  {
+    title: 'Cookie DAS API',
+    role: 'RPC & Indexer',
+    endpoint: 'api.cookiescan.io/das',
+    description: 'Digital Asset Standard RPC endpoints for querying tokens and assets.',
+    url: COOKIE_CHAIN_CONFIG.cookieDasApi,
+    actionText: 'API Docs',
   },
   {
     title: 'Cookie Chain Docs',
-    description: 'Official SVM specs, genesis hash, node validator guides, and hackathon bounties.',
+    role: 'Core Specifications',
+    endpoint: 'docs.cookiescan.io',
+    description: 'SVM architecture, validator node deployment, and genesis specs.',
     url: COOKIE_CHAIN_CONFIG.docsUrl,
-    icon: BookOpen,
-    badge: 'Docs',
+    actionText: 'Read Docs',
   },
 ]
 
 export const EcosystemHub: React.FC = () => {
   return (
-    <footer className="mt-14 pt-8 pb-16 border-t border-[#3a251e]">
-      {/* Header */}
-      <div className="flex items-center justify-between gap-4 mb-6">
-        <div className="flex items-center gap-3">
-          <span className="p-2 rounded-xl bg-[#1e1410] border border-[#3a251e] text-[#d4a15c]">
-            <Compass className="w-4 h-4" />
-          </span>
-          <div>
-            <h3 className="font-display font-bold text-[#f5ece1] text-lg tracking-tight">
-              Ecosystem &amp; Infrastructure
+    <footer className="mt-12 pt-8 pb-14 border-t border-[#38261e]">
+      {/* Section Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
+        <div>
+          <div className="flex items-center gap-2.5">
+            <h3 className="font-display font-bold text-[#f5ece1] text-lg sm:text-xl tracking-tight">
+              Cookie Chain Registry &amp; Infrastructure
             </h3>
-            <p className="text-xs text-[#998376] font-sans">
-              Official developer endpoints, bridges, and tools on Cookie Chain
-            </p>
+            <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-[#251b16] text-[#d4a15c] border border-[#38261e] uppercase">
+              6 Verified Protocols
+            </span>
           </div>
+          <p className="text-xs text-[#8f8075] mt-1 font-sans">
+            Official tools, bridges, and RPC services powering the ecosystem
+          </p>
         </div>
 
         <a
           href={COOKIE_CHAIN_CONFIG.explorerUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#1e1410] hover:bg-[#281a15] border border-[#3a251e] hover:border-[#d4a15c] text-xs font-mono font-bold text-[#d4a15c] hover:text-[#f5ece1] transition"
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#1a1310] hover:bg-[#251b16] border border-[#38261e] text-xs font-mono font-bold text-[#d4a15c] hover:text-[#f5ece1] transition self-start sm:self-auto"
         >
-          <span>CookieScan</span>
-          <ArrowUpRight className="w-3 h-3" />
+          <span>CookieScan Explorer</span>
+          <ArrowUpRight className="w-3.5 h-3.5" />
         </a>
       </div>
 
-      {/* Grid of Pantry Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {ECOSYSTEM_SERVICES.map((item) => {
-          const Icon = item.icon
-          return (
-            <a
-              key={item.title}
-              href={item.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group p-4 rounded-2xl bg-[#1e1410] hover:bg-[#281a15] border border-[#3a251e] hover:border-[#d4a15c]/50 transition-all flex flex-col justify-between"
-            >
-              <div>
-                <div className="flex items-center justify-between mb-3">
-                  <span className="p-2 rounded-xl bg-[#281a15] text-[#d4a15c] border border-[#3a251e]">
-                    <Icon className="w-4 h-4" />
-                  </span>
-                  <span className="text-[10px] font-mono font-semibold px-2 py-0.5 rounded-md bg-[#140d0a] text-[#998376] border border-[#281a15]">
-                    {item.badge}
-                  </span>
-                </div>
-
-                <div className="flex items-center justify-between gap-1">
-                  <h4 className="font-display font-bold text-sm text-[#f5ece1] group-hover:text-[#ffb347] transition-colors">
-                    {item.title}
-                  </h4>
-                  <ArrowUpRight className="w-3.5 h-3.5 text-[#998376] group-hover:text-[#d4a15c] transition-colors" />
-                </div>
-
-                <p className="text-xs text-[#998376] mt-1.5 leading-relaxed font-sans">
-                  {item.description}
-                </p>
+      {/* Protocol Registry Table / List (Replaces generic 6 cards) */}
+      <div className="rounded-2xl bg-[#1a1310] border border-[#38261e] divide-y divide-[#241813] overflow-hidden shadow-xl">
+        {REGISTRY_PROTOCOLS.map((entry) => (
+          <div
+            key={entry.title}
+            className="p-4 sm:px-6 hover:bg-[#251b16]/60 transition-colors flex flex-col md:flex-row md:items-center justify-between gap-3 text-xs"
+          >
+            {/* Protocol Identity & Role */}
+            <div className="md:w-64 shrink-0 space-y-0.5">
+              <div className="flex items-center gap-2">
+                <span className="font-display font-bold text-sm text-[#f5ece1]">
+                  {entry.title}
+                </span>
+                <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-[#080504] text-[#d4a15c] border border-[#38261e]">
+                  {entry.role}
+                </span>
               </div>
-            </a>
-          )
-        })}
+              <span className="text-[11px] font-mono text-[#8f8075]">
+                {entry.endpoint}
+              </span>
+            </div>
+
+            {/* Description */}
+            <p className="flex-1 text-[#8f8075] font-sans text-xs leading-relaxed md:px-4">
+              {entry.description}
+            </p>
+
+            {/* Action link */}
+            <div className="shrink-0 flex items-center md:justify-end">
+              <a
+                href={entry.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-[#080504] hover:bg-[#1a1310] text-[#f5ece1] hover:text-[#ffb347] border border-[#38261e] text-xs font-mono font-bold transition group"
+              >
+                <span>{entry.actionText}</span>
+                <ArrowUpRight className="w-3 h-3 text-[#8f8075] group-hover:text-[#ffb347] transition-colors" />
+              </a>
+            </div>
+          </div>
+        ))}
       </div>
 
       {/* Footer Branding Bar */}
-      <div className="mt-10 pt-6 border-t border-[#281a15] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono text-[#998376]">
+      <div className="mt-8 pt-6 border-t border-[#241813] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono text-[#8f8075]">
         <div className="flex items-center gap-3">
           <img
             src="/cookie-sticker.png"

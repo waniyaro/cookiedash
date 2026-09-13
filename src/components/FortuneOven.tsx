@@ -124,164 +124,217 @@ export const FortuneOven: React.FC = () => {
   return (
     <article
       id="fortune-oven"
-      className="relative rounded-3xl bg-[#1e1410] border border-[#3a251e] p-6 sm:p-8 md:p-9 hero-oven-glow overflow-hidden transition-all"
+      className="relative rounded-3xl bg-[#1a1310] border border-[#38261e] p-6 sm:p-8 lg:p-10 hero-oven-glow overflow-hidden transition-all"
     >
-      {/* Artisanal Ember Glow Ambient (Bottom glow & top warmth) */}
-      <div className="absolute -right-20 -top-20 w-80 h-80 bg-gradient-to-br from-[#ff7a1a]/15 to-transparent rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute -left-20 -bottom-20 w-96 h-64 bg-gradient-to-tr from-[#ff7a1a]/20 via-[#ffb347]/10 to-transparent rounded-full blur-3xl pointer-events-none" />
+      {/* Artisanal Background Embers SVG & Ambient Glow */}
+      <div className="absolute -right-16 -top-16 w-96 h-96 bg-gradient-to-br from-[#ff7a1a]/15 to-transparent rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute -left-20 -bottom-20 w-[500px] h-72 bg-gradient-to-tr from-[#ff7a1a]/20 via-[#ffb347]/10 to-transparent rounded-full blur-3xl pointer-events-none" />
 
-      {/* Decorative Custom Flat Hearth & Header */}
-      <div className="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-6 pb-6 border-b border-[#281a15]">
-        {/* Title & Lore */}
-        <div className="space-y-2">
-          <div className="flex items-center gap-3">
-            <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-black text-[#f5ece1] tracking-tight">
-              Fortune Oven
-            </h2>
-            <span className="text-[11px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-[#281a15] text-[#ffb347] border border-[#3a251e] uppercase tracking-wider">
-              SVM Memo Inscription
-            </span>
-          </div>
-          <p className="text-sm text-[#998376] max-w-xl leading-relaxed font-sans">
-            Inscribe permanent fortunes and recipes directly into Cookie Chain block storage via the Solana Memo Program. Verified on-chain in ~0.8 seconds.
-          </p>
-        </div>
-
-        {/* Prominent Counter Display */}
-        <div className="flex sm:flex-col items-start sm:items-end justify-between sm:justify-center shrink-0 pt-2 sm:pt-0">
-          <span className="text-[11px] font-mono text-[#998376] uppercase tracking-wider">LIFETIME BATCHES</span>
-          <div className="flex items-baseline gap-1.5 mt-0.5">
-            <span className="font-display font-black text-2xl sm:text-3xl text-[#f5ece1]">
-              {totalBaked}
-            </span>
-            <span className="text-xs font-mono font-bold text-[#d4a15c]">Baked</span>
-          </div>
-        </div>
+      {/* Decorative Custom Artisanal Pattern (Handcrafted SVG Flour & Embers) */}
+      <div className="absolute inset-0 opacity-[0.035] pointer-events-none">
+        <svg width="100%" height="100%">
+          <pattern id="hearth-texture" width="40" height="40" patternUnits="userSpaceOnUse">
+            <circle cx="20" cy="20" r="1.2" fill="#ffb347" />
+            <circle cx="6" cy="10" r="0.8" fill="#f5ece1" />
+            <circle cx="32" cy="28" r="0.9" fill="#d4a15c" />
+          </pattern>
+          <rect width="100%" height="100%" fill="url(#hearth-texture)" />
+        </svg>
       </div>
 
-      {/* Oven Recipe Tray (Textarea Area) */}
-      <div className="relative z-10 mt-6 space-y-4">
-        <div className="rounded-2xl bg-[#0e0806] border border-[#3a251e] focus-within:border-[#d4a15c] transition-colors p-4 sm:p-5 space-y-3">
-          <div className="flex items-center justify-between text-xs font-mono">
-            <span className="text-[#998376] font-semibold flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-[#ff7a1a] animate-pulse" />
-              <span>RECIPE SLATE</span>
+      {/* Full-Width Grid Split Inside Hero: Left (Hearth Lore & Artwork), Right (Interactive Baking Slate) */}
+      <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        {/* Left Column (5 cols): Custom Hearth Illustration, Lore & Big Stats */}
+        <div className="lg:col-span-5 space-y-5">
+          <div className="flex items-center gap-3">
+            <span className="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-[#251b16] text-[#ffb347] border border-[#38261e] uppercase tracking-wider">
+              SVM Memo Inscription Engine
             </span>
-
-            {/* Subtle Ghost/Secondary Roll Button */}
-            <button
-              type="button"
-              onClick={handleRandomFortune}
-              disabled={bakingState === 'signing' || bakingState === 'baking'}
-              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl text-xs font-mono text-[#998376] hover:text-[#f5ece1] bg-[#1e1410] hover:bg-[#281a15] border border-[#3a251e] transition active:scale-95 disabled:opacity-50"
-            >
-              <Dices className="w-3.5 h-3.5 text-[#d4a15c]" />
-              <span>Roll Fortune</span>
-            </button>
           </div>
 
-          <textarea
-            rows={3}
-            value={fortune}
-            onChange={(e) => setFortune(e.target.value)}
-            disabled={bakingState === 'signing' || bakingState === 'baking'}
-            placeholder="Write your wisdom or prediction to inscribe into the block..."
-            className="w-full bg-transparent text-[#f5ece1] placeholder-[#998376]/60 text-base sm:text-lg focus:outline-none transition leading-relaxed resize-none font-sans font-medium"
-          />
+          <div className="space-y-2">
+            <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-black text-[#f5ece1] tracking-tight leading-[1.1]">
+              Fortune <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ff7a1a] via-[#ff9a2b] to-[#ffb347]">Oven</span>
+            </h1>
+            <p className="text-sm sm:text-base text-[#8f8075] leading-relaxed font-sans">
+              Inscribe permanent fortunes and recipes directly into Cookie Chain block storage via the Solana Memo Program. Immutable, verifiable, baked in ~0.8 seconds.
+            </p>
+          </div>
 
-          <div className="flex items-center justify-between text-[11px] font-mono text-[#998376] pt-3 border-t border-[#1e1410]">
-            <span className="flex items-center gap-1.5">
-              <span>Program:</span>
-              <span className="text-[#d4a15c] font-semibold">Solana Memo (MemoSq4g...)</span>
-            </span>
-            <span>{fortune.length} chars</span>
+          {/* Bespoke Hearth Stone Illustration */}
+          <div className="pt-2 flex items-center gap-5">
+            <div className="relative w-28 h-24 shrink-0 rounded-2xl bg-[#080504] border border-[#38261e] flex items-center justify-center overflow-hidden shadow-inner">
+              {/* Custom SVG Oven Arch & Coals */}
+              <svg viewBox="0 0 100 80" className="w-full h-full p-2">
+                <path
+                  d="M15 70 C15 35, 85 35, 85 70 Z"
+                  fill="#1a1310"
+                  stroke="#38261e"
+                  strokeWidth="3"
+                />
+                <path
+                  d="M25 70 C25 45, 75 45, 75 70 Z"
+                  fill="#0d0907"
+                />
+                {/* Glowing Coals */}
+                <ellipse cx="50" cy="67" rx="20" ry="6" fill="#ff7a1a" opacity="0.8" />
+                <ellipse cx="50" cy="66" rx="14" ry="4" fill="#ffb347" />
+                {/* Rising Sparks */}
+                <circle cx="45" cy="48" r="1.5" fill="#ffb347" />
+                <circle cx="56" cy="42" r="1.2" fill="#ff7a1a" />
+                <circle cx="49" cy="34" r="1" fill="#f5ece1" />
+              </svg>
+              {/* Gentle Steam Animation */}
+              <span className="absolute -top-1 left-7 text-[10px] text-[#ffb347] font-black animate-steam pointer-events-none select-none">
+                ~
+              </span>
+              <span className="absolute -top-2 right-8 text-[9px] text-[#f5ece1] font-bold animate-steam pointer-events-none select-none" style={{ animationDelay: '1.2s' }}>
+                ~
+              </span>
+            </div>
+
+            {/* Prominent Counter Display */}
+            <div className="space-y-0.5">
+              <span className="text-[11px] font-mono text-[#8f8075] uppercase tracking-wider block">
+                TOTAL ON-CHAIN BATCHES
+              </span>
+              <div className="flex items-baseline gap-2">
+                <span className="font-display font-black text-3xl sm:text-4xl text-[#f5ece1]">
+                  {totalBaked}
+                </span>
+                <span className="text-xs font-mono font-bold text-[#d4a15c]">Batches Baked</span>
+              </div>
+              <span className="text-[11px] font-mono text-[#8f8075] block">
+                Gas: &lt; 0.0001 $COOK
+              </span>
+            </div>
           </div>
         </div>
 
-        {/* Error Notification */}
-        {bakingState === 'error' && errorMsg && (
-          <div className="p-3.5 rounded-2xl bg-rose-950/30 border border-rose-500/30 text-rose-200 text-xs flex items-center gap-2.5">
-            <AlertCircle className="w-4 h-4 text-rose-400 shrink-0" />
-            <span className="truncate">{errorMsg}</span>
-          </div>
-        )}
-
-        {/* Confirmed Receipt Card */}
-        {bakingState === 'baked' && txSignature && (
-          <div className="p-5 rounded-2xl bg-[#140d0a] border border-[#d4a15c]/60 space-y-3 shadow-lg">
-            <div className="flex items-center justify-between gap-3 flex-wrap">
-              <div className="flex items-center gap-2.5">
-                <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
-                <div>
-                  <h4 className="font-display font-bold text-sm sm:text-base text-[#f5ece1]">
-                    Fresh Out Of The Oven! Baked on-chain.
-                  </h4>
-                  {bakedSlot && (
-                    <span className="text-xs font-mono text-[#d4a15c]">
-                      Confirmed in Slot #{bakedSlot.toLocaleString()} (~0.8s finality)
-                    </span>
-                  )}
-                </div>
-              </div>
-
-              <a
-                href={`${COOKIE_CHAIN_CONFIG.explorerUrl}/tx/${txSignature}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-[#281a15] hover:bg-[#33211b] text-[#f5ece1] border border-[#3a251e] text-xs font-mono font-bold transition"
-              >
-                <span>Inspect in CookieScan</span>
-                <ExternalLink className="w-3.5 h-3.5 text-[#d4a15c]" />
-              </a>
-            </div>
-
-            <p className="text-xs sm:text-sm text-[#f5ece1] font-mono bg-[#0e0806] p-3.5 rounded-xl border border-[#281a15] italic">
-              "{fortune}"
-            </p>
-
-            <div className="flex items-center justify-between pt-1">
-              <span className="text-[11px] font-mono text-[#998376]">
-                Tx: {txSignature.slice(0, 8)}...{txSignature.slice(-8)}
+        {/* Right Column (7 cols): The Baking Slate Tray & Hero CTA */}
+        <div className="lg:col-span-7 space-y-4">
+          <div className="rounded-2xl bg-[#080504] border border-[#38261e] focus-within:border-[#d4a15c] transition-colors p-5 space-y-3 shadow-inner">
+            <div className="flex items-center justify-between text-xs font-mono">
+              <span className="text-[#8f8075] font-semibold flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-[#ff7a1a] animate-pulse" />
+                <span>RECIPE SLATE</span>
               </span>
+
+              {/* Ghost Roll Fortune Button */}
               <button
-                onClick={handleResetForNewBake}
-                className="text-xs font-bold text-[#d4a15c] hover:text-[#f5ece1] transition flex items-center gap-1"
+                type="button"
+                onClick={handleRandomFortune}
+                disabled={bakingState === 'signing' || bakingState === 'baking'}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-mono text-[#8f8075] hover:text-[#f5ece1] bg-[#1a1310] hover:bg-[#251b16] border border-[#38261e] transition active:scale-95 disabled:opacity-50"
               >
-                <span>Bake Another Batch</span>
-                <span>→</span>
+                <Dices className="w-3.5 h-3.5 text-[#d4a15c]" />
+                <span>Roll Fortune</span>
               </button>
             </div>
-          </div>
-        )}
 
-        {/* PRIMARY HERO CTA BUTTON - THE ONLY FIERY GRADIENT BUTTON ON THE SCREEN */}
-        <button
-          onClick={handleBakeFortune}
-          disabled={bakingState === 'signing' || bakingState === 'baking' || !fortune.trim()}
-          className="w-full py-4 px-6 rounded-2xl hero-flame-btn text-sm sm:text-base uppercase tracking-wider flex items-center justify-center gap-2.5 select-none disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
-        >
-          {bakingState === 'signing' ? (
-            <>
-              <RefreshCw className="w-5 h-5 animate-spin" />
-              <span>Awaiting Signature in Wallet...</span>
-            </>
-          ) : bakingState === 'baking' ? (
-            <>
-              <RefreshCw className="w-5 h-5 animate-spin" />
-              <span>Baking Into Cookie Chain Ledger...</span>
-            </>
-          ) : !connected ? (
-            <>
-              <Wallet className="w-5 h-5" />
-              <span>Connect Wallet to Light the Oven</span>
-            </>
-          ) : (
-            <>
-              <Sparkles className="w-5 h-5" />
-              <span>Bake Fortune on Cookie Chain (~0.8s)</span>
-            </>
+            <textarea
+              rows={3}
+              value={fortune}
+              onChange={(e) => setFortune(e.target.value)}
+              disabled={bakingState === 'signing' || bakingState === 'baking'}
+              placeholder="Inscribe your message or wisdom to bake into the Cookie Chain ledger..."
+              className="w-full bg-transparent text-[#f5ece1] placeholder-[#8f8075]/60 text-base sm:text-lg focus:outline-none transition leading-relaxed resize-none font-sans font-medium"
+            />
+
+            <div className="flex items-center justify-between text-[11px] font-mono text-[#8f8075] pt-3 border-t border-[#1a1310]">
+              <span className="flex items-center gap-1.5">
+                <span>Program:</span>
+                <span className="text-[#d4a15c] font-semibold">Solana Memo (MemoSq4g...)</span>
+              </span>
+              <span>{fortune.length} characters</span>
+            </div>
+          </div>
+
+          {/* Error Notification */}
+          {bakingState === 'error' && errorMsg && (
+            <div className="p-3.5 rounded-2xl bg-rose-950/30 border border-rose-500/30 text-rose-200 text-xs flex items-center gap-2.5">
+              <AlertCircle className="w-4 h-4 text-rose-400 shrink-0" />
+              <span className="truncate">{errorMsg}</span>
+            </div>
           )}
-        </button>
+
+          {/* Confirmed Receipt Card */}
+          {bakingState === 'baked' && txSignature && (
+            <div className="p-5 rounded-2xl bg-[#080504] border border-[#d4a15c]/60 space-y-3 shadow-lg">
+              <div className="flex items-center justify-between gap-3 flex-wrap">
+                <div className="flex items-center gap-2.5">
+                  <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
+                  <div>
+                    <h4 className="font-display font-bold text-sm sm:text-base text-[#f5ece1]">
+                      Fresh Out Of The Oven! Baked on-chain.
+                    </h4>
+                    {bakedSlot && (
+                      <span className="text-xs font-mono text-[#d4a15c]">
+                        Confirmed in Slot #{bakedSlot.toLocaleString()} (~0.8s finality)
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                <a
+                  href={`${COOKIE_CHAIN_CONFIG.explorerUrl}/tx/${txSignature}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-[#251b16] hover:bg-[#33251e] text-[#f5ece1] border border-[#38261e] text-xs font-mono font-bold transition"
+                >
+                  <span>Inspect in CookieScan</span>
+                  <ExternalLink className="w-3.5 h-3.5 text-[#d4a15c]" />
+                </a>
+              </div>
+
+              <p className="text-xs sm:text-sm text-[#f5ece1] font-mono bg-[#1a1310] p-3.5 rounded-xl border border-[#251b16] italic">
+                "{fortune}"
+              </p>
+
+              <div className="flex items-center justify-between pt-1">
+                <span className="text-[11px] font-mono text-[#8f8075]">
+                  Tx: {txSignature.slice(0, 8)}...{txSignature.slice(-8)}
+                </span>
+                <button
+                  onClick={handleResetForNewBake}
+                  className="text-xs font-bold text-[#d4a15c] hover:text-[#f5ece1] transition flex items-center gap-1"
+                >
+                  <span>Bake Another Batch</span>
+                  <span>→</span>
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* PRIMARY HERO CTA BUTTON - ONLY FIERY BUTTON ON SCREEN */}
+          <button
+            onClick={handleBakeFortune}
+            disabled={bakingState === 'signing' || bakingState === 'baking' || !fortune.trim()}
+            className="w-full py-4 px-6 rounded-2xl hero-flame-btn text-sm sm:text-base uppercase tracking-wider flex items-center justify-center gap-2.5 select-none disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+          >
+            {bakingState === 'signing' ? (
+              <>
+                <RefreshCw className="w-5 h-5 animate-spin" />
+                <span>Awaiting Signature in Wallet...</span>
+              </>
+            ) : bakingState === 'baking' ? (
+              <>
+                <RefreshCw className="w-5 h-5 animate-spin" />
+                <span>Baking Into Cookie Chain Ledger...</span>
+              </>
+            ) : !connected ? (
+              <>
+                <Wallet className="w-5 h-5" />
+                <span>Connect Wallet to Light the Oven</span>
+              </>
+            ) : (
+              <>
+                <Sparkles className="w-5 h-5" />
+                <span>Bake Fortune on Cookie Chain (~0.8s)</span>
+              </>
+            )}
+          </button>
+        </div>
       </div>
     </article>
   )

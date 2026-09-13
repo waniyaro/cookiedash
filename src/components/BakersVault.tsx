@@ -169,13 +169,13 @@ export const BakersVault: React.FC = () => {
         </div>
 
         {connected && publicKey ? (
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#140d0a] border border-[#3a251e] text-xs font-mono">
+          <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#080504] border border-[#38261e] text-xs font-mono">
             <span className="text-[#d4a15c] font-bold">
               {publicKey.toBase58().slice(0, 4)}...{publicKey.toBase58().slice(-4)}
             </span>
             <button
               onClick={handleCopy}
-              className="p-1 text-[#998376] hover:text-[#f5ece1] transition rounded"
+              className="p-1 text-[#8f8075] hover:text-[#f5ece1] transition rounded"
               title="Copy address"
             >
               {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
@@ -184,35 +184,32 @@ export const BakersVault: React.FC = () => {
               href={`${COOKIE_CHAIN_CONFIG.explorerUrl}/address/${publicKey.toBase58()}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-1 text-[#998376] hover:text-[#d4a15c] transition rounded"
+              className="p-1 text-[#8f8075] hover:text-[#d4a15c] transition rounded"
               title="View in CookieScan"
             >
               <ExternalLink className="w-3.5 h-3.5" />
             </a>
           </div>
         ) : (
-          <button
-            onClick={() => setVisible(true)}
-            className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-[#d4a15c] hover:text-[#f5ece1] px-3 py-1.5 rounded-xl bg-[#281a15] hover:bg-[#33211b] border border-[#3a251e] transition"
-          >
-            <Lock className="w-3.5 h-3.5 text-[#d4a15c]" />
-            <span>Vault Locked · Connect</span>
-          </button>
+          <span className="inline-flex items-center gap-1.5 text-xs font-mono text-[#8f8075] px-2.5 py-1 rounded-lg bg-[#080504] border border-[#241813]">
+            <Lock className="w-3 h-3 text-[#d4a15c]" />
+            <span>Read-Only</span>
+          </span>
         )}
       </div>
 
       {/* Main Grid: Balance & Transfer Form */}
       <div className="mt-5 grid grid-cols-1 md:grid-cols-3 gap-5">
         {/* Balance Stash Card */}
-        <div className="p-4 rounded-2xl bg-[#140d0a] border border-[#281a15] flex flex-col justify-between">
+        <div className="p-4 rounded-2xl bg-[#080504] border border-[#241813] flex flex-col justify-between">
           <div>
-            <div className="flex items-center justify-between text-xs text-[#998376] mb-1">
+            <div className="flex items-center justify-between text-xs text-[#8f8075] mb-1">
               <span className="font-mono text-[10px] uppercase font-bold tracking-wider">YOUR COOKIE STASH</span>
               {connected && (
                 <button
                   onClick={fetchBalance}
                   disabled={loadingBalance}
-                  className="text-[#998376] hover:text-[#f5ece1] transition"
+                  className="text-[#8f8075] hover:text-[#f5ece1] transition"
                   title="Refresh Balance"
                 >
                   <RefreshCw className={`w-3 h-3 ${loadingBalance ? 'animate-spin text-[#d4a15c]' : ''}`} />
@@ -231,10 +228,10 @@ export const BakersVault: React.FC = () => {
               ) : (
                 <div className="space-y-1">
                   <div className="flex items-baseline gap-2">
-                    <span className="text-3xl font-black text-[#998376]/50 font-mono">—.—</span>
-                    <span className="text-xs font-mono font-bold text-[#998376]/50">$COOK</span>
+                    <span className="text-3xl font-black text-[#8f8075]/40 font-mono">—.—</span>
+                    <span className="text-xs font-mono font-bold text-[#8f8075]/40">$COOK</span>
                   </div>
-                  <p className="text-[11px] text-[#998376] font-sans">
+                  <p className="text-[11px] text-[#8f8075] font-sans">
                     Connect wallet to reveal your balance
                   </p>
                 </div>
@@ -242,7 +239,7 @@ export const BakersVault: React.FC = () => {
             </div>
           </div>
 
-          <div className="mt-4 pt-3 border-t border-[#1e1410] flex items-center justify-between">
+          <div className="mt-4 pt-3 border-t border-[#1a1310] flex items-center justify-between">
             <a
               href={COOKIE_CHAIN_CONFIG.bridgeUrl}
               target="_blank"
@@ -266,19 +263,19 @@ export const BakersVault: React.FC = () => {
         {/* Transfer Form or Engaging Disconnected State */}
         <div className="md:col-span-2">
           {!connected ? (
-            <div className="p-5 rounded-2xl bg-[#140d0a] border border-[#281a15] flex flex-col items-center justify-center text-center space-y-3 min-h-[140px]">
+            <div className="p-5 rounded-2xl bg-[#080504] border border-[#241813] flex flex-col items-center justify-center text-center space-y-3 min-h-[140px]">
               <div className="space-y-1 max-w-sm">
                 <h4 className="font-display font-bold text-sm text-[#f5ece1]">
                   Connect to Send $COOK
                 </h4>
-                <p className="text-xs text-[#998376] font-sans leading-relaxed">
+                <p className="text-xs text-[#8f8075] font-sans leading-relaxed">
                   Fast, sub-second peer-to-peer transfers with microscopic gas fees on Cookie Chain.
                 </p>
               </div>
               <button
                 type="button"
                 onClick={() => setVisible(true)}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#281a15] hover:bg-[#33211b] text-[#d4a15c] hover:text-[#f5ece1] border border-[#3a251e] font-mono text-xs font-bold transition active:scale-95"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#251b16] hover:bg-[#33251e] text-[#d4a15c] hover:text-[#f5ece1] border border-[#38261e] font-mono text-xs font-bold transition active:scale-95"
               >
                 <Wallet className="w-3.5 h-3.5" />
                 <span>Connect Wallet</span>

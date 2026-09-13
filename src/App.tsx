@@ -10,7 +10,7 @@ function App() {
   const { metrics, loading, error, refresh, isLive } = useNetworkMetrics()
 
   return (
-    <div className="min-h-screen bg-[#140d0a] text-[#f5ece1] flex flex-col font-sans selection:bg-[#ffb347] selection:text-[#140d0a]">
+    <div className="min-h-screen bg-[#0d0907] text-[#f5ece1] flex flex-col font-sans selection:bg-[#ffb347] selection:text-[#0d0907]">
       {/* Top Navigation */}
       <Navbar />
 
@@ -18,16 +18,16 @@ function App() {
         {/* Real-time Node Ticker Strip */}
         <NodeTickerBar metrics={metrics} isLive={isLive} />
 
-        {/* Asymmetrical Modular Bento Grid */}
+        {/* FULL-WIDTH TOP HERO: Fortune Oven */}
+        <FortuneOven />
+
+        {/* Asymmetrical Bento Grid: Pastry Vault (7 cols) + Hearth Telemetry & AI (5 cols) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-          {/* Main Column (8 cols): Hero Fortune Oven & Pastry Vault */}
-          <div className="lg:col-span-8 space-y-6">
-            <FortuneOven />
+          <div className="lg:col-span-7">
             <BakersVault />
           </div>
 
-          {/* Right Sidebar (4 cols): Hearth Gauges & Head Baker AI Oracle */}
-          <div className="lg:col-span-4 lg:sticky lg:top-24">
+          <div className="lg:col-span-5">
             <HearthInspector
               metrics={metrics}
               loading={loading}
@@ -38,7 +38,7 @@ function App() {
           </div>
         </div>
 
-        {/* Ecosystem Directory */}
+        {/* Ecosystem Registry & Infrastructure Table */}
         <EcosystemHub />
       </main>
     </div>

@@ -4,10 +4,10 @@
 
 @layer base {
   body {
-    background-color: #140d0a;
+    background-color: #0d0907;
     background-image: 
-      radial-gradient(ellipse 90% 40% at 50% -10%, rgba(255, 122, 26, 0.12), transparent 70%),
-      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.025'/%3E%3C/svg%3E");
+      radial-gradient(ellipse 80% 35% at 50% 0%, rgba(255, 122, 26, 0.09), transparent 75%),
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E");
     background-attachment: fixed;
     color: #f5ece1;
     font-family: 'Outfit', system-ui, -apple-system, sans-serif;
@@ -17,19 +17,19 @@
   }
 
   input, textarea {
-    background-color: #0e0806;
+    background-color: #080504;
     color: #f5ece1;
   }
 }
 
-/* Custom Steam Keyframe */
+/* Custom Steam Animation */
 @keyframes steamDrift {
   0% {
     transform: translateY(0px) scale(0.9);
     opacity: 0.7;
   }
   50% {
-    transform: translateY(-8px) scale(1.1) rotate(4deg);
+    transform: translateY(-8px) scale(1.1) rotate(3deg);
     opacity: 0.35;
   }
   100% {
@@ -42,22 +42,22 @@
   animation: steamDrift 3s ease-out infinite;
 }
 
-/* Exclusive Hero Flame CTA (Used ONLY on Fortune Oven) */
+/* Exclusive Hero Flame CTA */
 .hero-flame-btn {
-  background: linear-gradient(135deg, #ff7a1a 0%, #ff9e2c 50%, #ffb347 100%);
-  color: #140d0a;
+  background: linear-gradient(135deg, #ff7a1a 0%, #ff9a2b 50%, #ffb347 100%);
+  color: #0d0907;
   font-weight: 800;
   box-shadow: 
-    0 10px 30px -5px rgba(255, 122, 26, 0.45),
-    0 2px 4px 0 rgba(0, 0, 0, 0.3),
-    inset 0 1px 1px 0 rgba(255, 255, 255, 0.45);
+    0 12px 32px -4px rgba(255, 122, 26, 0.45),
+    0 2px 4px 0 rgba(0, 0, 0, 0.4),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.5);
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .hero-flame-btn:hover:not(:disabled) {
-  background: linear-gradient(135deg, #ff8c3a 0%, #ffab44 50%, #ffc166 100%);
+  background: linear-gradient(135deg, #ff8a2e 0%, #ffa73e 50%, #ffc060 100%);
   box-shadow: 
-    0 14px 36px -4px rgba(255, 122, 26, 0.6),
-    0 4px 8px 0 rgba(0, 0, 0, 0.4),
+    0 16px 40px -4px rgba(255, 122, 26, 0.6),
+    0 4px 8px 0 rgba(0, 0, 0, 0.5),
     inset 0 1px 1px 0 rgba(255, 255, 255, 0.6);
   transform: translateY(-1px);
 }
@@ -66,11 +66,11 @@
   box-shadow: 0 4px 14px 0 rgba(255, 122, 26, 0.35);
 }
 
-/* Fortune Oven Hero Container Shadow */
+/* Hero Oven Glow */
 .hero-oven-glow {
   box-shadow: 
-    0 0 80px -15px rgba(255, 122, 26, 0.18),
-    inset 0 1px 1px 0 rgba(255, 179, 71, 0.2);
+    0 0 90px -20px rgba(255, 122, 26, 0.15),
+    inset 0 1px 1px 0 rgba(255, 179, 71, 0.15);
 }
 
 /* Custom Night Bakery Scrollbar */
@@ -79,30 +79,29 @@
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #140d0a;
+  background: #0d0907;
 }
 ::-webkit-scrollbar-thumb {
-  background: #281a15;
+  background: #251b16;
   border-radius: 9999px;
-  border: 1px solid #3a251e;
+  border: 1px solid #38261e;
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #d4a15c;
 }
 
-/* Wallet adapter button styling to match warm bakery theme */
+/* Wallet adapter button */
 .wallet-adapter-button {
   font-family: 'Outfit', sans-serif !important;
-  background: #281a15 !important;
+  background: #1a1310 !important;
   color: #f5ece1 !important;
   font-weight: 700 !important;
   border-radius: 0.75rem !important;
-  border: 1px solid #3a251e !important;
+  border: 1px solid #38261e !important;
   transition: all 0.2s ease-in-out !important;
 }
 .wallet-adapter-button:hover {
-  background: #33211b !important;
+  background: #251b16 !important;
   border-color: #d4a15c !important;
   color: #ffffff !important;
 }
-

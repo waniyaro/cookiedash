@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useWallet } from '@solana/wallet-adapter-react'
-import { RefreshCw, Radio, Bot, ChevronDown, ChevronUp, Copy, Check, ExternalLink, ShieldCheck, Cpu } from 'lucide-react'
+import { RefreshCw, ChevronDown, ChevronUp, Copy, Check, ExternalLink } from 'lucide-react'
 import type { NetworkMetrics } from '../services/network'
 import { COOKIE_CHAIN_CONFIG } from '../config/network'
 
@@ -142,33 +142,28 @@ Status: Online with guaranteed message finality.`
   return (
     <aside
       id="telemetry-section"
-      className="rounded-3xl bg-[#1e1410] border border-[#3a251e] overflow-hidden shadow-xl"
+      className="rounded-3xl bg-[#1a1310] border border-[#38261e] overflow-hidden shadow-xl"
     >
       {/* SECTION 1: HEARTH GAUGES */}
-      <div className="p-5 sm:p-6 space-y-5">
+      <div className="p-5 sm:p-6 space-y-4">
         {/* Header: Clean, single status badge */}
-        <div className="flex items-center justify-between pb-3 border-b border-[#281a15]">
-          <div className="flex items-center gap-2.5">
-            <span className="p-1.5 rounded-lg bg-[#281a15] text-[#d4a15c] border border-[#3a251e]">
-              <Radio className="w-4 h-4" />
-            </span>
-            <div>
-              <h3 className="font-display font-bold text-sm sm:text-base text-[#f5ece1] tracking-tight">
-                Hearth Gauges
-              </h3>
-              <p className="text-[11px] font-mono text-[#998376]">rpc.cookiescan.io</p>
-            </div>
+        <div className="flex items-center justify-between pb-3 border-b border-[#241813]">
+          <div>
+            <h3 className="font-display font-bold text-sm sm:text-base text-[#f5ece1] tracking-tight">
+              Hearth Telemetry
+            </h3>
+            <p className="text-[11px] font-mono text-[#8f8075]">rpc.cookiescan.io</p>
           </div>
 
           <div className="flex items-center gap-2">
-            <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-[#140d0a] border border-[#3a251e] text-[10px] font-mono font-bold text-[#f5ece1]">
+            <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-[#080504] border border-[#38261e] text-[10px] font-mono font-bold text-[#f5ece1]">
               <span className={`w-1.5 h-1.5 rounded-full ${isLive ? 'bg-emerald-400' : 'bg-amber-400'} animate-pulse`} />
               LIVE
             </span>
             <button
               onClick={handleRefresh}
               disabled={isRefreshing || loading}
-              className="p-1.5 rounded-lg bg-[#281a15] hover:bg-[#33211b] text-[#998376] hover:text-[#f5ece1] transition border border-[#3a251e]"
+              className="p-1.5 rounded-lg bg-[#251b16] hover:bg-[#33251e] text-[#8f8075] hover:text-[#f5ece1] transition border border-[#38261e]"
               title="Refresh Telemetry"
             >
               <RefreshCw className={`w-3 h-3 ${isRefreshing || loading ? 'animate-spin text-[#d4a15c]' : ''}`} />
@@ -183,17 +178,17 @@ Status: Online with guaranteed message finality.`
         )}
 
         {/* Throughput Sparkline & Current Rate */}
-        <div className="p-3.5 rounded-2xl bg-[#140d0a] border border-[#281a15]">
-          <div className="flex items-center justify-between text-[11px] font-mono text-[#998376] mb-2">
+        <div className="p-3.5 rounded-2xl bg-[#080504] border border-[#241813]">
+          <div className="flex items-center justify-between text-[11px] font-mono text-[#8f8075] mb-2">
             <span>NETWORK THROUGHPUT</span>
-            <span className="text-[#998376]">{secondsAgo}s ago</span>
+            <span>{secondsAgo}s ago</span>
           </div>
 
           <div className="flex items-end justify-between gap-4">
             <div>
               <div className="flex items-baseline gap-1.5">
                 <span className="text-2xl font-black font-mono text-[#f5ece1]">{tps}</span>
-                <span className="text-xs font-mono text-[#998376]">tx / sec</span>
+                <span className="text-xs font-mono text-[#8f8075]">tx / sec</span>
               </div>
               <span className="text-[10px] font-mono text-emerald-400">Stable sub-second</span>
             </div>
@@ -219,7 +214,6 @@ Status: Online with guaranteed message finality.`
                   strokeLinejoin="round"
                   points={points}
                 />
-                {/* Last point dot */}
                 {tpsHistory.length > 0 && (
                   <circle
                     cx="140"
@@ -234,9 +228,9 @@ Status: Online with guaranteed message finality.`
         </div>
 
         {/* Epoch Radial & Slot Gauge */}
-        <div className="p-3.5 rounded-2xl bg-[#140d0a] border border-[#281a15] flex items-center justify-between gap-4">
+        <div className="p-3.5 rounded-2xl bg-[#080504] border border-[#241813] flex items-center justify-between gap-4">
           <div className="space-y-1">
-            <span className="text-[10px] font-mono text-[#998376] uppercase">SLOT INDEX</span>
+            <span className="text-[10px] font-mono text-[#8f8075] uppercase">SLOT INDEX</span>
             <div className="text-base font-black font-mono text-[#f5ece1]">
               #{slot.toLocaleString()}
             </div>
@@ -250,7 +244,7 @@ Status: Online with guaranteed message finality.`
                 cx="22"
                 cy="22"
                 r="18"
-                stroke="#281a15"
+                stroke="#1a1310"
                 strokeWidth="4"
                 fill="none"
               />
@@ -272,42 +266,31 @@ Status: Online with guaranteed message finality.`
           </div>
         </div>
 
-        {/* Quiet 2-col specs */}
+        {/* Specs Grid */}
         <div className="grid grid-cols-2 gap-2 text-xs font-mono">
-          <div className="p-2.5 rounded-xl bg-[#140d0a] border border-[#281a15]">
-            <div className="flex items-center gap-1 text-[10px] text-[#998376] mb-1">
-              <ShieldCheck className="w-3 h-3 text-[#d4a15c]" />
-              <span>VALIDATORS</span>
-            </div>
+          <div className="p-2.5 rounded-xl bg-[#080504] border border-[#241813]">
+            <div className="text-[10px] text-[#8f8075] mb-0.5">VALIDATORS</div>
             <div className="font-bold text-[#f5ece1]">{activeValidators} active</div>
           </div>
-          <div className="p-2.5 rounded-xl bg-[#140d0a] border border-[#281a15]">
-            <div className="flex items-center gap-1 text-[10px] text-[#998376] mb-1">
-              <Cpu className="w-3 h-3 text-[#d4a15c]" />
-              <span>CORE</span>
-            </div>
+          <div className="p-2.5 rounded-xl bg-[#080504] border border-[#241813]">
+            <div className="text-[10px] text-[#8f8075] mb-0.5">CORE</div>
             <div className="font-bold text-[#f5ece1]">SVM v{version}</div>
           </div>
         </div>
       </div>
 
       {/* SUBTLE INNER DIVIDER */}
-      <div className="border-t border-[#281a15]" />
+      <div className="border-t border-[#241813]" />
 
       {/* SECTION 2: HEAD BAKER AI & MCP ORACLE */}
-      <div className="p-5 sm:p-6 space-y-4 bg-[#180f0c]/60">
+      <div className="p-5 sm:p-6 space-y-4 bg-[#140d0a]/50">
         {/* Oracle Header */}
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className="p-1.5 rounded-lg bg-[#281a15] text-[#d4a15c] border border-[#3a251e]">
-              <Bot className="w-4 h-4" />
-            </span>
-            <div>
-              <h4 className="font-display font-bold text-sm text-[#f5ece1]">
-                Head Baker AI
-              </h4>
-              <span className="text-[10px] font-mono text-[#998376]">cookie-mcp/v1.0</span>
-            </div>
+          <div>
+            <h4 className="font-display font-bold text-sm text-[#f5ece1]">
+              Head Baker AI Agent
+            </h4>
+            <span className="text-[10px] font-mono text-[#8f8075]">cookie-mcp/v1.0</span>
           </div>
 
           <a
@@ -336,8 +319,8 @@ Status: Online with guaranteed message finality.`
               onClick={() => setSelectedAgentView(tab.id)}
               className={`py-1 rounded-lg border text-center transition ${
                 selectedAgentView === tab.id
-                  ? 'bg-[#281a15] border-[#d4a15c] text-[#f5ece1] font-bold'
-                  : 'bg-[#140d0a] border-[#281a15] text-[#998376] hover:text-[#f5ece1]'
+                  ? 'bg-[#251b16] border-[#d4a15c] text-[#f5ece1] font-bold'
+                  : 'bg-[#080504] border-[#241813] text-[#8f8075] hover:text-[#f5ece1]'
               }`}
             >
               {tab.label}
@@ -346,27 +329,25 @@ Status: Online with guaranteed message finality.`
         </div>
 
         {/* Compact Agent Output */}
-        <div className="p-3 rounded-2xl bg-[#0e0806] border border-[#281a15] text-xs font-mono leading-relaxed text-[#f5ece1]/90">
-          <pre className="whitespace-pre-wrap font-sans text-xs text-[#f5ece1]">
+        <div className="p-3 rounded-2xl bg-[#080504] border border-[#241813] text-xs font-mono leading-relaxed text-[#f5ece1]">
+          <pre className="whitespace-pre-wrap font-sans text-xs text-[#f5ece1]/90">
             {getAgentContent()}
           </pre>
         </div>
 
         {/* Proof of Integration: Live MCP Manifest Drawer */}
-        <div className="rounded-2xl border border-[#3a251e] bg-[#140d0a] overflow-hidden">
+        <div className="rounded-2xl border border-[#38261e] bg-[#080504] overflow-hidden">
           <button
             onClick={() => setManifestOpen(!manifestOpen)}
-            className="w-full px-3 py-2 flex items-center justify-between text-xs font-mono text-[#d4a15c] hover:bg-[#1e1410] transition"
+            className="w-full px-3 py-2 flex items-center justify-between text-xs font-mono text-[#d4a15c] hover:bg-[#1a1310] transition"
           >
-            <span className="flex items-center gap-1.5 font-semibold">
-              <span>View live MCP manifest</span>
-            </span>
+            <span className="font-semibold">View live cookie-mcp manifest</span>
             {manifestOpen ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
           </button>
 
           {manifestOpen && (
-            <div className="p-3 border-t border-[#281a15] bg-[#0e0806] space-y-2">
-              <div className="flex items-center justify-between text-[10px] font-mono text-[#998376]">
+            <div className="p-3 border-t border-[#241813] bg-[#080504] space-y-2">
+              <div className="flex items-center justify-between text-[10px] font-mono text-[#8f8075]">
                 <span>cookie-mcp protocol dump</span>
                 <button
                   onClick={copyManifestJson}
@@ -376,7 +357,7 @@ Status: Online with guaranteed message finality.`
                   <span>{copiedManifest ? 'Copied' : 'Copy JSON'}</span>
                 </button>
               </div>
-              <pre className="text-[10px] font-mono text-[#998376] leading-snug overflow-x-auto max-h-48 p-2 rounded-lg bg-[#140d0a]">
+              <pre className="text-[10px] font-mono text-[#8f8075] leading-snug overflow-x-auto max-h-48 p-2 rounded-lg bg-[#1a1310]">
                 {JSON.stringify(mcpManifest, null, 2)}
               </pre>
             </div>
