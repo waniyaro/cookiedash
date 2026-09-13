@@ -137,7 +137,7 @@ export const BakersVault: React.FC = () => {
   }
 
   return (
-    <div className="rounded-3xl bg-cookie-card border border-cookie-border p-6 sm:p-7 shadow-sm">
+    <div id="vault-section" className="rounded-3xl bg-cookie-card border border-cookie-border p-6 sm:p-7 shadow-sm">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-cookie-border">
         <div className="flex items-center gap-2.5">

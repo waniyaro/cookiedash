@@ -36,7 +36,7 @@ export const OvenStatus: React.FC<OvenStatusProps> = ({
   }
 
   return (
-    <div className="rounded-3xl bg-cookie-card border border-cookie-border p-6 shadow-sm">
+    <div id="telemetry-section" className="rounded-3xl bg-cookie-card border border-cookie-border p-6 shadow-sm">
       {/* Header */}
       <div className="flex items-center justify-between pb-4 border-b border-cookie-border">
         <div className="flex items-center gap-2.5">
