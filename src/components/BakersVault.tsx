@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react'
 import { useConnection, useWallet } from '@solana/wallet-adapter-react'
 import { useWalletModal } from '@solana/wallet-adapter-react-ui'
 import { PublicKey, Transaction, SystemProgram, LAMPORTS_PER_SOL } from '@solana/web3.js'
-import { Wallet, Send, Copy, Check, ExternalLink, RefreshCw, AlertCircle, ArrowUpRight } from 'lucide-react'
+import { Send, Copy, Check, ExternalLink, RefreshCw, AlertCircle, ArrowUpRight } from 'lucide-react'
 import confetti from 'canvas-confetti'
 import { COOKIE_CHAIN_CONFIG } from '../config/network'
 
@@ -15,7 +15,7 @@ export const BakersVault: React.FC = () => {
   const [loadingBalance, setLoadingBalance] = useState<boolean>(false)
   const [copied, setCopied] = useState<boolean>(false)
 
-  // Transfer form state
+  // Transfer state
   const [recipient, setRecipient] = useState<string>('')
   const [amount, setAmount] = useState<string>('')
   const [isSending, setIsSending] = useState<boolean>(false)
@@ -121,7 +121,7 @@ export const BakersVault: React.FC = () => {
         particleCount: 50,
         spread: 60,
         origin: { y: 0.7 },
-        colors: ['#e59a38', '#f5b041', '#ff5722'],
+        colors: ['#38bdf8', '#f59e0b'],
       })
 
       setAmount('')
@@ -137,21 +137,16 @@ export const BakersVault: React.FC = () => {
   }
 
   return (
-    <div className="rounded-3xl bg-cookie-card/90 border border-cookie-border/70 p-6 sm:p-8 shadow-2xl backdrop-blur-xl relative overflow-hidden">
+    <div className="rounded-3xl bg-cookie-card border border-cookie-border p-6 sm:p-8 shadow-sm">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-cookie-border/50">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-2xl bg-cookie-accent/15 border border-cookie-accent/30 text-cookie-gold flex items-center justify-center">
-            <Wallet className="w-5 h-5" />
-          </div>
-          <div>
-            <h3 className="font-extrabold text-white text-base tracking-tight">The Baker's Vault</h3>
-            <p className="text-xs text-slate-400">Manage assets & execute instant $COOK transfers</p>
-          </div>
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-cookie-border">
+        <div>
+          <h3 className="font-bold text-white text-base tracking-tight">The Baker's Vault</h3>
+          <p className="text-xs text-slate-400 mt-0.5">Asset balance & instant $COOK transfers</p>
         </div>
 
         {connected && publicKey && (
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/[0.03] border border-white/[0.06] text-xs font-mono">
+          <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-cookie-surface border border-cookie-border text-xs font-mono">
             <span className="text-slate-300">
               {publicKey.toBase58().slice(0, 4)}...{publicKey.toBase58().slice(-4)}
             </span>
@@ -166,7 +161,7 @@ export const BakersVault: React.FC = () => {
               href={`${COOKIE_CHAIN_CONFIG.explorerUrl}/address/${publicKey.toBase58()}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-0.5 text-slate-400 hover:text-cookie-gold transition"
+              className="p-0.5 text-slate-400 hover:text-cookie-blue transition"
               title="View in CookieScan"
             >
               <ExternalLink className="w-3.5 h-3.5" />
@@ -176,48 +171,48 @@ export const BakersVault: React.FC = () => {
       </div>
 
       {!connected ? (
-        <div className="mt-6 p-6 rounded-2xl bg-white/[0.02] border border-white/[0.05] text-center space-y-3">
+        <div className="mt-5 p-5 rounded-2xl bg-cookie-surface/50 border border-cookie-border text-center space-y-2.5">
           <p className="text-xs text-slate-300">
-            Connect your wallet to inspect your $COOK balance and transfer funds on Cookie Chain.
+            Connect your wallet to inspect your on-chain $COOK balance and transfer funds.
           </p>
           <button
             onClick={() => setVisible(true)}
-            className="px-5 py-2.5 rounded-xl bg-cookie-card hover:bg-cookie-border border border-cookie-border text-xs font-bold text-cookie-gold transition"
+            className="px-4 py-2 rounded-xl bg-cookie-card hover:bg-cookie-surface border border-cookie-border text-xs font-bold text-cookie-blue transition"
           >
             Connect Wallet
           </button>
         </div>
       ) : (
-        <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div className="mt-5 grid grid-cols-1 md:grid-cols-3 gap-5">
           {/* Balance card */}
-          <div className="p-5 rounded-2xl bg-white/[0.02] border border-white/[0.06] flex flex-col justify-between">
+          <div className="p-4 rounded-2xl bg-cookie-surface border border-cookie-border flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between text-xs text-slate-400 mb-1">
-                <span className="font-semibold uppercase tracking-wider text-[11px]">Available $COOK</span>
+                <span className="font-mono text-[11px]">BALANCE</span>
                 <button
                   onClick={fetchBalance}
                   disabled={loadingBalance}
-                  className="hover:text-cookie-gold transition"
+                  className="hover:text-cookie-blue transition"
                 >
-                  <RefreshCw className={`w-3 h-3 ${loadingBalance ? 'animate-spin text-cookie-gold' : ''}`} />
+                  <RefreshCw className={`w-3 h-3 ${loadingBalance ? 'animate-spin text-cookie-blue' : ''}`} />
                 </button>
               </div>
               <div className="flex items-baseline gap-2">
                 <span className="text-3xl font-extrabold text-white font-mono">
                   {balance !== null ? balance.toLocaleString(undefined, { maximumFractionDigits: 4 }) : '0.00'}
                 </span>
-                <span className="text-xs font-bold text-cookie-gold font-mono">$COOK</span>
+                <span className="text-xs font-mono font-bold text-cookie-blue">$COOK</span>
               </div>
             </div>
 
-            <div className="mt-4 pt-3 border-t border-white/[0.05]">
+            <div className="mt-4 pt-3 border-t border-cookie-border">
               <a
                 href={COOKIE_CHAIN_CONFIG.bridgeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 text-[11px] font-semibold text-cookie-gold hover:underline"
+                className="inline-flex items-center gap-1 text-[11px] font-semibold text-cookie-blue hover:underline"
               >
-                Bridge $COOK from Solana
+                Bridge $COOK via Hyperlane
                 <ArrowUpRight className="w-3 h-3" />
               </a>
             </div>
@@ -233,7 +228,7 @@ export const BakersVault: React.FC = () => {
                   value={recipient}
                   onChange={(e) => setRecipient(e.target.value)}
                   disabled={isSending}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-white/[0.02] border border-white/[0.08] focus:border-cookie-gold text-white text-xs font-mono placeholder-slate-500 focus:outline-none transition"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-cookie-surface border border-cookie-border focus:border-cookie-blue text-white text-xs font-mono placeholder-slate-500 focus:outline-none transition"
                 />
               </div>
 
@@ -247,12 +242,12 @@ export const BakersVault: React.FC = () => {
                     value={amount}
                     onChange={(e) => setAmount(e.target.value)}
                     disabled={isSending}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-white/[0.02] border border-white/[0.08] focus:border-cookie-gold text-white text-xs font-mono placeholder-slate-500 focus:outline-none transition pr-16"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-cookie-surface border border-cookie-border focus:border-cookie-blue text-white text-xs font-mono placeholder-slate-500 focus:outline-none transition pr-16"
                   />
                   <button
                     type="button"
                     onClick={handleSetMax}
-                    className="absolute right-2.5 top-2 text-[10px] font-bold text-cookie-gold hover:underline px-1.5 py-0.5 rounded bg-cookie-card border border-cookie-border/60"
+                    className="absolute right-2.5 top-2 text-[10px] font-bold text-cookie-blue hover:underline px-1.5 py-0.5 rounded bg-cookie-card border border-cookie-border"
                   >
                     MAX
                   </button>
@@ -261,7 +256,7 @@ export const BakersVault: React.FC = () => {
                 <button
                   type="submit"
                   disabled={isSending || !recipient || !amount}
-                  className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-cookie-accent to-cookie-oven hover:brightness-110 text-cookie-dark font-extrabold text-xs uppercase tracking-wider transition shadow-cookie-glow disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-1.5 shrink-0"
+                  className="px-5 py-2.5 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-xs uppercase tracking-wider transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-1.5 shrink-0"
                 >
                   <Send className="w-3.5 h-3.5" />
                   <span>{isSending ? 'Sending...' : 'Send'}</span>
@@ -282,9 +277,9 @@ export const BakersVault: React.FC = () => {
                     href={`${COOKIE_CHAIN_CONFIG.explorerUrl}/tx/${txSignature}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-cookie-gold hover:underline flex items-center gap-1 font-semibold"
+                    className="text-cookie-blue hover:underline flex items-center gap-1 font-semibold"
                   >
-                    View on CookieScan
+                    CookieScan
                     <ExternalLink className="w-3 h-3" />
                   </a>
                 </div>

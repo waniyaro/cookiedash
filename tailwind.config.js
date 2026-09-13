@@ -8,22 +8,20 @@ export default {
     extend: {
       colors: {
         cookie: {
-          dark: '#0e0b08',
-          card: '#18130e',
-          border: '#32251a',
-          accent: '#e59a38',
-          gold: '#f5b041',
-          oven: '#ff5722',
-          glow: '#ff9800',
+          bg: '#070d18',
+          card: '#0d172a',
+          surface: '#121f38',
+          border: '#1e293b',
+          blue: '#38bdf8',
+          cyan: '#0ea5e9',
+          gold: '#f59e0b',
+          amber: '#fbbf24',
+          oven: '#f97316',
         },
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
-        mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
-      },
-      boxShadow: {
-        'cookie-glow': '0 0 25px -5px rgba(229, 154, 56, 0.25)',
-        'oven-glow': '0 0 35px -5px rgba(255, 87, 34, 0.3)',
+        mono: ['JetBrains Mono', 'ui-monospace', 'monospace'],
       },
     },
   },

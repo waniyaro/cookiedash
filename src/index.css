@@ -4,22 +4,22 @@
 
 @layer base {
   body {
-    @apply bg-cookie-dark text-slate-100 font-sans antialiased min-h-screen selection:bg-cookie-accent selection:text-cookie-dark;
+    @apply bg-cookie-bg text-slate-100 font-sans antialiased min-h-screen selection:bg-cookie-blue selection:text-cookie-bg;
   }
 }
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #0e0b08;
+  background: #070d18;
 }
 ::-webkit-scrollbar-thumb {
-  background: #32251a;
-  border-radius: 4px;
+  background: #1e293b;
+  border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #e59a38;
+  background: #38bdf8;
 }
