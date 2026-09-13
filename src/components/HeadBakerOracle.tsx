@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Bot, Terminal, Activity, BookOpen, Layers } from 'lucide-react'
+import { Terminal, Activity, BookOpen, Layers, Cpu } from 'lucide-react'
 import type { NetworkMetrics } from '../services/network'
 
 interface HeadBakerOracleProps {
@@ -18,16 +18,16 @@ export const HeadBakerOracle: React.FC<HeadBakerOracleProps> = ({ metrics, isLiv
 
     switch (promptKey) {
       case 'status':
-        return `[NODE TELEMETRY]: Cookie Chain SVM cluster active at ${tps} TPS in Slot #${slot.toLocaleString()} (solana-core ${version}). Sub-second finality is healthy with 0% network stall. Gas fees < 0.0001 $COOK. Optimal throughput for on-chain execution.`
+        return `[TELEMETRY OK]: SVM cluster active at ${tps} TPS in Slot #${slot.toLocaleString()} (solana-core ${version}). Sub-second finality healthy, 0% stall, fee < 0.0001 $COOK.`
 
       case 'fortune':
-        return `[MEMO SPECIFICATION]: Writing to the Solana Memo Program (MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr) establishes permanent on-chain data with near-zero gas overhead. Messages are signed by the wallet and immutably indexed by CookieScan.`
+        return `[MEMO SPEC]: Solana Memo Program (MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr) writes permanent UTF-8 bytes to the ledger with near-zero overhead.`
 
       case 'bridge':
-        return `[HYPERLANE WARP ROUTE]: To bridge $COOK, use the community multi-sig bridge at hyperlane.cookiescan.io. Deposits from Solana confirm in your Nightly wallet in under 60 seconds with m-of-n validator safety.`
+        return `[HYPERLANE ROUTE]: Multi-sig bridge at hyperlane.cookiescan.io transfers $COOK from Solana to Cookie Chain in < 60s.`
 
       case 'mcp':
-        return `[AGENT COOKIE-MCP]: Fully compatible with the official cookie-mcp server (github.com/cookiechain/cookie-mcp). Autonomous agents can read our metrics and invoke memo inscriptions programmatically via standard MCP stdio.`
+        return `[COOKIE-MCP]: Compatible with official Model Context Protocol server (cookiechain/cookie-mcp). Autonomous agents read telemetry via stdio.`
 
       default:
         return `Cookie Chain SVM is operational.`
@@ -41,93 +41,105 @@ export const HeadBakerOracle: React.FC<HeadBakerOracleProps> = ({ metrics, isLiv
   }
 
   return (
-    <div id="oracle-section" className="rounded-3xl bg-cookie-card border border-cookie-border p-6 shadow-sm">
+    <div id="oracle-section" className="rounded-2xl bg-cookie-card border border-cookie-border/80 p-5 sm:p-6 shadow-sm">
       {/* Header */}
-      <div className="flex items-center justify-between pb-4 border-b border-cookie-border">
+      <div className="flex items-center justify-between pb-4 border-b border-cookie-border/60">
         <div className="flex items-center gap-2.5">
           <div className="p-2 rounded-xl bg-sky-500/10 text-sky-400 border border-sky-500/20">
-            <Bot className="w-4 h-4" />
+            <Terminal className="w-4 h-4" />
           </div>
           <div>
             <h3 className="font-bold text-white text-base tracking-tight">
               Head Baker AI
             </h3>
-            <p className="text-[11px] text-slate-400">Contextual Telemetry Assistant</p>
+            <p className="text-[11px] text-slate-400 mt-0.5">Telemetry Oracle &amp; MCP</p>
           </div>
         </div>
 
-        <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-cookie-surface border border-cookie-border text-[10px] text-sky-400 font-mono">
-          <Terminal className="w-3 h-3" />
-          <span>cookie-mcp</span>
-        </div>
+        <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-cookie-surface text-sky-400 border border-cookie-border">
+          cookie-mcp
+        </span>
       </div>
 
       {/* Query Selector Tabs */}
-      <div className="mt-4 grid grid-cols-2 gap-2">
+      <div className="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-1.5">
         <button
           onClick={() => handleSelectPrompt('status')}
-          className={`group px-3 py-2 rounded-xl text-xs font-mono font-medium transition-all duration-200 text-left flex items-center gap-2 border ${
+          className={`px-2.5 py-1.5 rounded-lg text-xs font-mono transition-all text-center flex items-center justify-center gap-1.5 border ${
             selectedPrompt === 'status'
-              ? 'bg-sky-500/15 border-sky-500/30 text-sky-300 shadow-sm'
-              : 'bg-cookie-surface border-cookie-border text-slate-400 hover:text-slate-200 hover:border-slate-700'
+              ? 'bg-sky-500/20 border-sky-500/40 text-sky-300 font-semibold'
+              : 'bg-slate-950/60 border-slate-800/80 text-slate-400 hover:text-slate-200'
           }`}
         >
-          <Activity className="w-3.5 h-3.5 text-sky-400 shrink-0 transition-transform duration-200 group-hover:scale-110" />
-          <span className="truncate">Node Status</span>
+          <Activity className="w-3 h-3 text-sky-400 shrink-0" />
+          <span className="truncate">Status</span>
         </button>
 
         <button
           onClick={() => handleSelectPrompt('fortune')}
-          className={`group px-3 py-2 rounded-xl text-xs font-mono font-medium transition-all duration-200 text-left flex items-center gap-2 border ${
+          className={`px-2.5 py-1.5 rounded-lg text-xs font-mono transition-all text-center flex items-center justify-center gap-1.5 border ${
             selectedPrompt === 'fortune'
-              ? 'bg-sky-500/15 border-sky-500/30 text-sky-300 shadow-sm'
-              : 'bg-cookie-surface border-cookie-border text-slate-400 hover:text-slate-200 hover:border-slate-700'
+              ? 'bg-sky-500/20 border-sky-500/40 text-sky-300 font-semibold'
+              : 'bg-slate-950/60 border-slate-800/80 text-slate-400 hover:text-slate-200'
           }`}
         >
-          <BookOpen className="w-3.5 h-3.5 text-amber-400 shrink-0 transition-transform duration-200 group-hover:scale-110" />
-          <span className="truncate">Memo Docs</span>
+          <BookOpen className="w-3 h-3 text-amber-400 shrink-0" />
+          <span className="truncate">Memo</span>
         </button>
 
         <button
           onClick={() => handleSelectPrompt('bridge')}
-          className={`group px-3 py-2 rounded-xl text-xs font-mono font-medium transition-all duration-200 text-left flex items-center gap-2 border ${
+          className={`px-2.5 py-1.5 rounded-lg text-xs font-mono transition-all text-center flex items-center justify-center gap-1.5 border ${
             selectedPrompt === 'bridge'
-              ? 'bg-sky-500/15 border-sky-500/30 text-sky-300 shadow-sm'
-              : 'bg-cookie-surface border-cookie-border text-slate-400 hover:text-slate-200 hover:border-slate-700'
+              ? 'bg-sky-500/20 border-sky-500/40 text-sky-300 font-semibold'
+              : 'bg-slate-950/60 border-slate-800/80 text-slate-400 hover:text-slate-200'
           }`}
         >
-          <Layers className="w-3.5 h-3.5 text-blue-400 shrink-0 transition-transform duration-200 group-hover:scale-110" />
-          <span className="truncate">Bridge Route</span>
+          <Layers className="w-3 h-3 text-blue-400 shrink-0" />
+          <span className="truncate">Bridge</span>
         </button>
 
         <button
           onClick={() => handleSelectPrompt('mcp')}
-          className={`group px-3 py-2 rounded-xl text-xs font-mono font-medium transition-all duration-200 text-left flex items-center gap-2 border ${
+          className={`px-2.5 py-1.5 rounded-lg text-xs font-mono transition-all text-center flex items-center justify-center gap-1.5 border ${
             selectedPrompt === 'mcp'
-              ? 'bg-sky-500/15 border-sky-500/30 text-sky-300 shadow-sm'
-              : 'bg-cookie-surface border-cookie-border text-slate-400 hover:text-slate-200 hover:border-slate-700'
+              ? 'bg-sky-500/20 border-sky-500/40 text-sky-300 font-semibold'
+              : 'bg-slate-950/60 border-slate-800/80 text-slate-400 hover:text-slate-200'
           }`}
         >
-          <Terminal className="w-3.5 h-3.5 text-emerald-400 shrink-0 transition-transform duration-200 group-hover:scale-110" />
-          <span className="truncate">cookie-mcp</span>
+          <Cpu className="w-3 h-3 text-emerald-400 shrink-0" />
+          <span className="truncate">MCP</span>
         </button>
       </div>
 
-      {/* Terminal Display */}
-      <div className="mt-4 rounded-2xl bg-cookie-surface border border-cookie-border p-4 font-mono text-xs">
-        <div className="flex items-center justify-between text-[10px] text-slate-500 pb-2 mb-2 border-b border-slate-800">
-          <span className="text-sky-400 font-semibold">oracle@cookiechain</span>
-          <span>{isLive ? 'CONNECTED' : 'POLLING'}</span>
+      {/* Terminal Window with macOS Chrome */}
+      <div className="mt-3 rounded-xl bg-slate-950 border border-slate-800/80 overflow-hidden font-mono text-xs shadow-inner">
+        {/* Titlebar with Traffic Lights */}
+        <div className="px-3 py-2 bg-slate-900/90 border-b border-slate-800 flex items-center justify-between">
+          <div className="flex items-center gap-1.5">
+            <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f56]" />
+            <span className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]" />
+            <span className="w-2.5 h-2.5 rounded-full bg-[#27c93f]" />
+          </div>
+          <span className="text-[10px] text-slate-400 font-semibold">oracle@cookiechain:~</span>
+          <span className="text-[9px] text-emerald-400 font-semibold flex items-center gap-1">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
+            {isLive ? 'ACTIVE' : 'IDLE'}
+          </span>
         </div>
 
-        <div className="text-slate-300 leading-relaxed min-h-[60px]">
+        {/* Content Body */}
+        <div className="p-3.5 text-slate-300 leading-relaxed min-h-[68px]">
           {isThinking ? (
-            <span className="text-sky-400 animate-pulse">Evaluating on-chain telemetry...</span>
+            <span className="text-sky-400 animate-pulse">Running telemetry query...</span>
           ) : (
-            <p className="whitespace-pre-line">{getOracleResponse(selectedPrompt)}</p>
+            <p className="whitespace-pre-line text-emerald-300/90 selection:bg-emerald-500/20">
+              {getOracleResponse(selectedPrompt)}
+            </p>
           )}
         </div>
       </div>
     </div>
   )
 }
+

@@ -11,6 +11,11 @@
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
   }
+
+  input, textarea {
+    background-color: #0b1326;
+    color: #f8fafc;
+  }
 }
 
 /* Custom soft keyframes */
