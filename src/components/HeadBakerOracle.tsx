@@ -126,102 +126,100 @@ Ready to bake in slot #${(slot + 1).toLocaleString()}.`
   }
 
   return (
-    <div id="oracle-section" className="rounded-2xl bg-cookie-card border border-cookie-border/80 p-5 sm:p-6 shadow-sm">
+    <div id="oracle-section" className="rounded-2xl bg-[#120703]/90 border border-[#381608] p-5 sm:p-6 shadow-xl relative overflow-hidden">
       {/* Header */}
-      <div className="flex items-center justify-between pb-4 border-b border-cookie-border/60">
-        <div className="flex items-center gap-2.5">
-          <div className="p-2 rounded-xl bg-sky-500/10 text-sky-400 border border-sky-500/20">
-            <Terminal className="w-4 h-4" />
+      <div className="flex items-center justify-between pb-4 border-b border-[#2e1307]">
+        <div className="flex items-center gap-3">
+          <div className="p-2.5 rounded-xl bg-amber-500/15 text-amber-400 border border-amber-500/30">
+            <Terminal className="w-4 h-4 text-amber-400" />
           </div>
           <div>
-            <h3 className="font-bold text-white text-base tracking-tight flex items-center gap-2">
+            <h3 className="font-display font-black text-[#fffbeb] text-lg tracking-tight flex items-center gap-2">
               <span>Head Baker AI</span>
-              <span className="text-[10px] font-mono font-semibold px-2 py-0.5 rounded-full bg-sky-500/10 text-sky-300 border border-sky-500/30">
-                LIVE ORACLE
+              <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-300 border border-amber-500/30 uppercase">
+                Hearth Dispatch
               </span>
             </h3>
-            <p className="text-xs text-slate-300 mt-0.5">Real-time SVM telemetry &amp; autonomous agent MCP</p>
+            <p className="text-xs text-amber-200/70 mt-0.5 font-sans">Autonomous agent oracle &amp; Model Context Protocol</p>
           </div>
         </div>
 
-        <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-cookie-surface text-sky-400 border border-cookie-border">
+        <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-[#1e0d06] text-amber-300 border border-[#3d1a0c] font-bold">
           cookie-mcp
         </span>
       </div>
 
-      {/* Query Selector Tabs */}
+      {/* Query Selector Slips */}
       <div className="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-1.5">
         <button
           onClick={() => handleSelectPrompt('status')}
-          className={`px-2.5 py-1.5 rounded-lg text-xs font-mono transition-all text-center flex items-center justify-center gap-1.5 border ${
+          className={`px-3 py-1.5 rounded-xl text-xs font-mono transition-all text-center flex items-center justify-center gap-1.5 border active:scale-95 ${
             selectedPrompt === 'status'
-              ? 'bg-sky-500/20 border-sky-500/40 text-sky-300 font-bold'
-              : 'bg-slate-950/70 border-slate-800/90 text-slate-300 hover:text-white'
+              ? 'bg-amber-500/20 border-amber-500/60 text-amber-300 font-bold shadow-sm shadow-amber-500/20'
+              : 'bg-[#0a0402] border-[#2e1307] text-amber-200/70 hover:text-white hover:border-amber-500/30'
           }`}
         >
-          <Activity className="w-3.5 h-3.5 text-sky-400 shrink-0" />
-          <span className="truncate">Node</span>
+          <Activity className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+          <span className="truncate">Node Feed</span>
         </button>
 
         <button
           onClick={() => handleSelectPrompt('wallet')}
-          className={`px-2.5 py-1.5 rounded-lg text-xs font-mono transition-all text-center flex items-center justify-center gap-1.5 border ${
+          className={`px-3 py-1.5 rounded-xl text-xs font-mono transition-all text-center flex items-center justify-center gap-1.5 border active:scale-95 ${
             selectedPrompt === 'wallet'
-              ? 'bg-sky-500/20 border-sky-500/40 text-sky-300 font-bold'
-              : 'bg-slate-950/70 border-slate-800/90 text-slate-300 hover:text-white'
+              ? 'bg-amber-500/20 border-amber-500/60 text-amber-300 font-bold shadow-sm shadow-amber-500/20'
+              : 'bg-[#0a0402] border-[#2e1307] text-amber-200/70 hover:text-white hover:border-amber-500/30'
           }`}
         >
           <UserCheck className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-          <span className="truncate">Wallet</span>
+          <span className="truncate">Audit Wallet</span>
         </button>
 
         <button
           onClick={() => handleSelectPrompt('memo')}
-          className={`px-2.5 py-1.5 rounded-lg text-xs font-mono transition-all text-center flex items-center justify-center gap-1.5 border ${
+          className={`px-3 py-1.5 rounded-xl text-xs font-mono transition-all text-center flex items-center justify-center gap-1.5 border active:scale-95 ${
             selectedPrompt === 'memo' || selectedPrompt === 'fortune'
-              ? 'bg-sky-500/20 border-sky-500/40 text-sky-300 font-bold'
-              : 'bg-slate-950/70 border-slate-800/90 text-slate-300 hover:text-white'
+              ? 'bg-amber-500/20 border-amber-500/60 text-amber-300 font-bold shadow-sm shadow-amber-500/20'
+              : 'bg-[#0a0402] border-[#2e1307] text-amber-200/70 hover:text-white hover:border-amber-500/30'
           }`}
         >
-          <BookOpen className="w-3.5 h-3.5 text-blue-400 shrink-0" />
-          <span className="truncate">Memo</span>
+          <BookOpen className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+          <span className="truncate">Memo Spec</span>
         </button>
 
         <button
           onClick={() => handleSelectPrompt('mcp')}
-          className={`px-2.5 py-1.5 rounded-lg text-xs font-mono transition-all text-center flex items-center justify-center gap-1.5 border ${
+          className={`px-3 py-1.5 rounded-xl text-xs font-mono transition-all text-center flex items-center justify-center gap-1.5 border active:scale-95 ${
             selectedPrompt === 'mcp'
-              ? 'bg-sky-500/20 border-sky-500/40 text-sky-300 font-bold'
-              : 'bg-slate-950/70 border-slate-800/90 text-slate-300 hover:text-white'
+              ? 'bg-amber-500/20 border-amber-500/60 text-amber-300 font-bold shadow-sm shadow-amber-500/20'
+              : 'bg-[#0a0402] border-[#2e1307] text-amber-200/70 hover:text-white hover:border-amber-500/30'
           }`}
         >
-          <Cpu className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+          <Cpu className="w-3.5 h-3.5 text-amber-400 shrink-0" />
           <span className="truncate">MCP JSON</span>
         </button>
       </div>
 
-      {/* Terminal Window with macOS Chrome */}
-      <div className="mt-3 rounded-xl bg-slate-950 border border-slate-800/90 overflow-hidden font-mono text-xs shadow-inner">
-        {/* Titlebar with Traffic Lights */}
-        <div className="px-3 py-2 bg-slate-900/90 border-b border-slate-800 flex items-center justify-between">
-          <div className="flex items-center gap-1.5">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f56]" />
-            <span className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]" />
-            <span className="w-2.5 h-2.5 rounded-full bg-[#27c93f]" />
+      {/* Amber Phosphor Hearth Terminal */}
+      <div className="mt-3.5 rounded-2xl bg-[#060301] border-2 border-[#381608] overflow-hidden font-mono text-xs shadow-inner shadow-black">
+        {/* Terminal Titlebar - Industrial Bakehouse Console */}
+        <div className="px-3.5 py-2 bg-[#160a04] border-b border-[#2e1307] flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <span className="w-2.5 h-2.5 rounded-full bg-amber-500 shadow-[0_0_8px_#f59e0b] animate-pulse" />
+            <span className="text-[11px] text-amber-300 font-bold tracking-wider">CHEF-TERMINAL // DISPATCH</span>
           </div>
-          <span className="text-[10px] text-slate-300 font-semibold">baker-oracle@cookiechain:~</span>
-          <span className="text-[9px] text-emerald-400 font-semibold flex items-center gap-1">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
-            {isLive ? 'LIVE' : 'SYNCING'}
+          <span className="text-[10px] text-amber-400 font-bold flex items-center gap-1">
+            <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-ping" />
+            {isLive ? 'ACTIVE' : 'STANDBY'}
           </span>
         </div>
 
-        {/* Content Body */}
-        <div className="p-3.5 text-slate-200 leading-relaxed min-h-[95px] max-h-[160px] overflow-y-auto space-y-2 select-text">
+        {/* Content Body - Amber Phosphor Typography */}
+        <div className="p-4 text-amber-100/90 leading-relaxed min-h-[105px] max-h-[160px] overflow-y-auto space-y-2 select-text">
           {terminalHistory.length > 0 && (
-            <div className="space-y-1.5 text-slate-400 text-[11px] border-b border-slate-800 pb-2">
+            <div className="space-y-1 text-amber-500/70 text-[11px] border-b border-[#2e1307] pb-2">
               {terminalHistory.map((line, idx) => (
-                <div key={idx} className={line.startsWith('baker>') ? 'text-amber-400 font-bold' : 'text-slate-300'}>
+                <div key={idx} className={line.startsWith('baker>') ? 'text-amber-300 font-bold' : 'text-amber-200/80'}>
                   {line}
                 </div>
               ))}
@@ -229,9 +227,9 @@ Ready to bake in slot #${(slot + 1).toLocaleString()}.`
           )}
 
           {isThinking ? (
-            <span className="text-sky-400 animate-pulse">Running live SVM telemetry query...</span>
+            <span className="text-amber-400 animate-pulse font-bold">Querying hearth telemetry &amp; node state...</span>
           ) : (
-            <pre className="whitespace-pre-wrap text-emerald-300 text-[11px] font-mono leading-relaxed">
+            <pre className="whitespace-pre-wrap text-amber-300 text-[11px] font-mono leading-relaxed drop-shadow-[0_0_6px_rgba(245,158,11,0.3)]">
               {getOracleResponse(selectedPrompt)}
             </pre>
           )}
@@ -240,19 +238,19 @@ Ready to bake in slot #${(slot + 1).toLocaleString()}.`
         {/* Interactive CLI Input Line */}
         <form
           onSubmit={handleCommandSubmit}
-          className="px-3 py-2 bg-slate-900/70 border-t border-slate-800/80 flex items-center gap-2"
+          className="px-3.5 py-2.5 bg-[#0f0703] border-t border-[#2e1307] flex items-center gap-2"
         >
-          <span className="text-emerald-400 font-bold text-xs select-none">baker&gt;</span>
+          <span className="text-amber-400 font-bold text-xs select-none">chef&gt;</span>
           <input
             type="text"
             value={customCommand}
             onChange={(e) => setCustomCommand(e.target.value)}
-            placeholder="Type 'help', 'status', 'wallet', 'bake <msg>'..."
-            className="flex-1 bg-transparent text-slate-100 placeholder-slate-400 text-xs font-mono focus:outline-none"
+            placeholder="Type 'help', 'status', 'wallet', 'bake <wisdom>'..."
+            className="flex-1 bg-transparent text-[#fffbeb] placeholder-amber-700/80 text-xs font-mono focus:outline-none"
           />
           <button
             type="submit"
-            className="p-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition"
+            className="px-2 py-1 rounded bg-[#241006] hover:bg-[#381a0b] text-amber-300 hover:text-white border border-[#3d1a0c] transition active:scale-95"
             title="Execute Command"
           >
             <CornerDownLeft className="w-3 h-3" />

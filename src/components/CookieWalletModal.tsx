@@ -39,31 +39,34 @@ export const CookieWalletModal: React.FC<CookieWalletModalProps> = ({ isOpen, on
       {/* Backdrop */}
       <div
         onClick={onClose}
-        className="absolute inset-0 bg-black/75 backdrop-blur-md transition-opacity animate-in fade-in duration-200"
+        className="absolute inset-0 bg-black/85 backdrop-blur-md transition-opacity animate-in fade-in duration-200"
       />
 
       {/* Modal Container */}
-      <div className="relative w-full max-w-md rounded-3xl bg-cookie-card border border-cookie-border shadow-2xl p-6 sm:p-7 overflow-hidden z-10 transition-all duration-300 animate-in zoom-in-95">
-        {/* Soft Ambient Top Glow */}
-        <div className="absolute -top-20 -right-20 w-56 h-56 bg-sky-500/15 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute -bottom-20 -left-20 w-56 h-56 bg-amber-500/15 rounded-full blur-3xl pointer-events-none" />
+      <div className="relative w-full max-w-md rounded-3xl bg-[#130703] border-2 border-[#381608] shadow-[0_0_80px_rgba(234,88,12,0.3)] p-6 sm:p-7 overflow-hidden z-10 transition-all duration-300 animate-in zoom-in-95">
+        {/* Soft Ambient Hearth Glow */}
+        <div className="absolute -top-20 -right-20 w-56 h-56 bg-amber-500/20 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-20 -left-20 w-56 h-56 bg-orange-600/20 rounded-full blur-3xl pointer-events-none" />
 
         {/* Modal Header */}
-        <div className="relative flex items-center justify-between pb-4 border-b border-cookie-border/80">
+        <div className="relative flex items-center justify-between pb-4 border-b border-[#2e1307]">
           <div className="flex items-center gap-3">
             <img
               src="/cookie-sticker.png"
               alt="Cookie Logo"
-              className="w-8 h-8 object-contain drop-shadow-sm"
+              className="w-8 h-8 object-contain drop-shadow-[0_0_6px_rgba(245,158,11,0.6)]"
             />
-            <h3 className="font-extrabold text-white text-base tracking-tight">
-              Connect Wallet
-            </h3>
+            <div>
+              <h3 className="font-display font-black text-[#fffbeb] text-lg tracking-tight">
+                Connect Bakery Wallet
+              </h3>
+              <p className="text-xs text-amber-200/70 font-sans">Cookie Chain SVM Keypair</p>
+            </div>
           </div>
 
           <button
             onClick={onClose}
-            className="p-1.5 rounded-xl bg-cookie-surface hover:bg-cookie-border text-slate-400 hover:text-white transition"
+            className="p-1.5 rounded-xl bg-[#200e06] hover:bg-[#30160a] text-amber-400 hover:text-white transition border border-[#3d1a0c]"
             title="Close"
           >
             <X className="w-4 h-4" />
@@ -80,10 +83,10 @@ export const CookieWalletModal: React.FC<CookieWalletModalProps> = ({ isOpen, on
                   key={wallet.adapter.name}
                   onClick={() => handleSelectWallet(wallet.adapter.name)}
                   disabled={connecting}
-                  className={`w-full group p-3.5 rounded-2xl border transition-all duration-200 flex items-center justify-between text-left ${
+                  className={`w-full group p-3.5 rounded-2xl border transition-all duration-200 flex items-center justify-between text-left active:scale-[0.98] ${
                     isNightly
-                      ? 'bg-sky-500/10 hover:bg-sky-500/15 border-sky-500/30 hover:border-sky-500/50'
-                      : 'bg-cookie-surface hover:bg-cookie-surface/80 border-cookie-border hover:border-slate-700'
+                      ? 'bg-gradient-to-r from-amber-500/20 to-orange-500/20 hover:from-amber-500/30 hover:to-orange-500/30 border-amber-500/50 hover:border-amber-400 shadow-sm'
+                      : 'bg-[#090402] hover:bg-[#1a0c05] border-[#2e1307] hover:border-amber-500/40'
                   }`}
                 >
                   <div className="flex items-center gap-3">
@@ -91,30 +94,35 @@ export const CookieWalletModal: React.FC<CookieWalletModalProps> = ({ isOpen, on
                       <img
                         src={wallet.adapter.icon}
                         alt={wallet.adapter.name}
-                        className="w-7 h-7 rounded-xl object-contain shrink-0 p-0.5 bg-black/20 border border-white/5 group-hover:scale-105 transition-transform"
+                        className="w-8 h-8 rounded-xl object-contain shrink-0 p-1 bg-black/40 border border-white/10 group-hover:scale-105 transition-transform"
                       />
                     ) : (
-                      <div className="w-7 h-7 rounded-xl bg-cookie-card border border-cookie-border flex items-center justify-center font-bold text-xs text-sky-400">
+                      <div className="w-8 h-8 rounded-xl bg-[#200e06] border border-[#3d1a0c] flex items-center justify-center font-black text-xs text-amber-400">
                         {wallet.adapter.name.slice(0, 2)}
                       </div>
                     )}
                     <div>
-                      <span className="text-xs font-bold text-white group-hover:text-sky-300 transition-colors">
+                      <span className="text-sm font-bold text-[#fffbeb] group-hover:text-amber-300 transition-colors">
                         {wallet.adapter.name}
                       </span>
+                      {isNightly && (
+                        <span className="block text-[10px] font-mono text-amber-400/90 font-semibold">
+                          Recommended for Cookie Chain
+                        </span>
+                      )}
                     </div>
                   </div>
 
-                  <span className="text-xs font-mono text-sky-400 group-hover:translate-x-0.5 transition-transform">
+                  <span className="text-xs font-mono text-amber-400 group-hover:translate-x-0.5 transition-transform">
                     →
                   </span>
                 </button>
               )
             })
           ) : (
-            <div className="p-4 rounded-2xl bg-cookie-surface/50 border border-cookie-border text-center space-y-2">
-              <p className="text-xs text-slate-300">
-                No supported Solana/SVM wallets detected in this browser.
+            <div className="p-5 rounded-2xl bg-[#0a0402] border border-[#2e1307] text-center space-y-2">
+              <p className="text-xs text-amber-200/80 font-sans">
+                No active SVM wallets detected in this browser.
               </p>
             </div>
           )}
@@ -125,16 +133,19 @@ export const CookieWalletModal: React.FC<CookieWalletModalProps> = ({ isOpen, on
               href="https://nightly.app"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3 rounded-2xl bg-cookie-surface/40 hover:bg-cookie-surface border border-cookie-border hover:border-sky-500/30 transition flex items-center justify-between"
+              className="p-3.5 rounded-2xl bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 hover:border-amber-400 transition flex items-center justify-between"
             >
               <div className="flex items-center gap-2.5">
-                <div className="w-7 h-7 rounded-xl bg-purple-500/20 text-purple-300 flex items-center justify-center font-bold text-xs border border-purple-500/30">
+                <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-amber-500 to-orange-500 text-[#080402] flex items-center justify-center font-black text-xs">
                   N
                 </div>
-                <span className="text-xs font-bold text-white">Nightly Wallet</span>
+                <div>
+                  <span className="text-xs font-bold text-[#fffbeb]">Install Nightly Wallet</span>
+                  <span className="block text-[10px] text-amber-300/80">Native multi-chain SVM support</span>
+                </div>
               </div>
-              <span className="text-[11px] font-mono text-cookie-blue flex items-center gap-1">
-                Install <ArrowUpRight className="w-3 h-3" />
+              <span className="text-xs font-mono text-amber-400 flex items-center gap-1 font-bold">
+                Get <ArrowUpRight className="w-3 h-3" />
               </span>
             </a>
           )}

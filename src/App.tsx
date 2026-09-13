@@ -11,7 +11,7 @@ function App() {
   const { metrics, loading, error, refresh, isLive } = useNetworkMetrics()
 
   return (
-    <div className="min-h-screen bg-cookie-dark text-slate-100 flex flex-col font-sans selection:bg-cookie-accent selection:text-cookie-dark">
+    <div className="min-h-screen text-[#fffbeb] flex flex-col font-sans selection:bg-amber-400 selection:text-[#080402]">
       <Navbar isLive={isLive} currentSlot={metrics?.currentSlot} />
 
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
