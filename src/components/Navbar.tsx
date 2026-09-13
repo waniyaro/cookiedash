@@ -43,6 +43,27 @@ export const Navbar: React.FC = () => {
               alt="CookieDash Fortune Logo"
               className="relative z-20 w-9 h-9 object-contain drop-shadow-[0_6px_14px_rgba(255,179,71,0.5)] transition-all duration-400 ease-out opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100"
             />
+
+            {/* Top Main Crumb (Flies up-right from crack) */}
+            <img
+              src="/crumb-top-main.png"
+              alt=""
+              className="absolute inset-0 z-25 w-9 h-9 object-contain drop-shadow-[0_2px_6px_rgba(255,179,71,0.4)] pointer-events-none crumb-top-main"
+            />
+
+            {/* Top Spray Crumbs (Burst upward out of the fissure) */}
+            <img
+              src="/crumb-top-spray.png"
+              alt=""
+              className="absolute inset-0 z-25 w-9 h-9 object-contain drop-shadow-[0_2px_6px_rgba(255,179,71,0.4)] pointer-events-none crumb-top-spray"
+            />
+
+            {/* Bottom Crumbs (Drop downward from the crack) */}
+            <img
+              src="/crumb-bottom.png"
+              alt=""
+              className="absolute inset-0 z-25 w-9 h-9 object-contain drop-shadow-[0_2px_6px_rgba(255,179,71,0.4)] pointer-events-none crumb-bottom"
+            />
           </div>
 
           <div className="flex items-center gap-2.5">
