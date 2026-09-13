@@ -4,7 +4,11 @@
 
 @layer base {
   body {
-    @apply bg-cookie-bg text-slate-100 font-sans antialiased min-h-screen selection:bg-cookie-blue selection:text-cookie-bg;
+    background-color: #070d18;
+    color: #f8fafc;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
   }
 }
 
