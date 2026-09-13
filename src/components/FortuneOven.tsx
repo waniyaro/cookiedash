@@ -126,25 +126,13 @@ export const FortuneOven: React.FC = () => {
       id="fortune-oven"
       className="relative rounded-3xl bg-[#1a1310] border border-[#38261e] p-6 sm:p-8 lg:p-10 hero-oven-glow overflow-hidden transition-all"
     >
-      {/* Artisanal Background Embers SVG & Ambient Glow */}
+      {/* Artisanal Ambient Warmth */}
       <div className="absolute -right-16 -top-16 w-96 h-96 bg-gradient-to-br from-[#ff7a1a]/15 to-transparent rounded-full blur-3xl pointer-events-none" />
       <div className="absolute -left-20 -bottom-20 w-[500px] h-72 bg-gradient-to-tr from-[#ff7a1a]/20 via-[#ffb347]/10 to-transparent rounded-full blur-3xl pointer-events-none" />
 
-      {/* Decorative Custom Artisanal Pattern (Handcrafted SVG Flour & Embers) */}
-      <div className="absolute inset-0 opacity-[0.035] pointer-events-none">
-        <svg width="100%" height="100%">
-          <pattern id="hearth-texture" width="40" height="40" patternUnits="userSpaceOnUse">
-            <circle cx="20" cy="20" r="1.2" fill="#ffb347" />
-            <circle cx="6" cy="10" r="0.8" fill="#f5ece1" />
-            <circle cx="32" cy="28" r="0.9" fill="#d4a15c" />
-          </pattern>
-          <rect width="100%" height="100%" fill="url(#hearth-texture)" />
-        </svg>
-      </div>
-
       {/* Full-Width Grid Split Inside Hero: Left (Hearth Lore & Artwork), Right (Interactive Baking Slate) */}
       <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-        {/* Left Column (5 cols): Custom Hearth Illustration, Lore & Big Stats */}
+      {/* Left Column (5 cols): Hearth Lore & Big Stats */}
         <div className="lg:col-span-5 space-y-5">
           <div className="flex items-center gap-3">
             <span className="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-[#251b16] text-[#ffb347] border border-[#38261e] uppercase tracking-wider">
@@ -161,41 +149,20 @@ export const FortuneOven: React.FC = () => {
             </p>
           </div>
 
-          {/* Bespoke Hearth Stone Illustration */}
-          <div className="pt-2 flex items-center gap-5">
-            <div className="relative w-28 h-24 shrink-0 rounded-2xl bg-[#080504] border border-[#38261e] flex items-center justify-center overflow-hidden shadow-inner">
-              {/* Custom SVG Oven Arch & Coals */}
-              <svg viewBox="0 0 100 80" className="w-full h-full p-2">
-                <path
-                  d="M15 70 C15 35, 85 35, 85 70 Z"
-                  fill="#1a1310"
-                  stroke="#38261e"
-                  strokeWidth="3"
-                />
-                <path
-                  d="M25 70 C25 45, 75 45, 75 70 Z"
-                  fill="#0d0907"
-                />
-                {/* Glowing Coals */}
-                <ellipse cx="50" cy="67" rx="20" ry="6" fill="#ff7a1a" opacity="0.8" />
-                <ellipse cx="50" cy="66" rx="14" ry="4" fill="#ffb347" />
-                {/* Rising Sparks */}
-                <circle cx="45" cy="48" r="1.5" fill="#ffb347" />
-                <circle cx="56" cy="42" r="1.2" fill="#ff7a1a" />
-                <circle cx="49" cy="34" r="1" fill="#f5ece1" />
-              </svg>
-              {/* Gentle Steam Animation */}
-              <span className="absolute -top-1 left-7 text-[10px] text-[#ffb347] font-black animate-steam pointer-events-none select-none">
-                ~
-              </span>
-              <span className="absolute -top-2 right-8 text-[9px] text-[#f5ece1] font-bold animate-steam pointer-events-none select-none" style={{ animationDelay: '1.2s' }}>
-                ~
-              </span>
+          {/* Clean Brand Stat Tile */}
+          <div className="pt-2 flex items-center gap-4">
+            <div className="relative w-16 h-16 shrink-0 rounded-2xl bg-[#080504] border border-[#38261e] flex items-center justify-center shadow-inner group">
+              <div className="absolute inset-0 rounded-2xl bg-[#ff7a1a]/15 blur-sm pointer-events-none" />
+              <img
+                src="/cookie-sticker.png"
+                alt="Cookie Chain"
+                className="relative z-10 w-11 h-11 object-contain drop-shadow-[0_2px_8px_rgba(255,122,26,0.5)] transition-transform group-hover:scale-110 group-hover:rotate-6"
+              />
             </div>
 
             {/* Prominent Counter Display */}
             <div className="space-y-0.5">
-              <span className="text-[11px] font-mono text-[#8f8075] uppercase tracking-wider block">
+              <span className="text-[10px] font-mono text-[#8f8075] uppercase tracking-wider block">
                 TOTAL ON-CHAIN BATCHES
               </span>
               <div className="flex items-baseline gap-2">
@@ -204,9 +171,11 @@ export const FortuneOven: React.FC = () => {
                 </span>
                 <span className="text-xs font-mono font-bold text-[#d4a15c]">Batches Baked</span>
               </div>
-              <span className="text-[11px] font-mono text-[#8f8075] block">
-                Gas: &lt; 0.0001 $COOK
-              </span>
+              <div className="flex items-center gap-2 text-[11px] font-mono text-[#8f8075]">
+                <span>Gas: &lt; 0.0001 $COOK</span>
+                <span>•</span>
+                <span className="text-emerald-400">~0.8s Finality</span>
+              </div>
             </div>
           </div>
         </div>
