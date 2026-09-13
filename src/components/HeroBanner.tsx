@@ -1,5 +1,5 @@
 import React from 'react'
-import { Sparkles, Send, Activity, Bot, ExternalLink } from 'lucide-react'
+import { Flame, ArrowLeftRight, Radio, Terminal, Compass, ArrowUpRight } from 'lucide-react'
 import { COOKIE_CHAIN_CONFIG } from '../config/network'
 
 export const HeroBanner: React.FC = () => {
@@ -34,7 +34,7 @@ export const HeroBanner: React.FC = () => {
             onClick={() => scrollTo('fortune-oven')}
             className="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-cookie-card hover:bg-cookie-surface border border-cookie-border hover:border-amber-500/40 text-xs font-medium text-slate-300 hover:text-white transition duration-200"
           >
-            <Sparkles className="w-3.5 h-3.5 text-amber-400 group-hover:scale-110 transition-transform" />
+            <Flame className="w-3.5 h-3.5 text-amber-400 group-hover:scale-110 transition-transform" />
             <span>Fortune Oven</span>
           </button>
 
@@ -42,7 +42,7 @@ export const HeroBanner: React.FC = () => {
             onClick={() => scrollTo('vault-section')}
             className="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-cookie-card hover:bg-cookie-surface border border-cookie-border hover:border-sky-500/40 text-xs font-medium text-slate-300 hover:text-white transition duration-200"
           >
-            <Send className="w-3.5 h-3.5 text-sky-400 group-hover:scale-110 transition-transform" />
+            <ArrowLeftRight className="w-3.5 h-3.5 text-sky-400 group-hover:scale-110 transition-transform" />
             <span>Transfer Vault</span>
           </button>
 
@@ -50,15 +50,15 @@ export const HeroBanner: React.FC = () => {
             onClick={() => scrollTo('telemetry-section')}
             className="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-cookie-card hover:bg-cookie-surface border border-cookie-border hover:border-emerald-500/40 text-xs font-medium text-slate-300 hover:text-white transition duration-200"
           >
-            <Activity className="w-3.5 h-3.5 text-emerald-400 group-hover:scale-110 transition-transform" />
+            <Radio className="w-3.5 h-3.5 text-emerald-400 group-hover:scale-110 transition-transform" />
             <span>Telemetry</span>
           </button>
 
           <button
             onClick={() => scrollTo('oracle-section')}
-            className="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-cookie-card hover:bg-cookie-surface border border-cookie-border hover:border-purple-500/40 text-xs font-medium text-slate-300 hover:text-white transition duration-200"
+            className="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-cookie-card hover:bg-cookie-surface border border-cookie-border hover:border-sky-400/40 text-xs font-medium text-slate-300 hover:text-white transition duration-200"
           >
-            <Bot className="w-3.5 h-3.5 text-purple-400 group-hover:scale-110 transition-transform" />
+            <Terminal className="w-3.5 h-3.5 text-sky-400 group-hover:scale-110 transition-transform" />
             <span>Oracle</span>
           </button>
 
@@ -66,10 +66,11 @@ export const HeroBanner: React.FC = () => {
             href={COOKIE_CHAIN_CONFIG.explorerUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-cookie-card hover:bg-cookie-surface border border-cookie-border hover:border-slate-600 text-xs font-medium text-slate-400 hover:text-white transition duration-200"
+            className="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-cookie-card hover:bg-cookie-surface border border-cookie-border hover:border-slate-600 text-xs font-medium text-slate-300 hover:text-white transition duration-200"
           >
+            <Compass className="w-3.5 h-3.5 text-slate-400 group-hover:text-white transition-colors" />
             <span>Explorer</span>
-            <ExternalLink className="w-3 h-3 text-slate-500" />
+            <ArrowUpRight className="w-3 h-3 text-slate-500 group-hover:text-slate-300 transition-colors" />
           </a>
         </div>
       </div>
