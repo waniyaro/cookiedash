@@ -1,7 +1,14 @@
-# 🍪 CookieDash: The Bakery Hub for Cookie Chain (SVM)
+<p align="center">
+  <img src="./assets/cookiedash-header.png" alt="CookieDash Header" width="100%" />
+</p>
 
-> **A high-performance, culture-native analytics platform, asset vault, and on-chain interaction hub built specifically for [Cookie Chain](https://www.cookiechain.wtf) (SVM).**  
-> Built for the **Superteam Earn Cookie Chain cApp Bounty**.
+<p align="center">
+  <a href="https://cookiedash-neon.vercel.app"><img src="https://img.shields.io/badge/Live%20Production-cookiedash--neon.vercel.app-ff7a1a?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Demo" /></a>
+  <a href="https://cookiescan.io"><img src="https://img.shields.io/badge/Network-Cookie%20Chain%20SVM-d4a15c?style=for-the-badge" alt="Cookie Chain" /></a>
+  <a href="https://github.com/cookiechain/superteam-hackathon-submissions"><img src="https://img.shields.io/badge/Superteam%20Earn-cApp%20Bounty-863bff?style=for-the-badge" alt="Hackathon Bounty" /></a>
+</p>
+
+> **CookieDash** is an interactive Night Bakery hub, on-chain Fortune Oven inscription engine, and live SVM telemetry portal engineered specifically for **[Cookie Chain](https://www.cookiechain.wtf)**. Built for the **Superteam Earn Cookie Chain cApp Bounty**.
 
 ---
 
